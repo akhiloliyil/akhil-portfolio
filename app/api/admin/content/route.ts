@@ -32,6 +32,13 @@ export async function PUT(req: NextRequest) {
       { status: 400 }
     );
   }
-  await saveContent(body);
-  return NextResponse.json({ ok: true });
+  try {
+    const mode = await saveContent(body);
+    return NextResponse.json({ ok: true, mode });
+  } catch (e) {
+    return NextResponse.json(
+      { error: e instanceof Error ? e.message : "Save failed." },
+      { status: 502 }
+    );
+  }
 }

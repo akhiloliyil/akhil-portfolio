@@ -11,6 +11,10 @@ import {
   gallery as seedGallery,
   toolkit as seedToolkit,
 } from "@/data/content";
+// Bundled at build time so it's always readable on serverless (Vercel) hosts,
+// where the raw file may not be traced into the function.
+import bundled from "@/data/content.json";
+import { githubEnabled, commitFile } from "@/lib/github";
 
 export type Content = {
   profile: typeof seedProfile;
@@ -38,20 +42,38 @@ export function seedContent(): Content {
   };
 }
 
-/** Read the live content from disk, falling back to the compiled seed. */
+/**
+ * Read the live content. Locally this reads the on-disk JSON (reflects local
+ * admin saves immediately). On Vercel the disk file may be unreadable, so it
+ * falls back to the JSON bundled at build time (= the last committed content).
+ */
 export async function getContent(): Promise<Content> {
   try {
     const raw = await fs.readFile(FILE, "utf8");
     return JSON.parse(raw) as Content;
   } catch {
-    return seedContent();
+    return (bundled as Content) ?? seedContent();
   }
 }
 
-/** Persist content to disk (pretty-printed JSON). */
-export async function saveContent(data: Content): Promise<void> {
+/**
+ * Persist content. When GitHub storage is configured, commit it to the repo
+ * (triggers a redeploy); otherwise write to the local disk (dev). Returns the
+ * storage mode so the UI can explain what will happen next.
+ */
+export async function saveContent(data: Content): Promise<"github" | "local"> {
+  const json = JSON.stringify(data, null, 2);
+  if (githubEnabled()) {
+    await commitFile(
+      "backend/data/content.json",
+      Buffer.from(json, "utf8"),
+      "admin: update site content"
+    );
+    return "github";
+  }
   await fs.mkdir(path.dirname(FILE), { recursive: true });
-  await fs.writeFile(FILE, JSON.stringify(data, null, 2), "utf8");
+  await fs.writeFile(FILE, json, "utf8");
+  return "local";
 }
 
 const TOP_KEYS: (keyof Content)[] = [

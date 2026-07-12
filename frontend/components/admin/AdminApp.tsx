@@ -203,7 +203,13 @@ export default function AdminApp() {
       const d = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(d.error || "Save failed");
       setOriginal(structuredClone(content));
-      setMsg({ ok: true, text: "Saved. Refresh the site to see changes." });
+      setMsg({
+        ok: true,
+        text:
+          d.mode === "github"
+            ? "Committed to GitHub — your live site updates in ~1 minute (redeploying)."
+            : "Saved. Refresh the site to see changes.",
+      });
     } catch (e) {
       setMsg({ ok: false, text: e instanceof Error ? e.message : "Save failed" });
     } finally {

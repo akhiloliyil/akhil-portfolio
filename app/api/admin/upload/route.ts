@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { verifyToken, AUTH_COOKIE } from "@/lib/auth";
+import { githubEnabled, commitFile } from "@/lib/github";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -49,14 +50,30 @@ export async function POST(req: NextRequest) {
   }
 
   const buf = Buffer.from(await file.arrayBuffer());
-  const dir = path.join(process.cwd(), "public", "images", "uploads");
-  await fs.mkdir(dir, { recursive: true });
 
-  // Deterministic-ish unique name without Date.now(): slug + short content hash.
+  // Unique name without Date.now(): slug + short content hash.
   const crypto = await import("node:crypto");
   const hash = crypto.createHash("sha1").update(buf).digest("hex").slice(0, 8);
   const filename = `${slug(file.name)}-${hash}.${EXT[file.type]}`;
-  await fs.writeFile(path.join(dir, filename), buf);
+  const relPath = `public/images/uploads/${filename}`;
 
-  return NextResponse.json({ path: `/images/uploads/${filename}` });
+  try {
+    if (githubEnabled()) {
+      // Commit into the repo → served after Vercel redeploys.
+      await commitFile(relPath, buf, `admin: upload ${filename}`);
+      return NextResponse.json({
+        path: `/images/uploads/${filename}`,
+        mode: "github",
+      });
+    }
+    const dir = path.join(process.cwd(), "public", "images", "uploads");
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(path.join(dir, filename), buf);
+    return NextResponse.json({ path: `/images/uploads/${filename}`, mode: "local" });
+  } catch (e) {
+    return NextResponse.json(
+      { error: e instanceof Error ? e.message : "Upload failed." },
+      { status: 502 }
+    );
+  }
 }
