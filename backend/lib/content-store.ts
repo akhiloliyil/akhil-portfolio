@@ -10,6 +10,8 @@ import {
   education as seedEducation,
   gallery as seedGallery,
   toolkit as seedToolkit,
+  process as seedProcess,
+  testimonials as seedTestimonials,
 } from "@/data/content";
 // Bundled at build time so it's always readable on serverless (Vercel) hosts,
 // where the raw file may not be traced into the function.
@@ -25,6 +27,8 @@ export type Content = {
   education: typeof seedEducation;
   gallery: typeof seedGallery;
   toolkit: typeof seedToolkit;
+  process: typeof seedProcess;
+  testimonials: typeof seedTestimonials;
 };
 
 const FILE = path.join(process.cwd(), "backend", "data", "content.json");
@@ -39,6 +43,8 @@ export function seedContent(): Content {
     education: seedEducation,
     gallery: seedGallery,
     toolkit: seedToolkit,
+    process: seedProcess,
+    testimonials: seedTestimonials,
   };
 }
 
@@ -85,6 +91,8 @@ const TOP_KEYS: (keyof Content)[] = [
   "education",
   "gallery",
   "toolkit",
+  "process",
+  "testimonials",
 ];
 
 /** Lightweight shape check so a bad payload can't wipe the file. */

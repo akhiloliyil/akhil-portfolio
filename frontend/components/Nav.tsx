@@ -5,9 +5,11 @@ import ThemeToggle from "./ThemeToggle";
 const links = [
   { href: "#about", label: "About" },
   { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
   { href: "#experience", label: "Experience" },
   { href: "#gallery", label: "Gallery" },
   { href: "#toolkit", label: "Toolkit" },
+  { href: "#testimonials", label: "Praise" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -24,7 +26,7 @@ export default function Nav() {
             .ui
           </span>
         </a>
-        <nav className="hidden gap-8 font-mono text-xs uppercase tracking-wider text-inkmuted sm:flex">
+        <nav className="hidden gap-5 font-mono text-xs uppercase tracking-wider text-inkmuted lg:flex">
           {links.map((link) => (
             <a
               key={link.href}

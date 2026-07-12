@@ -420,5 +420,47 @@
         "Design Systems"
       ]
     }
+  ],
+  "process": [
+    {
+      "title": "Research & Discovery",
+      "body": "Start with the business goal and the user. Stakeholder interviews, competitive teardown, analytics, and AI-assisted synthesis to find where the real friction is."
+    },
+    {
+      "title": "Define & Map",
+      "body": "Turn findings into clarity — personas, jobs-to-be-done, and end-to-end customer journeys that align product, CX, and engineering on what to build and why."
+    },
+    {
+      "title": "Design & Systemize",
+      "body": "Wireframes to high-fidelity flows in Figma, built on a scalable design system so patterns stay consistent, accessible, and fast to ship across web and mobile."
+    },
+    {
+      "title": "Prototype & Validate",
+      "body": "Interactive prototypes and usability testing to de-risk decisions early. AI-powered ideation to explore more directions in less time."
+    },
+    {
+      "title": "Build & Handoff",
+      "body": "Hands-on front-end in React, Next.js, and React Native — I bridge design and code, so quality holds from concept through production with a clean handoff."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Akhil pairs sharp design instincts with real engineering ability — he doesn't just hand off screens, he ships them. Our conversion and app ratings both moved after his redesigns.",
+      "name": "Product Lead",
+      "role": "Product Management",
+      "company": "Danube Home"
+    },
+    {
+      "quote": "He turned a genuinely complex, data-heavy system into something our team could actually use every day. Rare to find someone who understands both UX depth and business impact.",
+      "name": "Engineering Manager",
+      "role": "Engineering",
+      "company": "Danube Home"
+    },
+    {
+      "quote": "Fast, collaborative, and detail-obsessed. Akhil built our design system from scratch and it's still the backbone of everything we ship. A true end-to-end product designer.",
+      "name": "Founder",
+      "role": "Leadership",
+      "company": "Independent engagement"
+    }
   ]
 }

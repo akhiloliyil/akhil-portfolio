@@ -10,6 +10,8 @@ import {
   type Project,
   type Role,
   type Shot,
+  type ProcessStep,
+  type Testimonial,
 } from "@/data/content";
 import {
   Field,
@@ -31,6 +33,8 @@ type Content = {
   education: typeof sEd;
   gallery: Shot[];
   toolkit: { group: string; tools: string[] }[];
+  process: ProcessStep[];
+  testimonials: Testimonial[];
 };
 
 type Edu = Content["education"][number];
@@ -45,7 +49,9 @@ const TABS = [
   "Projects",
   "Experience",
   "Gallery",
+  "Process",
   "Toolkit",
+  "Testimonials",
   "Education",
   "Stats",
 ] as const;
@@ -123,6 +129,8 @@ function describeChanges(a: Content, b: Content): string[] {
   diffArray("Experience", a.experience, b.experience, (r) => r.company, out);
   diffArray("Gallery", a.gallery, b.gallery, (s) => s.title, out);
   diffArray("Toolkit", a.toolkit, b.toolkit, (g) => g.group, out);
+  diffArray("Process", a.process, b.process, (s) => s.title, out);
+  diffArray("Testimonials", a.testimonials, b.testimonials, (t) => t.name, out);
   diffArray("Education", a.education, b.education, (e) => e.degree, out);
   return out;
 }
@@ -473,6 +481,42 @@ export default function AdminApp() {
               <>
                 <Field label="Group" value={g.group} onChange={(v) => set({ ...g, group: v })} />
                 <StringList label="Tools" values={g.tools} onChange={(v) => set({ ...g, tools: v })} />
+              </>
+            )}
+          />
+        )}
+
+        {/* ---- PROCESS ---- */}
+        {tab === "Process" && (
+          <ArrayEditor<ProcessStep>
+            items={content.process}
+            onItems={(v) => patch({ process: v })}
+            blank={() => ({ title: "New step", body: "" })}
+            itemTitle={(s) => s.title || "Step"}
+            render={(s, set) => (
+              <>
+                <Field label="Title" value={s.title} onChange={(v) => set({ ...s, title: v })} />
+                <Area label="Body" value={s.body} onChange={(v) => set({ ...s, body: v })} />
+              </>
+            )}
+          />
+        )}
+
+        {/* ---- TESTIMONIALS ---- */}
+        {tab === "Testimonials" && (
+          <ArrayEditor<Testimonial>
+            items={content.testimonials}
+            onItems={(v) => patch({ testimonials: v })}
+            blank={() => ({ quote: "", name: "New person", role: "" })}
+            itemTitle={(t) => t.name || "Testimonial"}
+            render={(t, set) => (
+              <>
+                <Area label="Quote" rows={4} value={t.quote} onChange={(v) => set({ ...t, quote: v })} />
+                <div className={twoCol}>
+                  <Field label="Name" value={t.name} onChange={(v) => set({ ...t, name: v })} />
+                  <Field label="Role" value={t.role} onChange={(v) => set({ ...t, role: v })} />
+                </div>
+                <Field label="Company (optional)" value={t.company ?? ""} onChange={(v) => set({ ...t, company: v || undefined })} />
               </>
             )}
           />
