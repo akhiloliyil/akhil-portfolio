@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Palette as RGB channel triplets so Tailwind opacity modifiers (bg-paper/70)
+   keep working. Swap the values under .dark to retheme the whole site. */
+:root {
+  --paper: 243 245 248;
+  --panel: 255 255 255;
+  --ink: 17 25 43;
+  --inkmuted: 91 100 120;
+  --line: 215 220 229;
+  --accent: 54 84 244;
+  --coral: 255 91 60;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: 11 14 22;
+  --panel: 21 26 38;
+  --ink: 233 237 245;
+  --inkmuted: 150 160 180;
+  --line: 40 48 64;
+  --accent: 122 145 255;
+  --coral: 255 120 96;
+  color-scheme: dark;
+}
+
+/* Smooth the palette swap when toggling themes (but not other transitions). */
+body {
+  background-color: rgb(var(--paper));
+  color: rgb(var(--ink));
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Scroll smoothness is owned by Lenis (see SmoothScroll). Reduced-motion
+   users fall back to native instant scrolling. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+::selection {
+  background: rgb(var(--accent));
+  color: #ffffff;
+}
+
+/* Canvas grid backdrop, used behind the hero and section headers */
+.canvas-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--ink) / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--ink) / 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* The signature element: corner selection handles, like an object selected
+   on a design canvas. Applied to hero portrait frame and project frames. */
+.handle-frame {
+  position: relative;
+}
+
+.handle-frame::before,
+.handle-frame::after,
+.handle-frame .h-tl,
+.handle-frame .h-tr,
+.handle-frame .h-bl,
+.handle-frame .h-br {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgb(var(--accent));
+  background: rgb(var(--paper));
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.handle-frame.is-active::before,
+.handle-frame.is-active::after,
+.handle-frame.is-active .h-tl,
+.handle-frame.is-active .h-tr,
+.handle-frame.is-active .h-bl,
+.handle-frame.is-active .h-br,
+.handle-frame:hover::before,
+.handle-frame:hover::after,
+.handle-frame:hover .h-tl,
+.handle-frame:hover .h-tr,
+.handle-frame:hover .h-bl,
+.handle-frame:hover .h-br {
+  opacity: 1;
+}
+
+.handle-frame::before {
+  top: -5px;
+  left: -5px;
+}
+.handle-frame::after {
+  top: -5px;
+  right: -5px;
+}
+.handle-frame .h-bl {
+  bottom: -5px;
+  left: -5px;
+}
+.handle-frame .h-br {
+  bottom: -5px;
+  right: -5px;
+}
+
+.handle-frame .tag-label {
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.handle-frame.is-active .tag-label,
+.handle-frame:hover .tag-label {
+  opacity: 1;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+}
+
+/* Floating gradient blobs behind the hero — soft, slow, well within the
+   paper palette so the canvas identity still reads. */
+.hero-blob {
+  filter: blur(64px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.hero-blob--accent {
+  background: radial-gradient(circle at 30% 30%, rgb(var(--accent)), transparent 70%);
+  animation: blob-drift-a 18s ease-in-out infinite;
+}
+.hero-blob--coral {
+  background: radial-gradient(circle at 40% 40%, rgb(var(--coral)), transparent 70%);
+  opacity: 0.35;
+  animation: blob-drift-b 22s ease-in-out infinite;
+}
+.hero-blob--violet {
+  background: radial-gradient(circle at 50% 50%, rgb(var(--accent)), transparent 70%);
+  opacity: 0.28;
+  animation: blob-drift-c 26s ease-in-out infinite;
+}
+.dark .hero-blob {
+  opacity: 0.4;
+}
+
+@keyframes blob-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(40px, 30px, 0) scale(1.15);
+  }
+}
+
+@keyframes blob-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-36px, -28px, 0) scale(1.1);
+  }
+}
+
+@keyframes blob-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(24px, -40px, 0) scale(1.2);
+  }
+}
+
+/* Drifting canvas marks — small design tokens (dots, plus, ring) floating
+   behind the hero like objects scattered on an artboard. */
+.float-mark {
+  position: absolute;
+  color: rgb(var(--accent));
+  opacity: 0.35;
+  will-change: transform;
+  animation: mark-float 12s ease-in-out infinite;
+}
+.float-mark--coral {
+  color: rgb(var(--coral));
+}
+.float-mark--muted {
+  color: rgb(var(--inkmuted));
+  opacity: 0.25;
+}
+
+@keyframes mark-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) rotate(8deg);
+  }
+}

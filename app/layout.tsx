@@ -1,0 +1,59 @@
+import type { Metadata } from "next";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+
+const display = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+});
+
+const body = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+});
+
+export const metadata: Metadata = {
+  title: "Akhil Kumar — Lead Product Designer (UI/UX & CX)",
+  description:
+    "Portfolio of Akhil Kumar, a Dubai-based Lead Product Designer specializing in AI-driven experiences, design systems, and front-end delivery with React, Next.js, and React Native across e-commerce and complex web platforms.",
+};
+
+// Runs before paint to set the theme class from storage / system preference,
+// avoiding a flash of the wrong theme on load.
+const themeScript = `
+(function(){
+  try {
+    var t = localStorage.getItem('theme');
+    // Default to dark unless the user explicitly chose light before.
+    var dark = t ? t === 'dark' : true;
+    document.documentElement.classList.toggle('dark', dark);
+  } catch (e) {}
+})();
+`;
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body
+        className={`${display.variable} ${body.variable} ${mono.variable} font-body antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
