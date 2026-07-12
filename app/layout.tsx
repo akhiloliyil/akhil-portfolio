@@ -20,10 +20,41 @@ const mono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://akhiloliyil.vercel.app";
+const title = "Akhil Kumar — Lead Product Designer (UI/UX & CX)";
+const description =
+  "Portfolio of Akhil Kumar, a Dubai-based Lead Product Designer specializing in AI-driven experiences, design systems, and front-end delivery with React, Next.js, and React Native across e-commerce and complex web platforms.";
+
 export const metadata: Metadata = {
-  title: "Akhil Kumar — Lead Product Designer (UI/UX & CX)",
-  description:
-    "Portfolio of Akhil Kumar, a Dubai-based Lead Product Designer specializing in AI-driven experiences, design systems, and front-end delivery with React, Next.js, and React Native across e-commerce and complex web platforms.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  keywords: [
+    "Akhil Kumar",
+    "Lead Product Designer",
+    "UI/UX Designer",
+    "CX",
+    "Design Systems",
+    "React",
+    "Next.js",
+    "React Native",
+    "Dubai",
+  ],
+  authors: [{ name: "Akhil Kumar" }],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Akhil Kumar — Portfolio",
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 // Runs before paint to set the theme class from storage / system preference,
