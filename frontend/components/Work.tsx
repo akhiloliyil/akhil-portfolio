@@ -183,7 +183,7 @@ export default function Work({
                 <div className="group h-full rounded-sm transition-transform duration-300 will-change-transform hover:-translate-y-1.5">
                   <SelectionFrame
                     tag={`${project.featured ? "★ Featured" : `Frame ${String(i + 1).padStart(2, "0")}`} · ${project.org}`}
-                    className={`h-full border bg-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] ${
+                    className={`h-full border bg-panel p-7 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-9 ${
                       project.featured ? "border-accent/40" : "border-line"
                     }`}
                   >
@@ -199,8 +199,8 @@ export default function Work({
                       </div>
                     </div>
 
-                    <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <h3 className="font-display text-xl font-semibold leading-snug text-ink">
+                    <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <h3 className="font-display text-2xl font-semibold leading-snug tracking-tight text-ink">
                         {project.name}
                       </h3>
                       {project.role && (
@@ -209,28 +209,28 @@ export default function Work({
                         </span>
                       )}
                     </div>
-                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-inkmuted">
+                    <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-inkmuted">
                       {project.summary}
                     </p>
 
                     <ul
-                      className={`mt-4 space-y-1.5 ${
+                      className={`mt-7 space-y-3 ${
                         project.featured
-                          ? "sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-1.5 sm:space-y-0"
+                          ? "sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-3 sm:space-y-0"
                           : ""
                       }`}
                     >
-                      {project.details.map((d) => (
-                        <li key={d} className="flex gap-2 text-sm leading-relaxed text-ink">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                      {project.details.slice(0, 4).map((d) => (
+                        <li key={d} className="flex gap-3 text-sm leading-relaxed text-ink">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" />
                           {d}
                         </li>
                       ))}
                     </ul>
 
-                    <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-line pt-4">
+                    <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-line pt-5">
                       {project.stack.map((s) => (
-                        <span key={s} className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
+                        <span key={s} className="rounded-sm bg-paper px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
                           {s}
                         </span>
                       ))}

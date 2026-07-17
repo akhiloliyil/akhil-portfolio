@@ -245,9 +245,9 @@ body {
   will-change: transform;
 }
 .work-horizontal .work-card {
-  width: min(84vw, 34rem);
+  width: min(86vw, 37rem);
   flex: 0 0 auto;
 }
 .work-horizontal .work-card--featured {
-  width: min(92vw, 46rem);
+  width: min(94vw, 50rem);
 }
