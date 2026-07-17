@@ -215,6 +215,41 @@ body {
 /* Selected Work — desktop horizontal pinned scroll. The `work-horizontal`
    class is added by JS only on large screens with motion allowed; otherwise
    the section stays a normal vertical stack (mobile / reduced-motion). */
+/* Track base = vertical stack (reduced-motion desktop fallback). */
+.work-track {
+  flex-direction: column;
+  gap: 4rem;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Mobile / tablet — native horizontal swipe carousel (scroll-snap). */
+@media (max-width: 1023px) {
+  .work-track {
+    flex-direction: row;
+    max-width: none;
+    margin: 0;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.5rem;
+    padding-bottom: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .work-track::-webkit-scrollbar {
+    display: none;
+  }
+  .work-card {
+    width: 86vw;
+    max-width: 26rem;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+}
+
+/* Desktop — GSAP pinned horizontal scroll (class added by JS on lg + motion). */
 .work-horizontal {
   height: 100vh;
 }
@@ -240,12 +275,12 @@ body {
   height: auto;
   align-items: center;
   gap: 2rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  overflow: visible;
   will-change: transform;
 }
 .work-horizontal .work-card {
   width: min(86vw, 37rem);
+  max-width: none;
   flex: 0 0 auto;
 }
 .work-horizontal .work-card--featured {

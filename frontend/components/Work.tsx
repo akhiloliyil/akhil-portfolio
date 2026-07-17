@@ -134,26 +134,8 @@ export default function Work({
         }
       );
 
-      // Mobile / tablet — the lightweight fade-up (unchanged).
-      mm.add(
-        "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
-        () => {
-          gsap.set(cards, { opacity: 0, y: 28 });
-          ScrollTrigger.batch(cards, {
-            start: "top 90%",
-            once: true,
-            onEnter: (batch) =>
-              gsap.to(batch, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power2.out",
-                stagger: 0.08,
-                overwrite: true,
-              }),
-          });
-        }
-      );
+      // Mobile / tablet uses a native horizontal swipe carousel (CSS
+      // scroll-snap) — no GSAP needed there.
     }, root);
 
     return () => {
@@ -185,10 +167,10 @@ export default function Work({
           </div>
         </div>
 
-        <div className="work-viewport mt-14 lg:mt-0">
+        <div className="work-viewport mt-10 lg:mt-0">
           <div
             ref={trackRef}
-            className="work-track mx-auto flex w-full max-w-6xl flex-col gap-16 px-6"
+            className="work-track flex px-6"
             style={{ perspective: 1200 }}
           >
             {projects.map((project, i) => (
