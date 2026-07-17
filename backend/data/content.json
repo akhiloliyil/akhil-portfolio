@@ -445,22 +445,31 @@
   ],
   "testimonials": [
     {
-      "quote": "Akhil pairs sharp design instincts with real engineering ability — he doesn't just hand off screens, he ships them. Our conversion and app ratings both moved after his redesigns.",
-      "name": "Product Lead",
-      "role": "Product Management",
+      "quote": "I had the pleasure of working with Akhil at Danube Home, where he consistently demonstrated exceptional skills as a UI/UX Designer, Web Designer, and Front-End Developer. He has a keen eye for design and a deep understanding of user experience principles, which he seamlessly integrates into his work. His ability to create visually appealing and user-friendly interfaces is truly impressive — and he ensures his designs are not only beautiful but also functional and responsive. His attention to detail and commitment to high-quality work make him an invaluable asset to any team.",
+      "name": "Naveen Varma",
+      "role": "D2C & Ecommerce Platform Strategist"
+    },
+    {
+      "quote": "Akhil is an excellent UI/UX React front-end developer with a strong eye for design and functionality. I had the pleasure of working with him on several projects, and he consistently delivers visually appealing, user-friendly designs while ensuring smooth functionality and performance. He combines strong React expertise with a deep understanding of UI/UX principles, and he's a great team player — always open to feedback and highly collaborative. I highly recommend him for any UI/UX React front-end role.",
+      "name": "Rishal KS",
+      "role": "Assistant Manager, UI/UX",
       "company": "Danube Home"
     },
     {
-      "quote": "He turned a genuinely complex, data-heavy system into something our team could actually use every day. Rare to find someone who understands both UX depth and business impact.",
-      "name": "Engineering Manager",
-      "role": "Engineering",
-      "company": "Danube Home"
+      "quote": "I've worked with Akhil on multiple projects, and he's one of the most talented and versatile designers I've met. As a UI/UX designer he has a keen eye for detail and a deep understanding of what makes a user experience truly exceptional — his designs are always visually stunning, intuitive, and user-friendly. What sets him apart is his ability to bring those designs to life with front-end skills in HTML, CSS, JavaScript, and React, turning complex concepts into fully functional, responsive, pixel-perfect web apps. If you want a designer who can also ship the code, look no further.",
+      "name": "Isham Azad",
+      "role": "Full Stack Developer & Technical Architect"
     },
     {
-      "quote": "Fast, collaborative, and detail-obsessed. Akhil built our design system from scratch and it's still the backbone of everything we ship. A true end-to-end product designer.",
-      "name": "Founder",
-      "role": "Leadership",
-      "company": "Independent engagement"
+      "quote": "Akhil excels in UI/UX design, combining a keen eye for aesthetics with a deep understanding of user behavior to create seamless, engaging digital experiences. His commitment to enhancing customer experience is evident in every project, where he skillfully balances functionality with visually striking designs. His ability to translate complex ideas into user-friendly interfaces makes him a standout professional and a true asset.",
+      "name": "Muhammed Shafeel",
+      "role": "Solutions Architect — AI & ML"
+    },
+    {
+      "quote": "Hardworking, and pretty fast at what he does!",
+      "name": "Eldho Joy",
+      "role": "Founder & Managing Director",
+      "company": "eWoke"
     }
   ]
 }
