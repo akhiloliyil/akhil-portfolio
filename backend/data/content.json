@@ -582,7 +582,7 @@
     {
       "id": "gallery",
       "label": "Gallery",
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "toolkit",
