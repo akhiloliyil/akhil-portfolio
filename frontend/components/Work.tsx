@@ -71,11 +71,24 @@ export default function Work({
         () => {
           root.classList.add("work-horizontal");
           const viewport = root.querySelector<HTMLElement>(".work-viewport");
-          const distance = () =>
-            Math.max(
-              0,
-              track.scrollWidth - (viewport?.clientWidth ?? window.innerWidth)
-            );
+          const vw = () => viewport?.clientWidth ?? window.innerWidth;
+
+          // Pad the ends so the first and last cards sit centred on screen.
+          const setPads = () => {
+            const first = cards[0];
+            const last = cards[cards.length - 1];
+            if (first)
+              track.style.paddingLeft =
+                Math.max(24, (vw() - first.offsetWidth) / 2) + "px";
+            if (last)
+              track.style.paddingRight =
+                Math.max(24, (vw() - last.offsetWidth) / 2) + "px";
+          };
+          setPads();
+          // Recompute before every ScrollTrigger measurement (incl. resize).
+          ScrollTrigger.addEventListener("refreshInit", setPads);
+
+          const distance = () => Math.max(0, track.scrollWidth - vw());
 
           const tween = gsap.to(track, {
             x: () => -distance(),
@@ -111,6 +124,9 @@ export default function Work({
           ScrollTrigger.refresh();
 
           return () => {
+            ScrollTrigger.removeEventListener("refreshInit", setPads);
+            track.style.paddingLeft = "";
+            track.style.paddingRight = "";
             root.classList.remove("work-horizontal");
             gsap.set(track, { x: 0 });
             gsap.set(cards, { opacity: 1, scale: 1 });
