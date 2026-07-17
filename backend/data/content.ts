@@ -397,6 +397,19 @@ export const toolkit = [
     ],
   },
   {
+    group: "AI Tools",
+    tools: [
+      "ChatGPT",
+      "Claude",
+      "Midjourney",
+      "Figma AI",
+      "Adobe Firefly",
+      "GitHub Copilot",
+      "Cursor",
+      "v0",
+    ],
+  },
+  {
     group: "Platforms",
     tools: ["Magento", "WooCommerce", "Zen Cart", "WordPress", "Joomla"],
   },
