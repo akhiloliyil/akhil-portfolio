@@ -73,7 +73,7 @@
       "name": "YARA — AI Shopping Assistant",
       "org": "Danube Home",
       "role": "UI Lead",
-      "link": "https://lnkd.in/dkCxxzJm",
+      "link": "https://www.danubehome.com/ae/en/yara-ai-search",
       "featured": true,
       "summary": "Next-generation AI shopping assistant transforming retail across digital and physical stores. As UI Lead, I drove the end-to-end experience strategy — intelligent, conversational, and consistent across every touchpoint.",
       "details": [
@@ -133,10 +133,11 @@
       "name": "Danubehome.com — E-commerce Website",
       "org": "Danube Home",
       "period": "Sep 2020 — Present",
-      "link": "https://www.danubehome.com",
-      "summary": "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong search experience.",
+      "link": "https://www.danubehome.com/ae/en/yara-ai-search",
+      "summary": "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong, AI-driven search experience.",
       "details": [
-        "AI-powered product search with intent-aware, personalized results",
+        "YARA AI Search — natural-language, intent-aware product discovery with personalized results (live on danubehome.com)",
+        "Conversational, assistant-style search that understands what shoppers mean, not just keywords",
         "Clean homepage, sticky responsive navigation, and robust discovery",
         "Layered PLP filtering and comprehensive PDPs with reviews",
         "Wallets, rewards, gift cards, and secure multi-option checkout",
@@ -146,7 +147,7 @@
         "ReactJS",
         "SCSS",
         "Adobe XD",
-        "AI Search"
+        "YARA AI Search"
       ],
       "frameType": "ecommerce"
     },

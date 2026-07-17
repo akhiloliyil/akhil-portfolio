@@ -78,7 +78,7 @@ export const projects: Project[] = [
     name: "YARA — AI Shopping Assistant",
     org: "Danube Home",
     role: "UI Lead",
-    link: "https://lnkd.in/dkCxxzJm",
+    link: "https://www.danubehome.com/ae/en/yara-ai-search",
     featured: true,
     summary:
       "Next-generation AI shopping assistant transforming retail across digital and physical stores. As UI Lead, I drove the end-to-end experience strategy — intelligent, conversational, and consistent across every touchpoint.",
@@ -129,17 +129,18 @@ export const projects: Project[] = [
     name: "Danubehome.com — E-commerce Website",
     org: "Danube Home",
     period: "Sep 2020 — Present",
-    link: "https://www.danubehome.com",
+    link: "https://www.danubehome.com/ae/en/yara-ai-search",
     summary:
-      "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong search experience.",
+      "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong, AI-driven search experience.",
     details: [
-      "AI-powered product search with intent-aware, personalized results",
+      "YARA AI Search — natural-language, intent-aware product discovery with personalized results (live on danubehome.com)",
+      "Conversational, assistant-style search that understands what shoppers mean, not just keywords",
       "Clean homepage, sticky responsive navigation, and robust discovery",
       "Layered PLP filtering and comprehensive PDPs with reviews",
       "Wallets, rewards, gift cards, and secure multi-option checkout",
       "Account management, order history, and click-and-collect",
     ],
-    stack: ["ReactJS", "SCSS", "Adobe XD", "AI Search"],
+    stack: ["ReactJS", "SCSS", "Adobe XD", "YARA AI Search"],
     frameType: "ecommerce",
   },
   {
