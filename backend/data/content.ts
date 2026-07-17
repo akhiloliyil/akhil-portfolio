@@ -401,9 +401,12 @@ export const toolkit = [
     tools: [
       "ChatGPT",
       "Claude",
+      "Gemini",
+      "Google Stitch",
+      "Google Whisk",
       "Midjourney",
-      "Figma AI",
       "Adobe Firefly",
+      "Figma AI",
       "GitHub Copilot",
       "Cursor",
       "v0",
