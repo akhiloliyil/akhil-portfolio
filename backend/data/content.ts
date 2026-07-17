@@ -129,6 +129,7 @@ export const projects: Project[] = [
     name: "Danubehome.com — E-commerce Website",
     org: "Danube Home",
     period: "Sep 2020 — Present",
+    link: "https://www.danubehome.com",
     summary:
       "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong search experience.",
     details: [
@@ -381,7 +382,16 @@ export const education = [
 export const toolkit = [
   {
     group: "Design",
-    tools: ["Adobe XD", "Figma", "Photoshop", "Illustrator", "Balsamiq", "Canva"],
+    tools: [
+      "Adobe XD",
+      "Figma",
+      "Photoshop",
+      "Illustrator",
+      "Balsamiq",
+      "Canva",
+      "Google Web Designer",
+      "Material Icons",
+    ],
   },
   {
     group: "Front-End",
@@ -389,11 +399,15 @@ export const toolkit = [
       "HTML5",
       "CSS3 / SASS",
       "JavaScript (ES6+)",
+      "jQuery",
       "ReactJS",
       "React Native",
       "Next.js",
+      "Node.js",
       "Tailwind CSS",
       "Bootstrap",
+      "Reactstrap",
+      "Material-UI",
     ],
   },
   {
@@ -424,6 +438,22 @@ export const toolkit = [
       "WCAG Accessibility",
       "Design Systems",
     ],
+  },
+  {
+    group: "Soft Skills",
+    tools: [
+      "Team Collaboration",
+      "Time Management",
+      "Problem Solving",
+      "Adaptability",
+      "Attention to Detail",
+      "Multitasking",
+      "Client Relations",
+    ],
+  },
+  {
+    group: "Languages",
+    tools: ["English", "Hindi"],
   },
 ];
 

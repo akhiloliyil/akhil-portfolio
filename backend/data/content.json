@@ -74,7 +74,7 @@
       "org": "Danube Home",
       "role": "UI Lead",
       "link": "https://lnkd.in/dkCxxzJm",
-      "featured": false,
+      "featured": true,
       "summary": "Next-generation AI shopping assistant transforming retail across digital and physical stores. As UI Lead, I drove the end-to-end experience strategy — intelligent, conversational, and consistent across every touchpoint.",
       "details": [
         "AI-powered, intent-driven product discovery with personalized recommendations",
@@ -126,14 +126,14 @@
         "Adobe XD",
         "React Native"
       ],
-      "frameType": "app",
-      "featured": false
+      "frameType": "app"
     },
     {
       "id": "danubehome-web",
       "name": "Danubehome.com — E-commerce Website",
       "org": "Danube Home",
       "period": "Sep 2020 — Present",
+      "link": "https://www.danubehome.com",
       "summary": "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong search experience.",
       "details": [
         "AI-powered product search with intent-aware, personalized results",
@@ -146,8 +146,7 @@
         "ReactJS",
         "SCSS",
         "Adobe XD",
-        "AI Search",
-        "NextJs"
+        "AI Search"
       ],
       "frameType": "ecommerce"
     },
@@ -385,7 +384,9 @@
         "Photoshop",
         "Illustrator",
         "Balsamiq",
-        "Canva"
+        "Canva",
+        "Google Web Designer",
+        "Material Icons"
       ]
     },
     {
@@ -394,11 +395,15 @@
         "HTML5",
         "CSS3 / SASS",
         "JavaScript (ES6+)",
+        "jQuery",
         "ReactJS",
         "React Native",
         "Next.js",
+        "Node.js",
         "Tailwind CSS",
-        "Bootstrap"
+        "Bootstrap",
+        "Reactstrap",
+        "Material-UI"
       ]
     },
     {
@@ -434,6 +439,25 @@
         "Cross-browser Compatibility",
         "WCAG Accessibility",
         "Design Systems"
+      ]
+    },
+    {
+      "group": "Soft Skills",
+      "tools": [
+        "Team Collaboration",
+        "Time Management",
+        "Problem Solving",
+        "Adaptability",
+        "Attention to Detail",
+        "Multitasking",
+        "Client Relations"
+      ]
+    },
+    {
+      "group": "Languages",
+      "tools": [
+        "English",
+        "Hindi"
       ]
     }
   ],
