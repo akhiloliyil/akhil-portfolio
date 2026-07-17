@@ -2,7 +2,9 @@
 
 import ThemeToggle from "./ThemeToggle";
 
-const links = [
+type NavLink = { href: string; label: string };
+
+const defaultLinks: NavLink[] = [
   { href: "#about", label: "About" },
   { href: "#work", label: "Work" },
   { href: "#process", label: "Process" },
@@ -13,7 +15,7 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
-export default function Nav() {
+export default function Nav({ links = defaultLinks }: { links?: NavLink[] }) {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/70">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">

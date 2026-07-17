@@ -12,6 +12,7 @@ import {
   type Shot,
   type ProcessStep,
   type Testimonial,
+  type SectionToggle,
 } from "@/data/content";
 import {
   Field,
@@ -35,6 +36,7 @@ type Content = {
   toolkit: { group: string; tools: string[] }[];
   process: ProcessStep[];
   testimonials: Testimonial[];
+  sections: SectionToggle[];
 };
 
 type Edu = Content["education"][number];
@@ -54,6 +56,7 @@ const TABS = [
   "Testimonials",
   "Education",
   "Stats",
+  "Sections",
 ] as const;
 type Tab = (typeof TABS)[number];
 
@@ -132,6 +135,13 @@ function describeChanges(a: Content, b: Content): string[] {
   diffArray("Process", a.process, b.process, (s) => s.title, out);
   diffArray("Testimonials", a.testimonials, b.testimonials, (t) => t.name, out);
   diffArray("Education", a.education, b.education, (e) => e.degree, out);
+  diffArray(
+    "Sections",
+    a.sections,
+    b.sections,
+    (s) => `${s.label} (${s.enabled ? "on" : "off"})`,
+    out
+  );
   return out;
 }
 
@@ -555,6 +565,57 @@ export default function AdminApp() {
               </div>
             )}
           />
+        )}
+
+        {/* ---- SECTIONS (show / hide) ---- */}
+        {tab === "Sections" && (
+          <div>
+            <p className="mb-5 text-sm text-inkmuted">
+              Toggle a section off to hide it from both the site and the top
+              nav menu. The label is what shows in the nav.
+            </p>
+            <div className="space-y-2">
+              {content.sections.map((s, i) => (
+                <div
+                  key={s.id}
+                  className="flex flex-wrap items-center gap-4 rounded-md border border-line bg-paper p-3"
+                >
+                  <span
+                    className={`grid h-2.5 w-2.5 place-items-center rounded-full ${
+                      s.enabled ? "bg-accent" : "bg-line"
+                    }`}
+                  />
+                  <span className="w-24 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+                    {s.id}
+                  </span>
+                  <div className="flex-1 min-w-[8rem]">
+                    <Field
+                      label="Nav label"
+                      value={s.label}
+                      onChange={(v) =>
+                        patch({
+                          sections: content.sections.map((x, idx) =>
+                            idx === i ? { ...x, label: v } : x
+                          ),
+                        })
+                      }
+                    />
+                  </div>
+                  <Toggle
+                    label={s.enabled ? "Shown" : "Hidden"}
+                    value={s.enabled}
+                    onChange={(v) =>
+                      patch({
+                        sections: content.sections.map((x, idx) =>
+                          idx === i ? { ...x, enabled: v } : x
+                        ),
+                      })
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </main>
 

@@ -357,6 +357,11 @@
       "degree": "Higher Secondary, Science (Biology)",
       "school": "NSS HSS Manikamangalam",
       "period": "2004 — 2006"
+    },
+    {
+      "degree": "SSLC",
+      "school": "ASRAM Higher Secondary School",
+      "period": "2004"
     }
   ],
   "gallery": [
@@ -497,7 +502,8 @@
       "group": "Languages",
       "tools": [
         "English",
-        "Hindi"
+        "Hindi",
+        "Malayalam"
       ]
     }
   ],
@@ -550,6 +556,48 @@
       "name": "Eldho Joy",
       "role": "Founder & Managing Director",
       "company": "eWoke"
+    }
+  ],
+  "sections": [
+    {
+      "id": "about",
+      "label": "About",
+      "enabled": true
+    },
+    {
+      "id": "work",
+      "label": "Work",
+      "enabled": true
+    },
+    {
+      "id": "process",
+      "label": "Process",
+      "enabled": true
+    },
+    {
+      "id": "experience",
+      "label": "Experience",
+      "enabled": true
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery",
+      "enabled": true
+    },
+    {
+      "id": "toolkit",
+      "label": "Toolkit",
+      "enabled": true
+    },
+    {
+      "id": "testimonials",
+      "label": "Praise",
+      "enabled": true
+    },
+    {
+      "id": "contact",
+      "label": "Contact",
+      "enabled": true
     }
   ]
 }

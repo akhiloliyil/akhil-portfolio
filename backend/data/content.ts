@@ -570,3 +570,17 @@ export const testimonials: Testimonial[] = [
     company: "eWoke",
   },
 ];
+
+export type SectionToggle = { id: string; label: string; enabled: boolean };
+
+// Controls which sections show on the site + in the nav. Edit in /ak-admin.
+export const sections: SectionToggle[] = [
+  { id: "about", label: "About", enabled: true },
+  { id: "work", label: "Work", enabled: true },
+  { id: "process", label: "Process", enabled: true },
+  { id: "experience", label: "Experience", enabled: true },
+  { id: "gallery", label: "Gallery", enabled: true },
+  { id: "toolkit", label: "Toolkit", enabled: true },
+  { id: "testimonials", label: "Praise", enabled: true },
+  { id: "contact", label: "Contact", enabled: true },
+];

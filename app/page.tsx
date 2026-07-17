@@ -17,19 +17,27 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const c = await getContent();
 
+  const enabled = new Set(c.sections.filter((s) => s.enabled).map((s) => s.id));
+  const on = (id: string) => enabled.has(id);
+  const navLinks = c.sections
+    .filter((s) => s.enabled)
+    .map((s) => ({ href: `#${s.id}`, label: s.label }));
+
   return (
     <main className="min-h-screen bg-paper">
       <SmoothScroll />
-      <Nav />
+      <Nav links={navLinks} />
       <Hero profile={c.profile} stats={c.stats} />
-      <About about={c.about} />
-      <Work projects={c.projects} />
-      <DesignProcess process={c.process} />
-      <Experience experience={c.experience} education={c.education} />
-      <Gallery gallery={c.gallery} projects={c.projects} />
-      <Toolkit toolkit={c.toolkit} />
-      <Testimonials testimonials={c.testimonials} />
-      <Contact profile={c.profile} />
+      {on("about") && <About about={c.about} />}
+      {on("work") && <Work projects={c.projects} />}
+      {on("process") && <DesignProcess process={c.process} />}
+      {on("experience") && (
+        <Experience experience={c.experience} education={c.education} />
+      )}
+      {on("gallery") && <Gallery gallery={c.gallery} projects={c.projects} />}
+      {on("toolkit") && <Toolkit toolkit={c.toolkit} />}
+      {on("testimonials") && <Testimonials testimonials={c.testimonials} />}
+      {on("contact") && <Contact profile={c.profile} />}
     </main>
   );
 }

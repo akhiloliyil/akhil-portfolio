@@ -12,6 +12,7 @@ import {
   toolkit as seedToolkit,
   process as seedProcess,
   testimonials as seedTestimonials,
+  sections as seedSections,
 } from "@/data/content";
 // Bundled at build time so it's always readable on serverless (Vercel) hosts,
 // where the raw file may not be traced into the function.
@@ -29,6 +30,7 @@ export type Content = {
   toolkit: typeof seedToolkit;
   process: typeof seedProcess;
   testimonials: typeof seedTestimonials;
+  sections: typeof seedSections;
 };
 
 const FILE = path.join(process.cwd(), "backend", "data", "content.json");
@@ -45,6 +47,7 @@ export function seedContent(): Content {
     toolkit: seedToolkit,
     process: seedProcess,
     testimonials: seedTestimonials,
+    sections: seedSections,
   };
 }
 
@@ -56,9 +59,9 @@ export function seedContent(): Content {
 export async function getContent(): Promise<Content> {
   try {
     const raw = await fs.readFile(FILE, "utf8");
-    return JSON.parse(raw) as Content;
+    return { ...seedContent(), ...(JSON.parse(raw) as Partial<Content>) };
   } catch {
-    return (bundled as Content) ?? seedContent();
+    return { ...seedContent(), ...(bundled as Partial<Content>) };
   }
 }
 
@@ -93,6 +96,7 @@ const TOP_KEYS: (keyof Content)[] = [
   "toolkit",
   "process",
   "testimonials",
+  "sections",
 ];
 
 /** Lightweight shape check so a bad payload can't wipe the file. */
