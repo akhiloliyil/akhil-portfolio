@@ -261,10 +261,12 @@
       "title": "Sr. UI/UX Designer / Magento Front-End Developer",
       "period": "Aug 2019 — Sep 2020",
       "location": "Dubai, UAE",
-      "blurb": "UAE organic, vegan, gluten-free, and keto grocery store.",
+      "blurb": "UAE organic grocery store — certified organic, vegan, gluten-free, keto, and paleo products.",
       "highlights": [
-        "Designed layouts in Adobe XD, Photoshop, and Illustrator",
-        "Built responsive Magento front-end in HTML5, CSS, jQuery, and Bootstrap"
+        "Built the Magento e-commerce site from scratch — themes, layouts, and checkout",
+        "Responsive front-end in HTML5, CSS, jQuery, and Bootstrap, optimized across devices",
+        "Custom modules to extend catalog functionality, performance, and usability",
+        "Brand-aligned visuals designed in Adobe XD, Photoshop, and Illustrator"
       ]
     },
     {
@@ -272,51 +274,74 @@
       "title": "Sr. UI/UX Designer / Magento Front-End Developer",
       "period": "May 2018 — Jul 2019",
       "location": "Dubai Marina, UAE",
-      "blurb": "UAE multi-vendor e-commerce marketplace.",
+      "blurb": "UAE e-commerce marketplace connecting buyers and sellers across categories.",
       "highlights": [
-        "Designed and built the Magento marketplace experience",
-        "Responsive front-end with HTML5, CSS, jQuery, and Bootstrap"
+        "Designed and built a Magento multi-vendor marketplace from the ground up",
+        "Responsive, engaging UI in HTML5, CSS, jQuery, and Bootstrap",
+        "Optimized navigation, search, and multi-vendor management",
+        "Brand-cohesive visuals in Adobe XD, Photoshop, and Illustrator"
       ]
     },
     {
       "company": "Citrus Informatics (India) Pvt Ltd",
-      "title": "Sr. UI/UX Designer / Magento Front-End Developer",
+      "title": "Sr. UI/UX Designer / Web Designer / Front-End Developer",
       "period": "Dec 2016 — Feb 2018",
       "location": "Cochin, India",
-      "blurb": "IT services for primarily US-based healthcare clients.",
+      "blurb": "Global IT solutions provider — healthcare apps, desktop apps, and CMS sites for primarily US clients.",
       "highlights": [
-        "UI/UX research and layout design for web and mobile products",
-        "Built responsive front-ends and CMS sites (WordPress, Magento)"
+        "UI/UX research for healthcare mobile apps, desktop apps, and CMS websites",
+        "Designed user-centric product UIs aligned to client objectives and trends",
+        "Built and maintained responsive CMS sites on Joomla and WordPress",
+        "Created design systems and style guides for consistency and scalability",
+        "Ensured accessible, inclusive designs to usability standards"
       ]
     },
     {
       "company": "eWoke Innovative Solutions Pvt. Ltd",
-      "title": "Sr. Web Designer / Front-End Developer",
+      "title": "UI/UX Designer / Web Designer / Front-End Developer",
       "period": "Oct 2013 — Nov 2016",
       "location": "Kochi, India",
-      "blurb": "Digital agency serving US, Middle East, Europe, and UK clients.",
+      "blurb": "Digital creative agency serving clients across the US, Middle East, Europe, and UK.",
       "highlights": [
-        "Designed and built responsive websites and e-commerce front-ends",
-        "HTML5, CSS, jQuery, Bootstrap, and WordPress builds"
+        "Built responsive e-commerce sites on Magento, ZenCart, CodeIgniter, and Yii",
+        "Delivered shopping cart, payment gateway, and customer-management features",
+        "Customized and optimized storefronts to client requirements",
+        "Conducted UI research and product design for intuitive navigation",
+        "Enhanced scalability and cross-device responsiveness"
       ]
     },
     {
       "company": "Eden Software",
-      "title": "Sr. Web Designer / Front-End Developer",
+      "title": "UI/UX Designer / Web Designer / Front-End Developer",
       "period": "Feb 2013 — Sep 2013",
-      "location": "Kochi, India"
+      "location": "Kochi, India",
+      "highlights": [
+        "Designed and built web interfaces with Google Web Designer and Adobe tools",
+        "Delivered responsive, user-friendly e-commerce designs",
+        "HTML5, CSS, jQuery, Bootstrap, WordPress, and Magento"
+      ]
     },
     {
       "company": "Viaweb Solutions",
-      "title": "Web Designer / Front-End Developer",
+      "title": "UI/UX Designer / Web Designer / Front-End Developer",
       "period": "Feb 2012 — Feb 2013",
-      "location": "Kochi, India"
+      "location": "Kochi, India",
+      "highlights": [
+        "Designed and built web interfaces with Google Web Designer and Adobe tools",
+        "Delivered responsive, user-friendly e-commerce designs",
+        "HTML5, CSS, jQuery, Bootstrap, WordPress, and Magento"
+      ]
     },
     {
       "company": "Media Crow",
-      "title": "Jr. Web Designer / HTML Developer",
+      "title": "Web Designer / HTML Developer",
       "period": "Apr 2010 — Feb 2012",
-      "location": "Thrissur, India"
+      "location": "Thrissur, India",
+      "highlights": [
+        "Designed and built web interfaces with Google Web Designer and Adobe tools",
+        "Delivered responsive, user-friendly e-commerce designs",
+        "HTML5, CSS, jQuery, Bootstrap, and WordPress"
+      ]
     }
   ],
   "education": [
