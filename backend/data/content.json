@@ -133,11 +133,10 @@
       "name": "Danubehome.com — E-commerce Website",
       "org": "Danube Home",
       "period": "Sep 2020 — Present",
-      "link": "https://www.danubehome.com/ae/en/yara-ai-search",
-      "summary": "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong, AI-driven search experience.",
+      "link": "https://www.danubehome.com",
+      "summary": "Modern, conversion-focused storefront built on ReactJS and SCSS, designed for clarity and a strong search experience.",
       "details": [
-        "YARA AI Search — natural-language, intent-aware product discovery with personalized results (live on danubehome.com)",
-        "Conversational, assistant-style search that understands what shoppers mean, not just keywords",
+        "YARA AI Search — natural-language, intent-aware product search with personalized results",
         "Clean homepage, sticky responsive navigation, and robust discovery",
         "Layered PLP filtering and comprehensive PDPs with reviews",
         "Wallets, rewards, gift cards, and secure multi-option checkout",
@@ -147,7 +146,7 @@
         "ReactJS",
         "SCSS",
         "Adobe XD",
-        "YARA AI Search"
+        "AI Search"
       ],
       "frameType": "ecommerce"
     },
