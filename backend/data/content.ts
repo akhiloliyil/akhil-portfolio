@@ -177,15 +177,17 @@ export const projects: Project[] = [
     id: "omnichannel",
     name: "Omnichannel Retail Experience Platform",
     org: "Danube Home",
+    role: "Concept",
     summary:
-      "End-to-end omnichannel experience connecting in-store and digital touchpoints — discovery to visualization to purchase, without friction.",
+      "A concept that bridges physical stores and digital convenience — from discovery to visualization to purchase in one connected, frictionless flow.",
     details: [
-      "Smart check-in kiosk with personalized preferences and cross-device carts",
-      "AI-powered room visualization — shop directly from the design",
-      "Frictionless checkout with transparent pricing and flexible payment",
-      "Unified customer journey across physical and digital channels",
+      "Smart Check-in Kiosk — customers log in instantly, access their preferences, and continue their journey without friction",
+      "Frictionless Checkout UI — fast, intuitive checkout with clear pricing, delivery options, and flexible payments",
+      "AI-Powered Room Design (PureSpace-inspired) — visualize furniture in your own space, explore styles, and shop directly from the design",
+      "Connected discovery → visualization → purchase across physical and digital channels",
+      "Improves user experience, conversion, and in-store engagement",
     ],
-    stack: ["UX Research", "UX Design", "AI UX"],
+    stack: ["UI/UX Design", "Product Thinking", "UX Strategy", "AI UX"],
     frameType: "app",
   },
   {
