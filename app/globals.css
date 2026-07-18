@@ -215,6 +215,18 @@ body {
 /* Selected Work — desktop horizontal pinned scroll. The `work-horizontal`
    class is added by JS only on large screens with motion allowed; otherwise
    the section stays a normal vertical stack (mobile / reduced-motion). */
+/* Uniform section heights on desktop — every section fills at least the
+   viewport, with its content vertically centred. Work is excluded (it pins
+   to 100vh on its own). */
+@media (min-width: 1024px) {
+  main > section:not(#work) {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 /* Track base = vertical stack (reduced-motion desktop fallback). */
 .work-track {
   flex-direction: column;
