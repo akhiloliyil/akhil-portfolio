@@ -90,7 +90,7 @@ export default function CinematicPortrait({
             y: y + (Math.random() - 0.5) * step,
             b,
             ph: Math.random() * Math.PI * 2,
-            amp: 0.6 + Math.random() * 1.8,
+            amp: 1.3 + Math.random() * 2.8,
           });
         }
       }
@@ -118,8 +118,8 @@ export default function CinematicPortrait({
         let x = d.x;
         let y = d.y;
         if (animate) {
-          x += Math.cos(time + d.ph) * d.amp * 0.5;
-          y += Math.sin(time * 0.9 + d.ph) * d.amp * 0.5;
+          x += Math.cos(time * 0.8 + d.ph) * d.amp;
+          y += Math.sin(time * 0.7 + d.ph * 1.3) * d.amp;
         }
         // clear dust inside the reveal window
         if (m) {
@@ -127,7 +127,8 @@ export default function CinematicPortrait({
           const dy = y - m.y;
           if (dx * dx + dy * dy < rr * rr) continue;
         }
-        const a = Math.min(0.92, (d.b / 255) * 1.05);
+        const tw = animate ? 0.5 + 0.5 * Math.sin(time * 2.4 + d.ph * 2.5) : 1;
+        const a = Math.min(0.95, (d.b / 255) * 1.05) * tw;
         const g = Math.min(255, 205 + ((d.b / 255) * 45) | 0);
         ctx.fillStyle = `rgba(${g},${g},${Math.min(255, g + 6)},${a})`;
         ctx.fillRect(x, y, 1.25, 1.25);
