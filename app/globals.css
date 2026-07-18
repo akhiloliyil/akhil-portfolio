@@ -294,7 +294,7 @@ body {
   margin: 0;
   flex-direction: row;
   height: auto;
-  align-items: center;
+  align-items: stretch;
   gap: 2rem;
   overflow: visible;
   will-change: transform;
