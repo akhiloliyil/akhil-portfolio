@@ -1,7 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useReducedMotion } from "motion/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import { testimonials as seedTestimonials } from "@/data/content";
 
 function Chevron({ dir }: { dir: "left" | "right" }) {
@@ -38,6 +42,9 @@ export default function Testimonials({
 }) {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true });
   const [selected, setSelected] = useState(0);
+  const reduce = useReducedMotion();
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const slidesRef = useRef<HTMLDivElement>(null);
 
   const onSelect = useCallback(() => {
     if (embla) setSelected(embla.selectedScrollSnap());
@@ -52,6 +59,54 @@ export default function Testimonials({
     };
   }, [embla, onSelect]);
 
+  // Heading — split into characters and stagger them up as it scrolls in.
+  useEffect(() => {
+    const el = headingRef.current;
+    if (!el || reduce) return;
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    let split: SplitText | null = null;
+    const ctx = gsap.context(() => {
+      split = new SplitText(el, { type: "chars, words" });
+      gsap.from(split.chars, {
+        yPercent: 120,
+        opacity: 0,
+        ease: "power3.out",
+        duration: 0.7,
+        stagger: 0.025,
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+      });
+    }, el);
+    return () => {
+      ctx.revert();
+      split?.revert();
+    };
+  }, [reduce]);
+
+  // Active quote — split into words and reveal them each time the slide changes.
+  useEffect(() => {
+    const root = slidesRef.current;
+    if (!root || reduce) return;
+    const quote = root.querySelectorAll<HTMLElement>("blockquote")[selected];
+    if (!quote) return;
+    gsap.registerPlugin(SplitText);
+    let split: SplitText | null = null;
+    const ctx = gsap.context(() => {
+      split = new SplitText(quote, { type: "words, lines" });
+      gsap.from(split.words, {
+        opacity: 0,
+        yPercent: 60,
+        filter: "blur(6px)",
+        ease: "power2.out",
+        duration: 0.5,
+        stagger: 0.02,
+      });
+    }, quote);
+    return () => {
+      ctx.revert();
+      split?.revert();
+    };
+  }, [selected, reduce]);
+
   if (!testimonials.length) return null;
 
   return (
@@ -62,7 +117,10 @@ export default function Testimonials({
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
               Testimonials
             </p>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            <h2
+              ref={headingRef}
+              className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
+            >
               What people say
             </h2>
           </div>
@@ -87,7 +145,7 @@ export default function Testimonials({
         </div>
 
         <div className="mt-12 overflow-hidden" ref={emblaRef}>
-          <div className="flex items-center">
+          <div className="flex items-center" ref={slidesRef}>
             {testimonials.map((t, i) => (
               <figure
                 key={i}
