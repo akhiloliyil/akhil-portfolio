@@ -181,7 +181,7 @@ export default function Work({
               {projects.length} frames · scroll to explore
             </span>
             <a
-              href="#experience"
+              href="#process"
               className="focus-ring inline-flex items-center gap-1.5 rounded-sm border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:border-accent hover:text-accent"
             >
               Skip work
