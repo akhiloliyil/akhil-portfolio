@@ -49,25 +49,24 @@ export default function Work({
   const rootRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Order projects into industry groups, each preceded by a category panel.
-  type TrackItem =
-    | { kind: "cat"; id: string; label: string; icon: string; count: number }
-    | { kind: "card"; project: Project; frame: number };
-  const trackItems: TrackItem[] = [];
+  // Order projects by industry group (label shown small above each name).
+  const catMap = new Map(projectCategories.map((c) => [c.id, c]));
+  const ordered: {
+    project: Project;
+    frame: number;
+    cat?: (typeof projectCategories)[number];
+  }[] = [];
   let frame = 0;
   const known = new Set(projectCategories.map((c) => c.id));
   for (const cat of projectCategories) {
-    const items = projects.filter((p) => p.category === cat.id);
-    if (!items.length) continue;
-    trackItems.push({ kind: "cat", ...cat, count: items.length });
-    for (const project of items) {
+    for (const project of projects.filter((p) => p.category === cat.id)) {
       frame += 1;
-      trackItems.push({ kind: "card", project, frame });
+      ordered.push({ project, frame, cat });
     }
   }
   for (const project of projects.filter((p) => !known.has(p.category ?? ""))) {
     frame += 1;
-    trackItems.push({ kind: "card", project, frame });
+    ordered.push({ project, frame, cat: catMap.get(project.category ?? "") });
   }
 
   useIsoLayoutEffect(() => {
@@ -199,28 +198,7 @@ export default function Work({
             className="work-track flex px-6"
             style={{ perspective: 1200 }}
           >
-            {trackItems.map((item) =>
-              item.kind === "cat" ? (
-                <div
-                  key={`cat-${item.id}`}
-                  className="work-cat flex flex-col justify-center px-2"
-                >
-                  <span className="text-5xl leading-none" aria-hidden="true">
-                    {item.icon}
-                  </span>
-                  <h3 className="mt-5 font-display text-2xl font-semibold leading-tight text-ink">
-                    {item.label}
-                  </h3>
-                  <span className="mt-2 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
-                    {item.count} {item.count > 1 ? "projects" : "project"}
-                  </span>
-                  <span className="mt-4 block h-px w-12 bg-accent" />
-                </div>
-              ) : (
-                (() => {
-                  const project = item.project;
-                  const frameNo = item.frame;
-                  return (
+            {ordered.map(({ project, frame: frameNo, cat }) => (
               <div
                 key={project.id}
                 className={`work-card ${project.featured ? "work-card--featured" : ""}`}
@@ -244,7 +222,16 @@ export default function Work({
                       </div>
                     </div>
 
-                    <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2">
+                    {cat && (
+                      <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.15em] text-accent">
+                        {cat.icon} {cat.label}
+                      </p>
+                    )}
+                    <div
+                      className={`flex flex-wrap items-center gap-x-3 gap-y-2 ${
+                        cat ? "mt-1.5" : "mt-7"
+                      }`}
+                    >
                       <h3 className="font-display text-2xl font-semibold leading-snug tracking-tight text-ink">
                         {project.name}
                       </h3>
@@ -293,10 +280,7 @@ export default function Work({
                   </SelectionFrame>
                 </div>
               </div>
-                  );
-                })()
-              )
-            )}
+            ))}
           </div>
         </div>
       </div>

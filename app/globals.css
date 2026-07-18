@@ -247,12 +247,6 @@ body {
     flex: 0 0 auto;
     scroll-snap-align: center;
   }
-  .work-cat {
-    width: 62vw;
-    max-width: 15rem;
-    flex: 0 0 auto;
-    scroll-snap-align: center;
-  }
 }
 
 /* Desktop — GSAP pinned horizontal scroll (class added by JS on lg + motion). */
@@ -291,8 +285,4 @@ body {
 }
 .work-horizontal .work-card--featured {
   width: min(94vw, 50rem);
-}
-.work-horizontal .work-cat {
-  width: 17rem;
-  flex: 0 0 auto;
 }
