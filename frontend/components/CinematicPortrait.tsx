@@ -45,6 +45,24 @@ export default function CinematicPortrait({
 
     const revealR = () => Math.min(W, H) * 0.24;
 
+    // Dust ring that traces the reveal window — a dense feathered band of specks
+    // that spray outward from the circle edge (fixed once, animated in render).
+    type RingP = { ang: number; off: number; s: number; ph: number; b: number };
+    const ring: RingP[] = [];
+    const RING_N = 900;
+    for (let i = 0; i < RING_N; i++) {
+      // Offset biased into a bright core band at the edge with an outward spray.
+      const spray = Math.pow(Math.random(), 2.4);
+      const off = (Math.random() - 0.5) * 3 + spray * 22;
+      ring.push({
+        ang: Math.random() * Math.PI * 2,
+        off,
+        s: 0.6 + Math.random() * 1.6,
+        ph: Math.random() * Math.PI * 2,
+        b: 1 - spray * 0.75, // brighter near the edge, dimmer as it sprays out
+      });
+    }
+
     const drawImgToOff = (img: HTMLImageElement) => {
       off.width = W;
       off.height = H;
@@ -151,11 +169,20 @@ export default function CinematicPortrait({
         ctx.fillRect(m.x - rr, m.y - rr, rr * 2, rr * 2);
         ctx.restore();
 
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, rr, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(214,219,229,0.35)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        // dusty particle border around the reveal window
+        for (let i = 0; i < ring.length; i++) {
+          const p = ring[i];
+          // slow drift + shimmer so the ring feels alive
+          const a = p.ang + (animate ? time * 0.06 * (i % 2 ? 1 : -1) : 0);
+          const jitter = animate ? Math.sin(time * 2.2 + p.ph) * 1.4 : 0;
+          const r = rr + p.off + jitter;
+          const x = m.x + Math.cos(a) * r;
+          const y = m.y + Math.sin(a) * r;
+          const tw = animate ? 0.5 + 0.5 * Math.sin(time * 3 + p.ph * 3) : 1;
+          const al = Math.min(0.95, p.b * 0.95 * tw);
+          ctx.fillStyle = `rgba(244,246,252,${al})`;
+          ctx.fillRect(x, y, p.s, p.s);
+        }
 
         ctx.beginPath();
         ctx.arc(m.x, m.y, 15, 0, Math.PI * 2);
