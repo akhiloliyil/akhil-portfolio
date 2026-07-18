@@ -223,6 +223,9 @@ body {
   max-width: 72rem;
   margin: 0 auto;
 }
+.work-card-inner {
+  height: 100%;
+}
 
 /* Mobile / tablet — native horizontal swipe carousel (scroll-snap). */
 @media (max-width: 1023px) {
@@ -249,7 +252,8 @@ body {
   }
 }
 
-/* Desktop — GSAP pinned horizontal scroll (class added by JS on lg + motion). */
+/* Desktop — GSAP pinned single-card reveal (class added by JS on lg + motion).
+   Cards are stacked on top of each other; scroll fades/slides between them. */
 .work-horizontal {
   height: 100vh;
 }
@@ -257,41 +261,42 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 4.25rem;
+  padding-top: 4rem;
   padding-bottom: 1.5rem;
 }
-/* If a card is still taller than the pinned viewport, let it scroll inside. */
+.work-horizontal .work-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.work-horizontal .work-track {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
 .work-horizontal .work-card {
-  max-height: calc(100vh - 7rem);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  padding: 0 1.5rem;
+}
+.work-horizontal .work-card-inner {
+  width: min(92vw, 58rem);
+  height: auto;
+  max-height: calc(100vh - 8rem);
   overflow-y: auto;
   scrollbar-width: none;
 }
-.work-horizontal .work-card::-webkit-scrollbar {
+.work-horizontal .work-card--featured .work-card-inner {
+  width: min(94vw, 64rem);
+}
+.work-horizontal .work-card-inner::-webkit-scrollbar {
   display: none;
-}
-.work-horizontal .work-viewport {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-.work-horizontal .work-track {
-  max-width: none;
-  width: auto;
-  margin: 0;
-  flex-direction: row;
-  height: auto;
-  align-items: center;
-  gap: 2rem;
-  overflow: visible;
-  will-change: transform;
-}
-.work-horizontal .work-card {
-  width: min(86vw, 37rem);
-  max-width: none;
-  flex: 0 0 auto;
-}
-.work-horizontal .work-card--featured {
-  width: min(94vw, 50rem);
 }
