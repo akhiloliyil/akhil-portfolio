@@ -231,20 +231,27 @@
       "id": "omnichannel",
       "name": "Omnichannel Retail Experience Platform",
       "org": "Danube Home",
-      "role": "Concept",
-      "summary": "A concept that bridges physical stores and digital convenience — from discovery to visualization to purchase in one connected, frictionless flow.",
+      "role": "Concept Case Study · Lead Product Designer · Product Strategy · AI UX · Omnichannel CX",
+      "summary": "A forward-looking omnichannel retail concept that seamlessly connects physical stores with digital commerce — reimagining the customer journey from discovery and personalization to visualization and checkout through AI-driven experiences and connected touchpoints.",
       "details": [
-        "Smart Check-in Kiosk — customers log in instantly, access their preferences, and continue their journey without friction",
-        "Frictionless Checkout UI — fast, intuitive checkout with clear pricing, delivery options, and flexible payments",
-        "AI-Powered Room Design (PureSpace-inspired) — visualize furniture in your own space, explore styles, and shop directly from the design",
-        "Connected discovery → visualization → purchase across physical and digital channels",
-        "Improves user experience, conversion, and in-store engagement"
+        "Defined the end-to-end product vision and UX strategy for a unified omnichannel experience",
+        "Ran customer journey mapping, service blueprinting, and retail workflow analysis across online and in-store",
+        "Designed user flows, wireframes, and prototypes connecting physical and digital touchpoints",
+        "Smart Check-in Kiosk — instant access to saved preferences, wishlists, loyalty benefits, and ongoing sessions on store entry",
+        "Frictionless Checkout — transparent pricing, flexible payments, delivery scheduling, digital receipts, and omnichannel fulfillment",
+        "AI-Powered Room Design — place furniture in realistic room layouts, explore personalized styles, and buy directly from the design",
+        "Connected journey integrating AI recommendations, discovery, and visualization across web, mobile, and store",
+        "Established reusable interaction patterns and scalable principles for future AI-driven retail experiences"
       ],
       "stack": [
-        "UI/UX Design",
+        "Product Strategy",
+        "Omnichannel CX",
+        "AI UX",
+        "Service Design",
+        "Customer Journey Mapping",
+        "Wireframing",
         "Product Thinking",
-        "UX Strategy",
-        "AI UX"
+        "UX Strategy"
       ],
       "frameType": "app"
     },
@@ -252,16 +259,27 @@
       "id": "pim",
       "name": "Product Information Management (PIM)",
       "org": "Danube Home",
-      "summary": "Comprehensive PIM interface for managing product data at scale — accurate, structured, and integration-ready.",
+      "role": "Lead Product Designer",
+      "summary": "Led the end-to-end UX and product design of a Product Information Management platform that centralized product data, digital assets, and catalog management across channels — simplifying complex workflows, improving data accuracy, and supporting ERP and e-commerce integrations.",
       "details": [
-        "Central dashboard with real-time product and inventory status",
-        "Sortable catalog with advanced filters and bulk updates",
-        "Media management and a hierarchical category structure",
-        "Role-based access and API integration with ERP and e-commerce"
+        "Led UX strategy and product design for a centralized PIM platform",
+        "Ran user research, stakeholder workshops, workflow analysis, and information architecture for complex product processes",
+        "Designed user flows, wireframes, prototypes, and high-fidelity interfaces for large-scale catalog management",
+        "Built reusable enterprise UI components within a scalable design system",
+        "Designed real-time dashboards for product health, inventory status, content completeness, and publishing workflows",
+        "Simplified catalog management — advanced search, filtering, bulk editing, category hierarchy, DAM, and version control",
+        "Designed workflows for ERP integration, e-commerce sync, API connectivity, and multi-channel publishing",
+        "Collaborated with developers for pixel-perfect implementation and scalable enterprise UX"
       ],
       "stack": [
-        "Adobe XD",
-        "Design System"
+        "Enterprise UX",
+        "UX Research",
+        "Information Architecture",
+        "Workflow Analysis",
+        "Wireframing",
+        "Design System",
+        "Dashboard Design",
+        "Product Management"
       ],
       "frameType": "dashboard"
     },
@@ -269,17 +287,27 @@
       "id": "sleephubz",
       "name": "Sleephubz.com — Sleep E-commerce",
       "org": "Danube Home",
-      "summary": "UI/UX lead for a mattress and sleep-products storefront, focused on conversion, usability, and a scalable design system.",
+      "role": "Lead Product Designer",
+      "summary": "Led end-to-end UX and product design for SleepHubz.com, an e-commerce platform for mattresses and sleep solutions — creating intuitive shopping experiences, optimizing customer journeys, and building a scalable design system that lifted usability, engagement, and conversion across web and mobile.",
       "details": [
-        "End-to-end UX for discovery, PDP, cart, and checkout",
-        "Conversion gains by optimizing journeys and reducing friction",
-        "Scalable design system for consistent web and mobile UI",
-        "Usability testing and data analysis to refine the experience"
+        "Led UX strategy and product design for a conversion-focused sleep & mattress e-commerce platform",
+        "Ran UX research, competitor analysis, customer journey mapping, and usability testing to remove friction",
+        "Designed IA, user flows, wireframes, prototypes, and high-fidelity UI for the full purchase journey",
+        "Optimized discovery, category navigation, PLP, PDP, Cart, Checkout, and post-purchase experiences",
+        "Lifted conversion by simplifying journeys, reducing checkout friction, and validating via A/B testing",
+        "Built a scalable design system with reusable components, responsive layouts, and accessibility guidelines",
+        "Collaborated with developers for pixel-perfect, responsive implementation and clean design-to-dev handoff",
+        "Used analytics and customer feedback to continuously refine the experience and drive data-informed decisions"
       ],
       "stack": [
-        "Figma",
+        "UX Research",
+        "Customer Journey",
         "A/B Testing",
-        "Design System"
+        "Usability Testing",
+        "Wireframing",
+        "Design System",
+        "Conversion Optimization",
+        "Frontend Collaboration"
       ],
       "frameType": "ecommerce"
     }
