@@ -114,17 +114,26 @@
       "id": "danube-app",
       "name": "Danube Home — Mobile App",
       "org": "Danube Home",
+      "role": "Lead Product Designer",
       "period": "Jan 2023 — Present",
-      "summary": "React Native shopping app delivering a seamless, feature-rich experience for the Middle East's largest home retailer.",
+      "summary": "Led the end-to-end UX and product design of the Danube Home mobile app — a seamless omnichannel shopping experience across iOS and Android, with scalable mobile design patterns and production-ready React Native implementation.",
       "details": [
-        "Digital wallet, reward points, and gift-card management",
-        "Multi-step secure checkout with real-time tracking and reschedule",
-        "Predictive search, rich PDPs, and layered PLP filtering",
-        "Click-and-collect with fast address entry and autocomplete"
+        "Led UX strategy and mobile product design",
+        "Conducted UX research, customer journey mapping, and competitor analysis",
+        "Designed information architecture, user flows, wireframes, and interactive prototypes",
+        "Built reusable mobile components within a scalable design system",
+        "Designed predictive search and personalized shopping experiences",
+        "Optimized PLP, PDP, Cart, Checkout, Wallets, Reward Points, Gift Cards, Click & Collect, Order Tracking, and Delivery Rescheduling",
+        "Collaborated with React Native developers to implement responsive, production-ready mobile interfaces"
       ],
       "stack": [
-        "Adobe XD",
-        "React Native"
+        "UX Research",
+        "Mobile UX",
+        "Wireframing",
+        "Design System",
+        "AI UX",
+        "React Native",
+        "Frontend Implementation"
       ],
       "frameType": "app"
     },
