@@ -28,9 +28,8 @@ function parseStat(value: string) {
   };
 }
 
-/** Drop a portrait at public/images/profile.jpg (or .png) to replace the
- *  monogram. Falls back to the "AK" mark until the file exists. */
-const PROFILE_IMAGE = "/images/profile.jpg";
+/** Fallback portrait path; the live path comes from profile.portrait. */
+const DEFAULT_PORTRAIT = "/images/profile.jpg";
 
 export default function Hero({
   profile = seedProfile,
@@ -39,6 +38,7 @@ export default function Hero({
   profile?: typeof seedProfile;
   stats?: typeof seedStats;
 }) {
+  const PROFILE_IMAGE = profile.portrait || DEFAULT_PORTRAIT;
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [portraitOk, setPortraitOk] = useState(true);

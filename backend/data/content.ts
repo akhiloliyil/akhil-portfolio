@@ -16,6 +16,8 @@ export const profile = {
   ],
   // Hero portrait style: "card" (framed) or "cinematic" (particle portrait).
   heroStyle: "card",
+  // Hero portrait image (uploaded via /ak-admin, or a same-origin path).
+  portrait: "/images/profile.jpg",
 };
 
 export const stats = [

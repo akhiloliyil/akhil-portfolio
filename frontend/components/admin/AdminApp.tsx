@@ -379,8 +379,12 @@ export default function AdminApp() {
                 { value: "cinematic", label: "Cinematic (particle portrait)" },
               ]}
             />
-            <ImageField label="Portrait image" value="/images/profile.jpg" onChange={() => {}} />
-            <p className="text-xs text-inkmuted">Uploading a portrait? Save it as <code>/images/profile.jpg</code> to replace the hero photo.</p>
+            <ImageField
+              label="Portrait image"
+              value={content.profile.portrait ?? "/images/profile.jpg"}
+              onChange={(v) => patch({ profile: { ...content.profile, portrait: v } })}
+            />
+            <p className="text-xs text-inkmuted">Upload a photo (it saves to <code>/images/uploads/…</code>) or paste a path, then Save. The cinematic style needs a same-origin image (uploads qualify).</p>
           </div>
         )}
 
