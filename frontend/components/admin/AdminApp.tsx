@@ -370,6 +370,15 @@ export default function AdminApp() {
             <Field label="LinkedIn URL" value={content.profile.linkedin} onChange={(v) => patch({ profile: { ...content.profile, linkedin: v } })} />
             <Area label="Blurb" rows={4} value={content.profile.blurb} onChange={(v) => patch({ profile: { ...content.profile, blurb: v } })} />
             <StringList label="Focus pills" values={content.profile.focus} onChange={(v) => patch({ profile: { ...content.profile, focus: v } })} />
+            <Select
+              label="Hero portrait style"
+              value={content.profile.heroStyle ?? "card"}
+              onChange={(v) => patch({ profile: { ...content.profile, heroStyle: v } })}
+              options={[
+                { value: "card", label: "Card (framed photo)" },
+                { value: "cinematic", label: "Cinematic (particle portrait)" },
+              ]}
+            />
             <ImageField label="Portrait image" value="/images/profile.jpg" onChange={() => {}} />
             <p className="text-xs text-inkmuted">Uploading a portrait? Save it as <code>/images/profile.jpg</code> to replace the hero photo.</p>
           </div>

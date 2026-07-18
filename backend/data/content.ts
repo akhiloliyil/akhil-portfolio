@@ -14,6 +14,8 @@ export const profile = {
     "E-commerce",
     "Business Growth",
   ],
+  // Hero portrait style: "card" (framed) or "cinematic" (particle portrait).
+  heroStyle: "card",
 };
 
 export const stats = [

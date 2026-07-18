@@ -12,6 +12,7 @@ import CountUp from "react-countup";
 import { profile as seedProfile, stats as seedStats } from "@/data/content";
 import SelectionFrame from "./SelectionFrame";
 import Magnetic from "./Magnetic";
+import CinematicPortrait from "./CinematicPortrait";
 import ResumeButton from "./ResumeButton";
 import SaveContact from "./SaveContact";
 
@@ -104,6 +105,50 @@ export default function Hero({
       cleanup();
     };
   }, []);
+
+  const cardFrame = (
+    <SelectionFrame
+      tag={`AKHIL.UI · ${profile.location}`}
+      active
+      className="aspect-[4/5] w-full border border-line bg-panel p-6 shadow-[0_1px_0_0_rgba(17,25,43,0.04)]"
+    >
+      <div className="flex h-full flex-col justify-between">
+        <div className="flex flex-1 flex-col items-center justify-center gap-4">
+          <div className="flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border-2 border-accent bg-paper font-display text-5xl font-semibold text-accent sm:h-52 sm:w-52">
+            {portraitOk ? (
+              <img
+                src={PROFILE_IMAGE}
+                alt={`${profile.name} portrait`}
+                className="h-full w-full object-cover"
+                onError={() => setPortraitOk(false)}
+              />
+            ) : (
+              "AK"
+            )}
+          </div>
+          <p className="font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+            UI/UX → Code
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <div className="h-2 w-full rounded-full bg-line" />
+          <div className="h-2 w-4/5 rounded-full bg-line" />
+          <div className="flex gap-2 pt-2">
+            <span className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
+              Figma
+            </span>
+            <span className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
+              React
+            </span>
+            <span className="rounded-sm bg-coral/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-coral">
+              Next.js
+            </span>
+          </div>
+        </div>
+      </div>
+    </SelectionFrame>
+  );
 
   return (
     <section
@@ -294,48 +339,14 @@ export default function Hero({
                     }
               }
             >
-              <SelectionFrame
-                tag={`AKHIL.UI · ${profile.location}`}
-                active
-                className="aspect-[4/5] w-full border border-line bg-panel p-6 shadow-[0_1px_0_0_rgba(17,25,43,0.04)]"
-              >
-            <div className="flex h-full flex-col justify-between">
-              <div className="flex flex-1 flex-col items-center justify-center gap-4">
-                <div className="flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border-2 border-accent bg-paper font-display text-5xl font-semibold text-accent sm:h-52 sm:w-52">
-                  {portraitOk ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={PROFILE_IMAGE}
-                      alt={`${profile.name} portrait`}
-                      className="h-full w-full object-cover"
-                      onError={() => setPortraitOk(false)}
-                    />
-                  ) : (
-                    "AK"
-                  )}
-                </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-inkmuted">
-                  UI/UX → Code
-                </p>
-              </div>
-
-              <div className="space-y-2">
-                <div className="h-2 w-full rounded-full bg-line" />
-                <div className="h-2 w-4/5 rounded-full bg-line" />
-                <div className="flex gap-2 pt-2">
-                  <span className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
-                    Figma
-                  </span>
-                  <span className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
-                    React
-                  </span>
-                  <span className="rounded-sm bg-coral/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-coral">
-                    Next.js
-                  </span>
-                </div>
-              </div>
-            </div>
-              </SelectionFrame>
+              {(profile.heroStyle ?? "card") === "cinematic" ? (
+                <CinematicPortrait
+                  src={PROFILE_IMAGE}
+                  alt={`${profile.name} portrait`}
+                />
+              ) : (
+                cardFrame
+              )}
             </motion.div>
           </motion.div>
         </div>
