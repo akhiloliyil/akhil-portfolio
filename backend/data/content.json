@@ -72,22 +72,29 @@
       "id": "yara",
       "name": "YARA — AI Shopping Assistant",
       "org": "Danube Home",
-      "role": "UI Lead",
+      "role": "Lead Product Designer",
       "link": "https://www.danubehome.com/ae/en/yara-ai-search",
       "featured": true,
-      "summary": "Next-generation AI shopping assistant transforming retail across digital and physical stores. As UI Lead, I drove the end-to-end experience strategy — intelligent, conversational, and consistent across every touchpoint.",
+      "summary": "Led the end-to-end product design of YARA, an AI-powered shopping assistant that transformed the customer journey across web, mobile, and in-store retail. Defined the conversational UX strategy, AI interaction patterns, and scalable design system across an omnichannel experience.",
       "details": [
-        "AI-powered, intent-driven product discovery with personalized recommendations",
-        "Conversational AI with text and voice-enabled real-time assistance",
-        "In-store QR scan-to-connect for instant specs, pricing, and availability",
-        "\"Imagine with YARA\" — visualize products in curated interior settings",
-        "Personalized, omnichannel UX unified across web and in-store"
+        "Led AI UX strategy and product design for a next-generation conversational shopping assistant",
+        "Ran user research, customer journey mapping, and AI interaction design to simplify product discovery and decision-making",
+        "Designed conversational user flows, wireframes, and interactive prototypes for text and voice shopping",
+        "Created AI-powered discovery with intent-aware search, personalized recommendations, and contextual assistance",
+        "Connected web, mobile, and physical stores via QR-based discovery and real-time in-store assistance",
+        "Designed \"Imagine with YARA\" — visualize furniture and décor in curated interior settings before purchase",
+        "Built reusable conversational UI components within a scalable AI design system",
+        "Collaborated with AI engineers, PMs, and frontend developers to turn complex AI capabilities into intuitive experiences"
       ],
       "stack": [
         "AI UX",
-        "Conversational UI",
+        "Conversational Design",
+        "UX Research",
+        "Customer Journey",
+        "Voice UI",
         "Design System",
-        "Omnichannel"
+        "Omnichannel Experience",
+        "Frontend Collaboration"
       ],
       "frameType": "app"
     },
@@ -95,18 +102,27 @@
       "id": "hexa",
       "name": "Hexa — Showroom Sales App",
       "org": "Danube Home",
+      "role": "Lead Product Designer",
       "period": "Jan 2024 — Present",
-      "summary": "Mobile app that streamlines showroom sales operations — fast, role-aware, and built for accurate transactions on the floor.",
+      "summary": "Led the end-to-end UX and product design of Hexa, an enterprise mobile app for showroom sales teams — streamlining in-store operations, accelerating order processing, and improving inventory visibility through an intuitive, role-based experience with real-time insights.",
       "details": [
-        "Role-based dashboards for sales staff and managers with key metrics",
-        "Product search, rich detail pages, and multi-basket order placement",
-        "Real-time stock checks with low and out-of-stock alerts",
-        "Customer profiles with sortable sales history and status tracking"
+        "Led UX strategy and product design for a role-based enterprise sales application",
+        "Ran stakeholder workshops, user research, workflow analysis, and competitor benchmarking to surface operational pain points",
+        "Designed information architecture, user flows, wireframes, and interactive prototypes for complex sales workflows",
+        "Built reusable mobile components within a scalable enterprise design system",
+        "Designed role-based dashboards for executives, supervisors, and managers with personalized KPIs and insights",
+        "Streamlined product discovery — advanced search, rich detail pages, multi-basket order management, and real-time stock visibility",
+        "Improved customer management with detailed profiles, purchase history, sales status tracking, and personalized service workflows",
+        "Collaborated with React Native developers to ship production-ready mobile interfaces with design consistency and usability"
       ],
       "stack": [
-        "Adobe XD",
+        "UX Research",
+        "Enterprise UX",
+        "User Journey",
+        "Wireframing",
+        "Design System",
         "React Native",
-        "Design System"
+        "Frontend Implementation"
       ],
       "frameType": "app"
     },
@@ -169,18 +185,28 @@
       "id": "oms",
       "name": "Order Management System (OMS)",
       "org": "Danube Home",
+      "role": "Lead Product Designer",
       "period": "Sep 2020 — Present",
-      "summary": "Internal platform for handling and tracking orders end to end — real-time, role-based, and built for operational efficiency.",
+      "summary": "Led the end-to-end UX and product design of an enterprise Order Management System that streamlined order processing, inventory management, and operational workflows across teams — simplifying complex flows, improving real-time visibility, and delivering a scalable, role-based platform.",
       "details": [
-        "Live dashboard of orders, deliveries, and sales performance",
-        "Sortable, filterable order lists with detailed order actions",
-        "Inventory linkage with replenishment alerts to prevent overselling",
-        "Role-based access and exportable reporting and analytics"
+        "Led UX strategy and product design for a centralized enterprise order-management platform",
+        "Ran user research, stakeholder workshops, workflow analysis, and competitor benchmarking to optimize business processes",
+        "Designed IA, user flows, wireframes, prototypes, and high-fidelity interfaces for the full order lifecycle",
+        "Built reusable UI components within a scalable enterprise design system",
+        "Designed real-time dashboards with order tracking, delivery monitoring, sales insights, and KPI visualization",
+        "Simplified order management with advanced search, filtering, bulk actions, status tracking, and detailed workflows",
+        "Integrated inventory visibility, stock sync, replenishment alerts, and fulfillment workflows to reduce operational errors",
+        "Collaborated with ReactJS developers to ship responsive, production-ready interfaces with accessibility and consistency"
       ],
       "stack": [
-        "Adobe XD",
+        "Enterprise UX",
+        "UX Research",
+        "Workflow Analysis",
+        "Dashboard Design",
+        "Wireframing",
+        "Design System",
         "ReactJS",
-        "CSS"
+        "Frontend Implementation"
       ],
       "frameType": "dashboard"
     },
