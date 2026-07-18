@@ -192,8 +192,9 @@ export default async function CardPage() {
           ))}
         </ul>
 
-        {/* QR — for people without NFC */}
-        <section className="mt-10 flex flex-col items-center">
+        {/* QR — for people without NFC. Hidden on phones (the visitor is
+            already on the card there, so it's redundant). */}
+        <section className="mt-10 hidden flex-col items-center sm:flex">
           <div
             className="rounded-lg bg-white p-4 shadow-[0_1px_0_0_rgba(17,25,43,0.06)]"
             // Fixed light backing so the QR stays scannable in dark mode too.
