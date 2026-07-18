@@ -4,10 +4,11 @@ import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 
 /**
- * Cinematic hero portrait — the photo is shown CRISP inside a glowing circular
- * window; fine dust particles emanate from the window's edge and dissolve
- * outward into black (denser where the silhouette is bright). An amber cursor
- * ring nudges nearby particles. Needs a same-origin image (pixel sampling).
+ * Cinematic hero portrait — the whole face is rendered as thousands of fine
+ * dust particles sampled from the photo (dense in bright areas, dissolving to
+ * black at the edges). On hover, a crisp circular window follows the cursor and
+ * reveals the real photo through the dust, ringed by an amber cursor.
+ * Needs a same-origin image (canvas pixel sampling).
  */
 export default function CinematicPortrait({
   src,
@@ -20,6 +21,7 @@ export default function CinematicPortrait({
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef<{ x: number; y: number } | null>(null);
+  const renderRef = useRef<((animate: boolean) => void) | null>(null);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -36,49 +38,14 @@ export default function CinematicPortrait({
     let W = 0;
     let H = 0;
     let raf = 0;
-    let data: Uint8ClampedArray | null = null;
+    let hasImg = false;
 
-    const geom = () => {
-      const R = Math.min(W, H) * 0.36;
-      return { cx: W / 2, cy: H * 0.44, R };
-    };
+    type Dot = { x: number; y: number; b: number; ph: number; amp: number };
+    let dots: Dot[] = [];
 
-    const brightnessAt = (x: number, y: number) => {
-      if (!data) return 140;
-      const xi = Math.max(0, Math.min(W - 1, x | 0));
-      const yi = Math.max(0, Math.min(H - 1, y | 0));
-      const i = (yi * W + xi) * 4;
-      return (data[i] + data[i + 1] + data[i + 2]) / 3;
-    };
+    const revealR = () => Math.min(W, H) * 0.24;
 
-    type P = {
-      ang: number;
-      rad: number;
-      spd: number;
-      life: number;
-      max: number;
-      b: number;
-      wob: number;
-    };
-    let ps: P[] = [];
-
-    const spawn = (): P => {
-      const { cx, cy, R } = geom();
-      const ang = Math.random() * Math.PI * 2;
-      const rad = R * (0.92 + Math.random() * 0.14);
-      const b = brightnessAt(cx + Math.cos(ang) * rad, cy + Math.sin(ang) * rad);
-      return {
-        ang,
-        rad,
-        spd: 0.12 + Math.random() * 0.5,
-        life: Math.random() * 40,
-        max: 55 + Math.random() * 130,
-        b,
-        wob: (Math.random() - 0.5) * 0.006,
-      };
-    };
-
-    const drawImg = (img: HTMLImageElement) => {
+    const drawImgToOff = (img: HTMLImageElement) => {
       off.width = W;
       off.height = H;
       const ir = img.width / img.height;
@@ -100,100 +67,107 @@ export default function CinematicPortrait({
       }
       offctx.clearRect(0, 0, W, H);
       offctx.drawImage(img, dx, dy, dw, dh);
+
+      dots = [];
+      let data: Uint8ClampedArray;
       try {
         data = offctx.getImageData(0, 0, W, H).data;
       } catch {
-        data = null;
+        hasImg = false;
+        return;
+      }
+      hasImg = true;
+      const step = 3;
+      for (let y = 0; y < H; y += step) {
+        for (let x = 0; x < W; x += step) {
+          const i = (y * W + x) * 4;
+          const b = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          if (b < 40) continue; // dark background → no dust
+          // probability of keeping scales with brightness (denser highlights)
+          if (Math.random() > 0.35 + (b / 255) * 0.65) continue;
+          dots.push({
+            x: x + (Math.random() - 0.5) * step,
+            y: y + (Math.random() - 0.5) * step,
+            b,
+            ph: Math.random() * Math.PI * 2,
+            amp: 0.6 + Math.random() * 1.8,
+          });
+        }
+      }
+      // cap for performance
+      if (dots.length > 7000) {
+        for (let i = dots.length - 1; i > 0; i--) {
+          const j = (Math.random() * (i + 1)) | 0;
+          [dots[i], dots[j]] = [dots[j], dots[i]];
+        }
+        dots.length = 7000;
       }
     };
 
-    const drawCrisp = () => {
-      const { cx, cy, R } = geom();
-      // outer glow
-      const glow = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.5);
-      glow.addColorStop(0, "rgba(122,145,255,0.10)");
-      glow.addColorStop(1, "rgba(122,145,255,0)");
-      ctx.fillStyle = glow;
-      ctx.fillRect(cx - R * 1.5, cy - R * 1.5, R * 3, R * 3);
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.clip();
-      ctx.filter = "grayscale(1) contrast(1.18) brightness(0.95)";
-      ctx.drawImage(off, 0, 0, W, H, 0, 0, W, H);
-      ctx.filter = "none";
-      const vg = ctx.createRadialGradient(cx, cy - R * 0.1, R * 0.5, cx, cy, R);
-      vg.addColorStop(0, "rgba(0,0,0,0)");
-      vg.addColorStop(1, "rgba(0,0,0,0.55)");
-      ctx.fillStyle = vg;
-      ctx.fillRect(cx - R, cy - R, R * 2, R * 2);
-      ctx.restore();
-
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(210,216,228,0.5)";
-      ctx.lineWidth = 1.25;
-      ctx.stroke();
-    };
-
+    let time = 0;
     const render = (animate: boolean) => {
+      if (animate) time += 0.02;
       ctx.clearRect(0, 0, W, H);
-      const { cx, cy, R } = geom();
+      if (!hasImg) return;
+      const m = mouse.current;
+      const rr = revealR();
 
-      drawCrisp();
-
-      const band = R * 1.05; // how far the dust reaches beyond the edge
-      for (let k = 0; k < ps.length; k++) {
-        const p = ps[k];
+      // dust
+      for (let k = 0; k < dots.length; k++) {
+        const d = dots[k];
+        let x = d.x;
+        let y = d.y;
         if (animate) {
-          p.rad += p.spd;
-          p.ang += p.wob;
-          p.life++;
+          x += Math.cos(time + d.ph) * d.amp * 0.5;
+          y += Math.sin(time * 0.9 + d.ph) * d.amp * 0.5;
         }
-        const t = p.life / p.max;
-        const beyond = Math.max(0, (p.rad - R) / band);
-        const a = (1 - t) * Math.max(0, 1 - beyond) * (0.22 + 0.78 * (p.b / 255)) * 0.95;
-        if (animate && (a <= 0.012 || t >= 1)) {
-          ps[k] = spawn();
-          continue;
-        }
-        let x = cx + Math.cos(p.ang) * p.rad;
-        let y = cy + Math.sin(p.ang) * p.rad;
-        const m = mouse.current;
-        if (animate && m) {
+        // clear dust inside the reveal window
+        if (m) {
           const dx = x - m.x;
           const dy = y - m.y;
-          const dm = Math.hypot(dx, dy);
-          if (dm < 60 && dm > 0.01) {
-            const push = (1 - dm / 60) * 10;
-            x += (dx / dm) * push;
-            y += (dy / dm) * push;
-          }
+          if (dx * dx + dy * dy < rr * rr) continue;
         }
-        const g = Math.min(255, Math.round(190 + (p.b / 255) * 55));
+        const a = Math.min(0.92, (d.b / 255) * 1.05);
+        const g = Math.min(255, 205 + ((d.b / 255) * 45) | 0);
         ctx.fillStyle = `rgba(${g},${g},${Math.min(255, g + 6)},${a})`;
-        ctx.fillRect(x, y, 1.3, 1.3);
+        ctx.fillRect(x, y, 1.25, 1.25);
       }
 
-      const m = mouse.current;
+      // spotlight reveal — crisp photo through the dust at the cursor
       if (m) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, rr, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.filter = "grayscale(1) contrast(1.15) brightness(0.98)";
+        ctx.drawImage(off, 0, 0, W, H, 0, 0, W, H);
+        ctx.filter = "none";
+        // soft inner edge so the reveal blends into the dust
+        const vg = ctx.createRadialGradient(m.x, m.y, rr * 0.62, m.x, m.y, rr);
+        vg.addColorStop(0, "rgba(0,0,0,0)");
+        vg.addColorStop(1, "rgba(5,6,10,0.9)");
+        ctx.fillStyle = vg;
+        ctx.fillRect(m.x - rr, m.y - rr, rr * 2, rr * 2);
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, rr, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(214,219,229,0.35)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
         ctx.beginPath();
         ctx.arc(m.x, m.y, 15, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(232,164,66,0.8)";
+        ctx.strokeStyle = "rgba(232,164,66,0.85)";
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
     };
 
+    renderRef.current = render;
+
     const img = new Image();
     img.crossOrigin = "anonymous";
-
-    const seedParticles = () => {
-      const { R } = geom();
-      const count = Math.min(1800, Math.round(R * 7));
-      ps = Array.from({ length: count }, spawn);
-    };
 
     const resize = () => {
       W = wrap.clientWidth;
@@ -203,8 +177,7 @@ export default function CinematicPortrait({
       canvas.style.width = W + "px";
       canvas.style.height = H + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (img.complete && img.naturalWidth) drawImg(img);
-      seedParticles();
+      if (img.complete && img.naturalWidth) drawImgToOff(img);
     };
 
     const loop = () => {
@@ -235,15 +208,19 @@ export default function CinematicPortrait({
     };
   }, [src, reduce]);
 
+  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    mouse.current = { x: e.clientX - r.left, y: e.clientY - r.top };
+    if (reduce) renderRef.current?.(false);
+  };
+
   return (
     <div
       ref={wrapRef}
-      onPointerMove={(e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        mouse.current = { x: e.clientX - r.left, y: e.clientY - r.top };
-      }}
+      onPointerMove={onMove}
       onPointerLeave={() => {
         mouse.current = null;
+        if (reduce) renderRef.current?.(false);
       }}
       className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-md"
       style={{ background: "#05060a", cursor: "crosshair" }}
