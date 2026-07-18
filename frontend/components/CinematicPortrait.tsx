@@ -262,7 +262,12 @@ export default function CinematicPortrait({
       }}
       aria-label={alt}
     >
-      <canvas ref={canvasRef} className="absolute inset-0" />
+      <canvas
+        ref={canvasRef}
+        className={`absolute inset-0 transition-opacity duration-500 ${
+          revealed ? "opacity-0" : "opacity-100"
+        }`}
+      />
 
       {/* Full-colour photo — fades in on double-click, fades back out on the next. */}
       {colorSrc && (
