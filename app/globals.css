@@ -288,10 +288,10 @@ body {
   will-change: transform;
 }
 .work-horizontal .work-card {
-  width: min(86vw, 37rem);
+  width: min(64vw, 62rem);
   max-width: none;
   flex: 0 0 auto;
 }
 .work-horizontal .work-card--featured {
-  width: min(94vw, 50rem);
+  width: min(80vw, 78rem);
 }
