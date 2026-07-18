@@ -12,7 +12,7 @@ function originOf(req: NextRequest): string {
   if (env) return env.replace(/\/$/, "");
   const proto = req.headers.get("x-forwarded-proto") ?? "https";
   const host = req.headers.get("host");
-  return host ? `${proto}://${host}` : "https://akhiloliyil.vercel.app";
+  return host ? `${proto}://${host}` : "https://akhil-oliyil.com";
 }
 
 // Always-current contact card: built from the live (admin-edited) content on

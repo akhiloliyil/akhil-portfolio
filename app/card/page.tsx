@@ -21,7 +21,7 @@ async function getOrigin(): Promise<string> {
   const h = await headers();
   const host = h.get("host");
   const proto = h.get("x-forwarded-proto") ?? "https";
-  return host ? `${proto}://${host}` : "https://akhiloliyil.vercel.app";
+  return host ? `${proto}://${host}` : "https://akhil-oliyil.com";
 }
 
 const PROFILE_IMAGE = "/images/profile.jpg";

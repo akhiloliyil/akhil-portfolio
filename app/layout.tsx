@@ -21,7 +21,7 @@ const mono = JetBrains_Mono({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://akhiloliyil.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://akhil-oliyil.com";
 const title = "Akhil Kumar — Lead Product Designer (UI/UX & CX)";
 const description =
   "Portfolio of Akhil Kumar, a Dubai-based Lead Product Designer specializing in AI-driven experiences, design systems, and front-end delivery with React, Next.js, and React Native across e-commerce and complex web platforms.";
@@ -43,6 +43,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Akhil Kumar" }],
   alternates: { canonical: "/" },
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+    ],
+    apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     url: siteUrl,
