@@ -223,8 +223,8 @@ export default function CinematicPortrait({
         mouse.current = null;
         if (reduce) renderRef.current?.(false);
       }}
-      className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-md"
-      style={{ background: "#05060a", cursor: "crosshair" }}
+      className="relative aspect-[4/5] w-full max-w-sm rounded-md"
+      style={{ background: "transparent", cursor: "crosshair" }}
       aria-label={alt}
     >
       <canvas ref={canvasRef} className="absolute inset-0" />
