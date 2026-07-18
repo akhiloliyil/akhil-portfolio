@@ -88,63 +88,73 @@ export default function Work({
       const cards = gsap.utils.toArray<HTMLElement>(".work-card");
       const mm = gsap.matchMedia();
 
-      // Desktop — pin the section and reveal one card at a time: as you
-      // scroll, the current card fades/slides up and out while the next
-      // fades/slides in. Only one card is centred on screen at once.
+      // Desktop — pin the section and scrub the cards across horizontally,
+      // so they arrive one by one; the page continues only once they're done.
       mm.add(
         "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
         () => {
           root.classList.add("work-horizontal");
-          const counter = root.querySelector<HTMLElement>(".work-counter");
-          const total = cards.length;
-          const pad = (n: number) => String(n).padStart(2, "0");
+          const viewport = root.querySelector<HTMLElement>(".work-viewport");
+          const vw = () => viewport?.clientWidth ?? window.innerWidth;
 
-          // Stack: first card visible, the rest waiting below.
-          cards.forEach((card, i) => {
-            gsap.set(card, {
-              autoAlpha: i === 0 ? 1 : 0,
-              yPercent: i === 0 ? 0 : 6,
-              scale: i === 0 ? 1 : 0.96,
-            });
-          });
+          // Pad the ends so the first and last items sit centred on screen.
+          const setPads = () => {
+            const kids = track.children;
+            const first = kids[0] as HTMLElement | undefined;
+            const last = kids[kids.length - 1] as HTMLElement | undefined;
+            if (first)
+              track.style.paddingLeft =
+                Math.max(24, (vw() - first.offsetWidth) / 2) + "px";
+            if (last)
+              track.style.paddingRight =
+                Math.max(24, (vw() - last.offsetWidth) / 2) + "px";
+          };
+          setPads();
+          // Recompute before every ScrollTrigger measurement (incl. resize).
+          ScrollTrigger.addEventListener("refreshInit", setPads);
 
-          const tl = gsap.timeline({
-            defaults: { ease: "power2.inOut", duration: 1 },
+          const distance = () => Math.max(0, track.scrollWidth - vw());
+
+          const tween = gsap.to(track, {
+            x: () => -distance(),
+            ease: "none",
             scrollTrigger: {
               trigger: root,
               start: "top top",
-              end: () =>
-                "+=" + Math.max(1, total - 1) * Math.min(window.innerHeight, 900),
-              scrub: 0.6,
+              end: () => "+=" + distance(),
+              scrub: 1,
               pin: true,
               anticipatePin: 1,
               invalidateOnRefresh: true,
-              onUpdate: (self) => {
-                if (!counter) return;
-                const idx = Math.min(
-                  total,
-                  Math.floor(self.progress * (total - 1) + 0.5) + 1
-                );
-                counter.textContent = `${pad(idx)} / ${pad(total)}`;
-              },
             },
           });
 
-          for (let i = 1; i < total; i += 1) {
-            tl.to(cards[i - 1], { autoAlpha: 0, yPercent: -6, scale: 0.96 }, i - 1)
-              .fromTo(
-                cards[i],
-                { autoAlpha: 0, yPercent: 6, scale: 0.96 },
-                { autoAlpha: 1, yPercent: 0, scale: 1 },
-                "<"
-              );
-          }
+          // Each card eases to full opacity as it approaches centre-screen.
+          gsap.set(cards, { opacity: 0.35, scale: 0.96 });
+          cards.forEach((card) => {
+            gsap.to(card, {
+              opacity: 1,
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                containerAnimation: tween,
+                start: "left 85%",
+                end: "left 45%",
+                scrub: true,
+              },
+            });
+          });
 
           ScrollTrigger.refresh();
 
           return () => {
+            ScrollTrigger.removeEventListener("refreshInit", setPads);
+            track.style.paddingLeft = "";
+            track.style.paddingRight = "";
             root.classList.remove("work-horizontal");
-            gsap.set(cards, { clearProps: "all" });
+            gsap.set(track, { x: 0 });
+            gsap.set(cards, { opacity: 1, scale: 1 });
           };
         }
       );
@@ -168,10 +178,7 @@ export default function Work({
           </h2>
           <div className="flex items-center gap-4">
             <span className="hidden font-mono text-xs uppercase tracking-wider text-inkmuted sm:block">
-              <span className="work-counter">
-                01 / {String(projects.length).padStart(2, "0")}
-              </span>{" "}
-              · scroll to explore
+              {projects.length} frames · scroll to explore
             </span>
             <a
               href="#experience"
@@ -196,7 +203,7 @@ export default function Work({
                 key={project.id}
                 className={`work-card ${project.featured ? "work-card--featured" : ""}`}
               >
-                <div className="work-card-inner group rounded-sm transition-transform duration-300 will-change-transform hover:-translate-y-1.5">
+                <div className="group h-full rounded-sm transition-transform duration-300 will-change-transform hover:-translate-y-1.5">
                   <SelectionFrame
                     tag={`${project.featured ? "★ Featured" : `Frame ${String(frameNo).padStart(2, "0")}`} · ${project.org}`}
                     className={`h-full border bg-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-7 ${
