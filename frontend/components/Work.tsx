@@ -206,7 +206,7 @@ export default function Work({
                 <div className="group h-full rounded-sm transition-transform duration-300 will-change-transform hover:-translate-y-1.5">
                   <SelectionFrame
                     tag={`${project.featured ? "★ Featured" : `Frame ${String(frameNo).padStart(2, "0")}`} · ${project.org}`}
-                    className={`h-full border bg-panel p-7 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-9 ${
+                    className={`h-full border bg-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-7 ${
                       project.featured ? "border-accent/40" : "border-line"
                     }`}
                   >
@@ -223,16 +223,16 @@ export default function Work({
                     </div>
 
                     {cat && (
-                      <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.15em] text-accent">
+                      <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.15em] text-accent">
                         {cat.icon} {cat.label}
                       </p>
                     )}
                     <div
-                      className={`flex flex-wrap items-center gap-x-3 gap-y-2 ${
-                        cat ? "mt-1.5" : "mt-7"
+                      className={`flex flex-wrap items-center gap-x-3 gap-y-1.5 ${
+                        cat ? "mt-1" : "mt-5"
                       }`}
                     >
-                      <h3 className="font-display text-2xl font-semibold leading-snug tracking-tight text-ink">
+                      <h3 className="font-display text-xl font-semibold leading-snug tracking-tight text-ink">
                         {project.name}
                       </h3>
                       {project.role && (
@@ -241,26 +241,26 @@ export default function Work({
                         </span>
                       )}
                     </div>
-                    <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-inkmuted">
+                    <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-inkmuted">
                       {project.summary}
                     </p>
 
                     <ul
-                      className={`mt-7 space-y-3 ${
+                      className={`mt-4 space-y-2 ${
                         project.featured
-                          ? "sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-3 sm:space-y-0"
+                          ? "sm:grid sm:grid-cols-2 sm:gap-x-10 sm:gap-y-2 sm:space-y-0"
                           : ""
                       }`}
                     >
                       {project.details.slice(0, 4).map((d) => (
-                        <li key={d} className="flex gap-3 text-sm leading-relaxed text-ink">
+                        <li key={d} className="flex gap-2.5 text-sm leading-relaxed text-ink">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" />
                           {d}
                         </li>
                       ))}
                     </ul>
 
-                    <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-line pt-5">
+                    <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-line pt-4">
                       {project.stack.map((s) => (
                         <span key={s} className="rounded-sm bg-paper px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
                           {s}

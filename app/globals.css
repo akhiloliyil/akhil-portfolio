@@ -257,8 +257,17 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 5.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 4.25rem;
+  padding-bottom: 1.5rem;
+}
+/* If a card is still taller than the pinned viewport, let it scroll inside. */
+.work-horizontal .work-card {
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.work-horizontal .work-card::-webkit-scrollbar {
+  display: none;
 }
 .work-horizontal .work-viewport {
   flex: 1 1 auto;
