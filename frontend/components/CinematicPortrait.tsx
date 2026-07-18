@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 
 /**
@@ -13,11 +13,15 @@ import { useReducedMotion } from "motion/react";
 export default function CinematicPortrait({
   src,
   alt,
+  colorSrc,
 }: {
   src: string;
   alt: string;
+  colorSrc?: string;
 }) {
   const reduce = useReducedMotion();
+  // Double-click swaps the dust view for the full-colour photo (and back).
+  const [revealed, setRevealed] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef<{ x: number; y: number } | null>(null);
@@ -250,13 +254,33 @@ export default function CinematicPortrait({
         mouse.current = null;
         if (reduce) renderRef.current?.(false);
       }}
+      onDoubleClick={() => colorSrc && setRevealed((v) => !v)}
       className="relative aspect-[4/5] w-full rounded-md"
-      style={{ background: "transparent", cursor: "crosshair" }}
+      style={{
+        background: "transparent",
+        cursor: colorSrc ? "pointer" : "crosshair",
+      }}
       aria-label={alt}
     >
       <canvas ref={canvasRef} className="absolute inset-0" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-5 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-white/45">
-        UI/UX → Code
+
+      {/* Full-colour photo — fades in on double-click, fades back out on the next. */}
+      {colorSrc && (
+        <img
+          src={colorSrc}
+          alt={alt}
+          className={`absolute inset-0 h-full w-full rounded-md object-cover object-top transition-opacity duration-700 ${
+            revealed ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        />
+      )}
+
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-5 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-white/45 transition-opacity ${
+          revealed ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {colorSrc ? "Double-click to reveal" : "UI/UX → Code"}
       </div>
     </div>
   );

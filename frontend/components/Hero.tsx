@@ -41,6 +41,8 @@ export default function Hero({
   const PROFILE_IMAGE = profile.portrait || DEFAULT_PORTRAIT;
   // The cinematic (desktop) canvas can use its own image; falls back to the card one.
   const CINEMATIC_IMAGE = profile.portraitCinematic || PROFILE_IMAGE;
+  // Optional full-colour photo shown when the dust portrait is double-clicked.
+  const COLOR_IMAGE = profile.portraitColor || "";
   const heroCinematic = (profile.heroStyle ?? "card") === "cinematic";
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -352,6 +354,7 @@ export default function Hero({
                   <div className="hidden lg:block">
                     <CinematicPortrait
                       src={CINEMATIC_IMAGE}
+                      colorSrc={COLOR_IMAGE || undefined}
                       alt={`${profile.name} portrait`}
                     />
                   </div>

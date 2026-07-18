@@ -21,6 +21,8 @@ export const profile = {
   // Optional separate image for the cinematic (desktop) portrait; falls back
   // to `portrait` when empty. Use a dark/transparent-background photo here.
   portraitCinematic: "",
+  // Optional full-colour photo revealed when the dust portrait is double-clicked.
+  portraitColor: "",
 };
 
 export const stats = [

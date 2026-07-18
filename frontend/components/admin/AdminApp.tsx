@@ -389,7 +389,12 @@ export default function AdminApp() {
               value={content.profile.portraitCinematic ?? ""}
               onChange={(v) => patch({ profile: { ...content.profile, portraitCinematic: v } })}
             />
-            <p className="text-xs text-inkmuted">Upload a photo (it saves to <code>/images/uploads/…</code>) or paste a path, then Save. The cinematic style uses the second image on desktop (falls back to the first if empty) and needs a same-origin image with a dark/transparent background; mobile always shows the framed card.</p>
+            <ImageField
+              label="Colour reveal photo (double-click)"
+              value={content.profile.portraitColor ?? ""}
+              onChange={(v) => patch({ profile: { ...content.profile, portraitColor: v } })}
+            />
+            <p className="text-xs text-inkmuted">Upload a photo (it saves to <code>/images/uploads/…</code>) or paste a path, then Save. The cinematic style uses the second image on desktop (falls back to the first if empty) and needs a same-origin image with a dark/transparent background. The third image is a full-colour photo that fades in when the viewer double-clicks the dust portrait. Mobile always shows the framed card.</p>
           </div>
         )}
 
