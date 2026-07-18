@@ -19,7 +19,7 @@ export const profile = {
 export const stats = [
   { value: "16+", label: "years across design & front-end" },
   { value: "8", label: "companies, UAE & India" },
-  { value: "9", label: "shipped product platforms" },
+  { value: "75+", label: "shipped product platforms" },
 ];
 
 export const about = {
