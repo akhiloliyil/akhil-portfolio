@@ -13,6 +13,7 @@ import {
   type ProcessStep,
   type Testimonial,
   type SectionToggle,
+  projectCategories,
 } from "@/data/content";
 import {
   Field,
@@ -423,8 +424,9 @@ export default function AdminApp() {
                 </div>
                 <div className={twoCol}>
                   <Select label="Frame type" value={p.frameType} onChange={(v) => set({ ...p, frameType: v as Project["frameType"] })} options={[{ value: "app", label: "app" }, { value: "dashboard", label: "dashboard" }, { value: "ecommerce", label: "ecommerce" }]} />
-                  <Toggle label="Featured (spans width)" value={!!p.featured} onChange={(v) => set({ ...p, featured: v })} />
+                  <Select label="Category (group)" value={p.category ?? ""} onChange={(v) => set({ ...p, category: v || undefined })} options={[{ value: "", label: "— none —" }, ...projectCategories.map((c) => ({ value: c.id, label: `${c.icon} ${c.label}` }))]} />
                 </div>
+                <Toggle label="Featured (spans width)" value={!!p.featured} onChange={(v) => set({ ...p, featured: v })} />
                 <Area label="Summary" value={p.summary} onChange={(v) => set({ ...p, summary: v })} />
                 <StringList area label="Details" values={p.details} onChange={(v) => set({ ...p, details: v })} />
                 <StringList label="Stack" values={p.stack} onChange={(v) => set({ ...p, stack: v })} />

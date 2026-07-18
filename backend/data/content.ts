@@ -60,6 +60,7 @@ export const about = {
 
 export type Project = {
   id: string;
+  category?: string;
   name: string;
   org: string;
   period?: string;
@@ -72,9 +73,18 @@ export type Project = {
   frameType: "app" | "dashboard" | "ecommerce";
 };
 
+// Industry groupings for the Selected Work section, in display order.
+export type ProjectCategory = { id: string; label: string; icon: string };
+export const projectCategories: ProjectCategory[] = [
+  { id: "commerce", label: "Commerce & Retail", icon: "🛍️" },
+  { id: "ai", label: "AI & Innovation", icon: "🤖" },
+  { id: "enterprise", label: "Enterprise Products", icon: "🏢" },
+];
+
 export const projects: Project[] = [
   {
     id: "yara",
+    category: "ai",
     name: "YARA — AI Shopping Assistant",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -106,6 +116,7 @@ export const projects: Project[] = [
   },
   {
     id: "hexa",
+    category: "enterprise",
     name: "Hexa — Showroom Sales App",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -135,6 +146,7 @@ export const projects: Project[] = [
   },
   {
     id: "danube-app",
+    category: "commerce",
     name: "Danube Home — Mobile App",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -163,6 +175,7 @@ export const projects: Project[] = [
   },
   {
     id: "danubehome-web",
+    category: "commerce",
     name: "Danubehome.com — E-commerce Website",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -192,6 +205,7 @@ export const projects: Project[] = [
   },
   {
     id: "oms",
+    category: "enterprise",
     name: "Order Management System (OMS)",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -222,6 +236,7 @@ export const projects: Project[] = [
   },
   {
     id: "price-tag",
+    category: "enterprise",
     name: "Dynamic Price Tag Editor",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -250,6 +265,7 @@ export const projects: Project[] = [
   },
   {
     id: "omnichannel",
+    category: "ai",
     name: "Omnichannel Retail Experience Platform",
     org: "Danube Home",
     role: "Concept Case Study · Lead Product Designer · Product Strategy · AI UX · Omnichannel CX",
@@ -279,6 +295,7 @@ export const projects: Project[] = [
   },
   {
     id: "pim",
+    category: "enterprise",
     name: "Product Information Management (PIM)",
     org: "Danube Home",
     role: "Lead Product Designer",
@@ -308,6 +325,7 @@ export const projects: Project[] = [
   },
   {
     id: "sleephubz",
+    category: "commerce",
     name: "Sleephubz.com — Sleep E-commerce",
     org: "Danube Home",
     role: "Lead Product Designer",

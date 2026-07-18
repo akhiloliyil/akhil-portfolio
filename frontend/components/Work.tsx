@@ -3,7 +3,11 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects as seedProjects } from "@/data/content";
+import {
+  projects as seedProjects,
+  projectCategories,
+  type Project,
+} from "@/data/content";
 import SelectionFrame from "./SelectionFrame";
 
 const useIsoLayoutEffect =
@@ -45,6 +49,27 @@ export default function Work({
   const rootRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // Order projects into industry groups, each preceded by a category panel.
+  type TrackItem =
+    | { kind: "cat"; id: string; label: string; icon: string; count: number }
+    | { kind: "card"; project: Project; frame: number };
+  const trackItems: TrackItem[] = [];
+  let frame = 0;
+  const known = new Set(projectCategories.map((c) => c.id));
+  for (const cat of projectCategories) {
+    const items = projects.filter((p) => p.category === cat.id);
+    if (!items.length) continue;
+    trackItems.push({ kind: "cat", ...cat, count: items.length });
+    for (const project of items) {
+      frame += 1;
+      trackItems.push({ kind: "card", project, frame });
+    }
+  }
+  for (const project of projects.filter((p) => !known.has(p.category ?? ""))) {
+    frame += 1;
+    trackItems.push({ kind: "card", project, frame });
+  }
+
   useIsoLayoutEffect(() => {
     const root = rootRef.current;
     const track = trackRef.current;
@@ -73,10 +98,11 @@ export default function Work({
           const viewport = root.querySelector<HTMLElement>(".work-viewport");
           const vw = () => viewport?.clientWidth ?? window.innerWidth;
 
-          // Pad the ends so the first and last cards sit centred on screen.
+          // Pad the ends so the first and last items sit centred on screen.
           const setPads = () => {
-            const first = cards[0];
-            const last = cards[cards.length - 1];
+            const kids = track.children;
+            const first = kids[0] as HTMLElement | undefined;
+            const last = kids[kids.length - 1] as HTMLElement | undefined;
             if (first)
               track.style.paddingLeft =
                 Math.max(24, (vw() - first.offsetWidth) / 2) + "px";
@@ -173,14 +199,35 @@ export default function Work({
             className="work-track flex px-6"
             style={{ perspective: 1200 }}
           >
-            {projects.map((project, i) => (
+            {trackItems.map((item) =>
+              item.kind === "cat" ? (
+                <div
+                  key={`cat-${item.id}`}
+                  className="work-cat flex flex-col justify-center px-2"
+                >
+                  <span className="text-5xl leading-none" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  <h3 className="mt-5 font-display text-2xl font-semibold leading-tight text-ink">
+                    {item.label}
+                  </h3>
+                  <span className="mt-2 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+                    {item.count} {item.count > 1 ? "projects" : "project"}
+                  </span>
+                  <span className="mt-4 block h-px w-12 bg-accent" />
+                </div>
+              ) : (
+                (() => {
+                  const project = item.project;
+                  const frameNo = item.frame;
+                  return (
               <div
                 key={project.id}
                 className={`work-card ${project.featured ? "work-card--featured" : ""}`}
               >
                 <div className="group h-full rounded-sm transition-transform duration-300 will-change-transform hover:-translate-y-1.5">
                   <SelectionFrame
-                    tag={`${project.featured ? "★ Featured" : `Frame ${String(i + 1).padStart(2, "0")}`} · ${project.org}`}
+                    tag={`${project.featured ? "★ Featured" : `Frame ${String(frameNo).padStart(2, "0")}`} · ${project.org}`}
                     className={`h-full border bg-panel p-7 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-9 ${
                       project.featured ? "border-accent/40" : "border-line"
                     }`}
@@ -246,7 +293,10 @@ export default function Work({
                   </SelectionFrame>
                 </div>
               </div>
-            ))}
+                  );
+                })()
+              )
+            )}
           </div>
         </div>
       </div>
