@@ -39,6 +39,7 @@ export default function Hero({
   stats?: typeof seedStats;
 }) {
   const PROFILE_IMAGE = profile.portrait || DEFAULT_PORTRAIT;
+  const heroCinematic = (profile.heroStyle ?? "card") === "cinematic";
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [portraitOk, setPortraitOk] = useState(true);
@@ -324,7 +325,9 @@ export default function Hero({
                 ? undefined
                 : { duration: 7, repeat: Infinity, ease: "easeInOut" }
             }
-            className="w-full max-w-sm"
+            className={`w-full ${
+              heroCinematic ? "max-w-md lg:max-w-none" : "max-w-sm"
+            }`}
           >
             <motion.div
               style={

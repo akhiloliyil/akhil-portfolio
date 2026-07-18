@@ -223,7 +223,7 @@ export default function CinematicPortrait({
         mouse.current = null;
         if (reduce) renderRef.current?.(false);
       }}
-      className="relative aspect-[4/5] w-full max-w-sm rounded-md"
+      className="relative aspect-[4/5] w-full rounded-md"
       style={{ background: "transparent", cursor: "crosshair" }}
       aria-label={alt}
     >
