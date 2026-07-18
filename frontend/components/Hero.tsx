@@ -325,8 +325,8 @@ export default function Hero({
                 ? undefined
                 : { duration: 7, repeat: Infinity, ease: "easeInOut" }
             }
-            className={`w-full ${
-              heroCinematic ? "max-w-md lg:max-w-none" : "max-w-sm"
+            className={`w-full max-w-sm ${
+              heroCinematic ? "lg:max-w-none" : ""
             }`}
           >
             <motion.div
@@ -342,11 +342,18 @@ export default function Hero({
                     }
               }
             >
-              {(profile.heroStyle ?? "card") === "cinematic" ? (
-                <CinematicPortrait
-                  src={PROFILE_IMAGE}
-                  alt={`${profile.name} portrait`}
-                />
+              {heroCinematic ? (
+                <>
+                  {/* Mobile always shows the framed card — the cinematic dust
+                      portrait (and its hover reveal) is desktop-only. */}
+                  <div className="lg:hidden">{cardFrame}</div>
+                  <div className="hidden lg:block">
+                    <CinematicPortrait
+                      src={PROFILE_IMAGE}
+                      alt={`${profile.name} portrait`}
+                    />
+                  </div>
+                </>
               ) : (
                 cardFrame
               )}
