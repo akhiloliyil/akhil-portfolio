@@ -206,7 +206,7 @@ export default function Work({
                 <div className="group h-full rounded-sm transition-transform duration-300 will-change-transform hover:-translate-y-1.5">
                   <SelectionFrame
                     tag={`${project.featured ? "★ Featured" : `Frame ${String(frameNo).padStart(2, "0")}`} · ${project.org}`}
-                    className={`h-full border bg-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-7 ${
+                    className={`flex h-full flex-col border bg-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-accent hover:shadow-[0_18px_40px_-24px_rgba(17,25,43,0.45)] sm:p-7 ${
                       project.featured ? "border-accent/40" : "border-line"
                     }`}
                   >
@@ -260,7 +260,7 @@ export default function Work({
                       ))}
                     </ul>
 
-                    <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-line pt-4">
+                    <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-line pt-5">
                       {project.stack.map((s) => (
                         <span key={s} className="rounded-sm bg-paper px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
                           {s}
