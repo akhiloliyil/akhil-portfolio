@@ -39,6 +39,8 @@ export default function Hero({
   stats?: typeof seedStats;
 }) {
   const PROFILE_IMAGE = profile.portrait || DEFAULT_PORTRAIT;
+  // The cinematic (desktop) canvas can use its own image; falls back to the card one.
+  const CINEMATIC_IMAGE = profile.portraitCinematic || PROFILE_IMAGE;
   const heroCinematic = (profile.heroStyle ?? "card") === "cinematic";
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -349,7 +351,7 @@ export default function Hero({
                   <div className="lg:hidden">{cardFrame}</div>
                   <div className="hidden lg:block">
                     <CinematicPortrait
-                      src={PROFILE_IMAGE}
+                      src={CINEMATIC_IMAGE}
                       alt={`${profile.name} portrait`}
                     />
                   </div>

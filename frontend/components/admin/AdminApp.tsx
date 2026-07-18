@@ -380,11 +380,16 @@ export default function AdminApp() {
               ]}
             />
             <ImageField
-              label="Portrait image"
+              label="Portrait image (card / mobile)"
               value={content.profile.portrait ?? "/images/profile.jpg"}
               onChange={(v) => patch({ profile: { ...content.profile, portrait: v } })}
             />
-            <p className="text-xs text-inkmuted">Upload a photo (it saves to <code>/images/uploads/…</code>) or paste a path, then Save. The cinematic style needs a same-origin image (uploads qualify).</p>
+            <ImageField
+              label="Cinematic portrait image (desktop)"
+              value={content.profile.portraitCinematic ?? ""}
+              onChange={(v) => patch({ profile: { ...content.profile, portraitCinematic: v } })}
+            />
+            <p className="text-xs text-inkmuted">Upload a photo (it saves to <code>/images/uploads/…</code>) or paste a path, then Save. The cinematic style uses the second image on desktop (falls back to the first if empty) and needs a same-origin image with a dark/transparent background; mobile always shows the framed card.</p>
           </div>
         )}
 

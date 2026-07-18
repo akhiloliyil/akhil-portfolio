@@ -18,6 +18,9 @@ export const profile = {
   heroStyle: "card",
   // Hero portrait image (uploaded via /ak-admin, or a same-origin path).
   portrait: "/images/profile.jpg",
+  // Optional separate image for the cinematic (desktop) portrait; falls back
+  // to `portrait` when empty. Use a dark/transparent-background photo here.
+  portraitCinematic: "",
 };
 
 export const stats = [
