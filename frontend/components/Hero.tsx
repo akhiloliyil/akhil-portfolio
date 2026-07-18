@@ -13,6 +13,7 @@ import { profile as seedProfile, stats as seedStats } from "@/data/content";
 import SelectionFrame from "./SelectionFrame";
 import Magnetic from "./Magnetic";
 import ResumeButton from "./ResumeButton";
+import SaveContact from "./SaveContact";
 
 /** Split a stat value like "10+" into { end: 10, prefix: "", suffix: "+" }. */
 function parseStat(value: string) {
@@ -229,6 +230,9 @@ export default function Hero({
               >
                 View selected work
               </a>
+            </Magnetic>
+            <Magnetic>
+              <SaveContact variant="solid" />
             </Magnetic>
             <a
               href={`mailto:${profile.email}`}

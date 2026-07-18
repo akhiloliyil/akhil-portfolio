@@ -5,6 +5,7 @@ import { profile as seedProfile } from "@/data/content";
 import SelectionFrame from "./SelectionFrame";
 import Magnetic from "./Magnetic";
 import ShareButton from "./ShareButton";
+import SaveContact from "./SaveContact";
 
 export default function Contact({
   profile = seedProfile,
@@ -38,6 +39,9 @@ export default function Contact({
             </p>
 
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <Magnetic>
+                <SaveContact variant="solid" />
+              </Magnetic>
               <Magnetic>
                 <a
                   href={`mailto:${profile.email}`}
@@ -82,6 +86,16 @@ export default function Contact({
                 className="focus-ring inline-flex items-center gap-2 rounded-sm border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
               />
             </div>
+
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+              Tap an NFC card?{" "}
+              <a
+                href="/card"
+                className="text-accent underline-offset-4 hover:underline"
+              >
+                Open the tap-to-connect card →
+              </a>
+            </p>
           </SelectionFrame>
         </motion.div>
 
