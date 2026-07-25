@@ -537,6 +537,11 @@
         "Next.js",
         "Node.js",
         "Tailwind CSS",
+        "shadcn/ui",
+        "Framer Motion",
+        "GSAP",
+        "Lenis",
+        "React Three Fiber",
         "Bootstrap",
         "Reactstrap",
         "Material-UI"
