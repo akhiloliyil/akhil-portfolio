@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import QRCode from "qrcode";
 import { getContent } from "@/lib/content-store";
 import SaveContact from "@/components/SaveContact";
+import NebulaBackground from "@/components/NebulaBackground";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -108,7 +109,9 @@ export default async function CardPage() {
   ];
 
   return (
-    <main className="canvas-grid relative min-h-screen bg-paper px-5 py-10 sm:py-16">
+    <main className="relative min-h-screen overflow-hidden bg-paper px-5 py-10 sm:py-16">
+      <NebulaBackground />
+
       {/* Back to portfolio — pinned to the window's top-right corner */}
       <a
         href="/"

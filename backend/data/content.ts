@@ -28,7 +28,7 @@ export const profile = {
 export const stats = [
   { value: "16+", label: "years across design & front-end" },
   { value: "8", label: "companies, UAE & India" },
-  { value: "75+", label: "shipped product platforms" },
+  { value: "150+", label: "shipped product platforms" },
 ];
 
 export const about = {
@@ -96,7 +96,6 @@ export const projects: Project[] = [
     category: "ai",
     name: "YARA — AI Shopping Assistant",
     org: "Danube Home",
-    role: "Lead Product Designer",
     link: "https://www.danubehome.com/ae/en/yara-ai-search",
     summary:
       "Led the end-to-end product design of YARA, an AI-powered shopping assistant that transformed the customer journey across web, mobile, and in-store retail. Defined the conversational UX strategy, AI interaction patterns, and scalable design system across an omnichannel experience.",
@@ -127,7 +126,6 @@ export const projects: Project[] = [
     category: "enterprise",
     name: "Hexa — Showroom Sales App",
     org: "Danube Home",
-    role: "Lead Product Designer",
     period: "Jan 2024 — Present",
     summary:
       "Led the end-to-end UX and product design of Hexa, an enterprise mobile app for showroom sales teams — streamlining in-store operations, accelerating order processing, and improving inventory visibility through an intuitive, role-based experience with real-time insights.",
@@ -157,7 +155,6 @@ export const projects: Project[] = [
     category: "commerce",
     name: "Danube Home — Mobile App",
     org: "Danube Home",
-    role: "Lead Product Designer",
     period: "Jan 2023 — Present",
     summary:
       "Led the end-to-end UX and product design of the Danube Home mobile app — a seamless omnichannel shopping experience across iOS and Android, with scalable mobile design patterns and production-ready React Native implementation.",
@@ -184,9 +181,8 @@ export const projects: Project[] = [
   {
     id: "danubehome-web",
     category: "commerce",
-    name: "Danubehome.com — E-commerce Website",
+    name: "Danubehome.com — E-commerce",
     org: "Danube Home",
-    role: "Lead Product Designer",
     period: "Sep 2020 — Present",
     link: "https://www.danubehome.com",
     summary:
@@ -216,7 +212,6 @@ export const projects: Project[] = [
     category: "enterprise",
     name: "Order Management System (OMS)",
     org: "Danube Home",
-    role: "Lead Product Designer",
     period: "Sep 2020 — Present",
     summary:
       "Led the end-to-end UX and product design of an enterprise Order Management System that streamlined order processing, inventory management, and operational workflows across teams — simplifying complex flows, improving real-time visibility, and delivering a scalable, role-based platform.",
@@ -247,7 +242,6 @@ export const projects: Project[] = [
     category: "enterprise",
     name: "Dynamic Price Tag Editor",
     org: "Danube Home",
-    role: "Lead Product Designer",
     summary:
       "Led the end-to-end UX and product design of a Dynamic Price Tag Editor — an enterprise platform that simplifies large-scale retail pricing, catalog management, and in-store printing workflows, reducing manual effort and improving pricing accuracy across high-volume operations.",
     details: [
@@ -274,7 +268,7 @@ export const projects: Project[] = [
   {
     id: "omnichannel",
     category: "ai",
-    name: "Omnichannel Retail Experience Platform",
+    name: "Omnichannel Retail Experience",
     org: "Danube Home",
     role: "Concept Case Study · Lead Product Designer · Product Strategy · AI UX · Omnichannel CX",
     summary:
@@ -306,7 +300,6 @@ export const projects: Project[] = [
     category: "enterprise",
     name: "Product Information Management (PIM)",
     org: "Danube Home",
-    role: "Lead Product Designer",
     summary:
       "Led the end-to-end UX and product design of a Product Information Management platform that centralized product data, digital assets, and catalog management across channels — simplifying complex workflows, improving data accuracy, and supporting ERP and e-commerce integrations.",
     details: [
@@ -332,11 +325,40 @@ export const projects: Project[] = [
     frameType: "dashboard",
   },
   {
+    id: "trade-partner-program",
+    category: "enterprise",
+    name: "Trade Partner Program — B2B Rewards Platform",
+    org: "Danube Home",
+    summary:
+      "Designed and developed the Trade Partner Program, an interactive B2B rewards platform for Danube Home's retail partner ecosystem — supporting four partner programs (Privilege Partner, Interior Designer, Consultant, and Holiday Home) with a unified experience for onboarding, rewards management, exclusive campaigns, and account management.",
+    details: [
+      "Designed the end-to-end UX and developed the interactive front end using React.js and Next.js",
+      "Built immersive 3D visuals, scroll-based animations, and micro-interactions with Three.js, GSAP, and Framer Motion",
+      "Supported four partner programs — Privilege Partner, Interior Designer, Consultant, and Holiday Home",
+      "Designed digital partner onboarding, profile management, and rewards points tracking and redemption",
+      "Built a membership dashboard surfacing rewards, transactions, and program insights",
+      "Designed exclusive partner offers and promotional campaign experiences",
+      "Implemented secure authentication and role-based access control",
+      "Used AI-assisted development workflows to accelerate design, prototyping, and delivery",
+    ],
+    stack: [
+      "React.js",
+      "Next.js",
+      "Three.js",
+      "GSAP",
+      "Framer Motion",
+      "Design System",
+      "AI-Assisted Development",
+      "Frontend Implementation",
+    ],
+    frameType: "dashboard",
+  },
+  {
     id: "sleephubz",
     category: "commerce",
-    name: "Sleephubz.com — Sleep E-commerce",
+    name: "Sleephubz.com — E-commerce",
     org: "Danube Home",
-    role: "Lead Product Designer",
+    link: "https://www.sleephubz.com/ae/en",
     summary:
       "Led end-to-end UX and product design for SleepHubz.com, an e-commerce platform for mattresses and sleep solutions — creating intuitive shopping experiences, optimizing customer journeys, and building a scalable design system that lifted usability, engagement, and conversion across web and mobile.",
     details: [

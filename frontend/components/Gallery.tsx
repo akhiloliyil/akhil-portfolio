@@ -8,6 +8,7 @@ import {
 } from "@/data/content";
 import SelectionFrame from "./SelectionFrame";
 import Lightbox from "./Lightbox";
+import NebulaBackground from "./NebulaBackground";
 
 const container: Variants = {
   hidden: {},
@@ -34,8 +35,12 @@ export default function Gallery({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="gallery" className="canvas-grid border-b border-line">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <section
+      id="gallery"
+      className="relative overflow-hidden border-b border-line"
+    >
+      <NebulaBackground />
+      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">

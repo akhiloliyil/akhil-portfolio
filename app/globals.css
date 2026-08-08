@@ -53,12 +53,40 @@ body {
   color: #ffffff;
 }
 
-/* Canvas grid backdrop, used behind the hero and section headers */
-.canvas-grid {
-  background-image:
-    linear-gradient(to right, rgb(var(--ink) / 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--ink) / 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
+/* Nebula backdrop, used behind the hero and section headers — see
+   NebulaBackground.tsx. The photo drifts in a slow, seamless pan/zoom and
+   is always on, kept mild so copy stays legible; a canvas starfield layers
+   on top, twinkling and parallaxing toward the cursor (dark theme only —
+   white dots don't read on light paper, and the photo itself is dialled
+   down there to stay out of the way of the clean paper look). */
+.nebula-photo {
+  position: absolute;
+  inset: -6%;
+  background-image: url("/images/Space-Background-Images.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  filter: saturate(0.5) brightness(1.6);
+  animation: nebula-pan 60s ease-in-out infinite alternate;
+}
+.dark .nebula-photo {
+  opacity: 0.15;
+  filter: none;
+}
+
+@keyframes nebula-pan {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(-1.4%, -1%, 0);
+  }
+}
+
+.nebula-stars {
+  position: absolute;
+  inset: 0;
+  display: block;
 }
 
 /* The signature element: corner selection handles, like an object selected
@@ -128,61 +156,6 @@ body {
 .focus-ring:focus-visible {
   outline: 2px solid rgb(var(--accent));
   outline-offset: 3px;
-}
-
-/* Floating gradient blobs behind the hero — soft, slow, well within the
-   paper palette so the canvas identity still reads. */
-.hero-blob {
-  filter: blur(64px);
-  opacity: 0.5;
-  will-change: transform;
-}
-.hero-blob--accent {
-  background: radial-gradient(circle at 30% 30%, rgb(var(--accent)), transparent 70%);
-  animation: blob-drift-a 18s ease-in-out infinite;
-}
-.hero-blob--coral {
-  background: radial-gradient(circle at 40% 40%, rgb(var(--coral)), transparent 70%);
-  opacity: 0.35;
-  animation: blob-drift-b 22s ease-in-out infinite;
-}
-.hero-blob--violet {
-  background: radial-gradient(circle at 50% 50%, rgb(var(--accent)), transparent 70%);
-  opacity: 0.28;
-  animation: blob-drift-c 26s ease-in-out infinite;
-}
-.dark .hero-blob {
-  opacity: 0.4;
-}
-
-@keyframes blob-drift-a {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(40px, 30px, 0) scale(1.15);
-  }
-}
-
-@keyframes blob-drift-b {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-36px, -28px, 0) scale(1.1);
-  }
-}
-
-@keyframes blob-drift-c {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(24px, -40px, 0) scale(1.2);
-  }
 }
 
 /* Drifting canvas marks — small design tokens (dots, plus, ring) floating
@@ -259,6 +232,9 @@ body {
     flex: 0 0 auto;
     scroll-snap-align: center;
   }
+  .work-line {
+    display: none;
+  }
 }
 
 /* Desktop — GSAP pinned horizontal scroll (class added by JS on lg + motion). */
@@ -269,7 +245,11 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 4.25rem;
+  /* The arch's excursion is centred symmetrically (see drawArch's centerY
+     in Work.tsx), so this only needs to clear the header plus ~20px for
+     the curve's highest point — not the larger one-sided buffer an
+     off-centre baseline would require. */
+  padding-top: 5rem;
   padding-bottom: 1.5rem;
 }
 .work-horizontal .work-viewport {
@@ -286,15 +266,38 @@ body {
   flex-direction: row;
   height: auto;
   align-items: stretch;
-  gap: 2rem;
+  gap: 3rem;
   overflow: visible;
   will-change: transform;
+  position: relative;
+  isolation: isolate;
 }
 .work-horizontal .work-card {
-  width: min(64vw, 62rem);
+  width: min(46vw, 34rem);
   max-width: none;
   flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
 }
 .work-horizontal .work-card--featured {
-  width: min(80vw, 78rem);
+  width: min(52vw, 38rem);
+}
+
+/* Arch line — desktop only, threads behind (and through the hollow frame
+   numbers of) the pinned-scroll row. `.work-track` is isolated so its
+   z-index stays scoped to this row instead of leaking into the page. */
+.work-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+/* Soft glow behind each project's glyph icon. */
+.work-glyph-glow {
+  background: radial-gradient(circle, rgb(var(--accent) / 0.18), transparent 70%);
+  filter: blur(18px);
 }

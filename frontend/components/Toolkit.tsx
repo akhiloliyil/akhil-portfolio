@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { toolkit as seedToolkit } from "@/data/content";
+import NebulaBackground from "./NebulaBackground";
 
 const groupStagger: Variants = {
   hidden: {},
@@ -21,8 +22,12 @@ export default function Toolkit({
   const reduce = useReducedMotion();
 
   return (
-    <section id="toolkit" className="canvas-grid border-b border-line">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <section
+      id="toolkit"
+      className="relative overflow-hidden border-b border-line"
+    >
+      <NebulaBackground />
+      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
         <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           Toolkit
         </h2>

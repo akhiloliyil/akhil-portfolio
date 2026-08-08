@@ -15,6 +15,7 @@ import Magnetic from "./Magnetic";
 import CinematicPortrait from "./CinematicPortrait";
 import ResumeButton from "./ResumeButton";
 import SaveContact from "./SaveContact";
+import NebulaBackground from "./NebulaBackground";
 
 /** Split a stat value like "10+" into { end: 10, prefix: "", suffix: "+" }. */
 function parseStat(value: string) {
@@ -57,8 +58,6 @@ export default function Hero({
   const sy = useSpring(py, spring);
 
   // Layered parallax — deeper layers move more; the card counter-moves + tilts.
-  const blobX = useTransform(sx, (v) => v * 64);
-  const blobY = useTransform(sy, (v) => v * 44);
   const marksX = useTransform(sx, (v) => v * 38);
   const marksY = useTransform(sy, (v) => v * 28);
   const cardX = useTransform(sx, (v) => v * -26);
@@ -161,18 +160,9 @@ export default function Hero({
       ref={sectionRef}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="canvas-grid relative overflow-hidden border-b border-line"
+      className="relative overflow-hidden border-b border-line"
     >
-      {/* Floating gradient — soft accent/coral wash, parallaxed by the cursor */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={reduce ? undefined : { x: blobX, y: blobY }}
-      >
-        <div className="hero-blob hero-blob--accent absolute -left-24 -top-24 h-80 w-80 rounded-full" />
-        <div className="hero-blob hero-blob--coral absolute -right-16 top-40 h-72 w-72 rounded-full" />
-        <div className="hero-blob hero-blob--violet absolute bottom-0 left-1/3 h-64 w-64 rounded-full" />
-      </motion.div>
+      <NebulaBackground />
 
       {/* Drifting canvas marks — design tokens scattered on the artboard */}
       <motion.div
@@ -243,25 +233,25 @@ export default function Hero({
         </span>
       </motion.div>
 
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 sm:py-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-12 pb-14 sm:pt-0 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
             Portfolio — Dubai, UAE
           </p>
           <h1
             ref={headlineRef}
-            className="mt-5 overflow-hidden font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl"
+            className="mt-3 overflow-hidden font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl"
           >
             {profile.name}
           </h1>
-          <p className="mt-4 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted">
+          <p className="mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted">
             {profile.title}
           </p>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-inkmuted sm:text-lg">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-inkmuted sm:text-lg">
             {profile.blurb}
           </p>
 
-          <ul className="mt-6 flex flex-wrap gap-2">
+          <ul className="mt-4 flex flex-wrap gap-2">
             {profile.focus.map((f) => (
               <li
                 key={f}
@@ -272,7 +262,7 @@ export default function Hero({
             ))}
           </ul>
 
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Magnetic>
               <a
                 href="#work"
@@ -292,30 +282,6 @@ export default function Hero({
             </a>
             <ResumeButton />
           </div>
-
-          <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-6">
-            {stats.map((stat) => {
-              const s = parseStat(stat.value);
-              return (
-                <div key={stat.label}>
-                  <dt className="font-display text-2xl font-semibold text-ink">
-                    {s.numeric ? (
-                      <>
-                        {s.prefix}
-                        <CountUp end={s.end} duration={2} />
-                        {s.suffix}
-                      </>
-                    ) : (
-                      stat.value
-                    )}
-                  </dt>
-                  <dd className="mt-1 font-mono text-[11px] uppercase leading-snug tracking-wide text-inkmuted">
-                    {stat.label}
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
         </div>
 
         <div
@@ -365,6 +331,38 @@ export default function Hero({
             </motion.div>
           </motion.div>
         </div>
+
+        <dl className="relative grid grid-cols-3 gap-4 overflow-hidden rounded-2xl border border-white/10 bg-black/35 px-6 py-5 text-center shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:px-8 sm:py-6 lg:col-span-2">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent"
+          />
+          {stats.map((stat) => {
+            const s = parseStat(stat.value);
+            return (
+              <div key={stat.label} className="relative">
+                <dt className="font-display text-2xl font-bold text-white sm:text-3xl">
+                  {s.numeric ? (
+                    <>
+                      {s.prefix}
+                      <CountUp end={s.end} duration={2} />
+                      {s.suffix}
+                    </>
+                  ) : (
+                    stat.value
+                  )}
+                </dt>
+                <dd className="mt-1 text-xs capitalize leading-snug text-white/60 sm:text-sm">
+                  {stat.label}
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
       </div>
     </section>
   );
