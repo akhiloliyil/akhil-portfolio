@@ -3,6 +3,8 @@
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { toolkit as seedToolkit } from "@/data/content";
 import NebulaBackground from "./NebulaBackground";
+import ToolkitMarquee from "./ToolkitMarquee";
+import { ToolIcon, allToolNames } from "./ToolIcon";
 
 const groupStagger: Variants = {
   hidden: {},
@@ -36,7 +38,33 @@ export default function Toolkit({
           front-end stack that ships it on the other.
         </p>
 
-        <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2">
+        <div className="mt-12 grid items-center gap-10 rounded-2xl border border-line bg-panel p-6 sm:p-8 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+          <ToolkitMarquee tools={allToolNames(toolkit)} />
+          <div>
+            <span className="font-mono text-xs uppercase tracking-wider text-accent">
+              {allToolNames(toolkit).length}+ tools, one stack
+            </span>
+            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              Design tooling and the ship-it stack, side by side
+            </h3>
+            <p className="mt-3 text-sm text-inkmuted">
+              From first wireframe to production build — the design apps,
+              front-end stack, AI copilots, and platforms that carry a
+              project from idea to shipped.
+            </p>
+            <a
+              href="#toolkit-groups"
+              className="focus-ring mt-6 inline-block rounded-sm bg-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-paper transition-colors hover:bg-accent"
+            >
+              Browse the full list
+            </a>
+          </div>
+        </div>
+
+        <div
+          id="toolkit-groups"
+          className="mt-16 grid scroll-mt-24 gap-x-8 gap-y-10 sm:grid-cols-2"
+        >
           {toolkit.map((group) => (
             <motion.div
               key={group.group}
@@ -64,8 +92,9 @@ export default function Toolkit({
                     key={tool}
                     variants={reduce ? undefined : chip}
                     whileHover={reduce ? undefined : { y: -3 }}
-                    className="cursor-default rounded-sm border border-line bg-panel px-3 py-1.5 text-sm text-ink transition-colors hover:border-accent"
+                    className="inline-flex cursor-default items-center gap-2 rounded-sm border border-line bg-panel py-1.5 pl-1.5 pr-3 text-sm text-ink transition-colors hover:border-accent"
                   >
+                    <ToolIcon name={tool} size={22} />
                     {tool}
                   </motion.span>
                 ))}

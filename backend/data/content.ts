@@ -611,6 +611,11 @@ export const toolkit = [
       "Next.js",
       "Node.js",
       "Tailwind CSS",
+      "shadcn/ui",
+      "Framer Motion",
+      "GSAP",
+      "Lenis",
+      "React Three Fiber",
       "Bootstrap",
       "Reactstrap",
       "Material-UI",
@@ -659,7 +664,7 @@ export const toolkit = [
   },
   {
     group: "Languages",
-    tools: ["English", "Hindi"],
+    tools: ["English", "Hindi", "Malayalam"],
   },
 ];
 

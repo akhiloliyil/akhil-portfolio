@@ -301,3 +301,55 @@ body {
   background: radial-gradient(circle, rgb(var(--accent) / 0.18), transparent 70%);
   filter: blur(18px);
 }
+
+/* Toolkit hero — columns of tool icons drifting past like cards being
+   shuffled, alternating direction per column. Each column's tile list is
+   rendered twice back-to-back so the loop from -50% back to 0 is seamless. */
+.toolkit-marquee {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 14%,
+    black 86%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 14%,
+    black 86%,
+    transparent
+  );
+}
+
+.toolkit-column {
+  animation-name: toolkit-shuffle-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.toolkit-column--reverse {
+  animation-name: toolkit-shuffle-down;
+}
+
+.toolkit-marquee:hover .toolkit-column {
+  animation-play-state: paused;
+}
+
+@keyframes toolkit-shuffle-up {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes toolkit-shuffle-down {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
