@@ -16,6 +16,10 @@ const chip: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
+// These groups' tools skip the icon — both in their own chips (text-only)
+// and in the animated orbit pool on the left (real product logos only).
+const NO_ICON_GROUPS = new Set(["Platforms", "Practice", "Soft Skills", "Languages"]);
+
 export default function Toolkit({
   toolkit = seedToolkit,
 }: {
@@ -27,8 +31,8 @@ export default function Toolkit({
     <section id="toolkit" className="relative border-b border-line">
       {/* No overflow-hidden here — it would clip the containing block and
           silently break the sticky icon orbit below. NebulaBackground and
-          the glow layer both self-contain via absolute inset-0. */}
-      <NebulaBackground />
+          the glow layer both self-contain via absolute inset-0 / sticky. */}
+      <NebulaBackground parallax />
       {/* Violet/blue glow, dark theme only — the icon orbit and gradient
           headline read as washed-out without it, but it's too loud to show
           against the light-theme paper. */}
@@ -44,7 +48,11 @@ export default function Toolkit({
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
             <div className="lg:sticky lg:top-28 lg:flex lg:min-h-[70vh] lg:items-center">
-              <ToolkitOrbit />
+              <ToolkitOrbit
+                tools={allToolNames(
+                  toolkit.filter((group) => !NO_ICON_GROUPS.has(group.group))
+                )}
+              />
             </div>
           </div>
 
@@ -79,17 +87,24 @@ export default function Toolkit({
                     {group.group}
                   </h3>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {group.tools.map((tool) => (
-                      <motion.span
-                        key={tool}
-                        variants={reduce ? undefined : chip}
-                        whileHover={reduce ? undefined : { y: -2 }}
-                        className="inline-flex cursor-default items-center gap-2 rounded-full border border-line bg-panel py-1.5 pl-1.5 pr-3.5 text-sm text-ink transition-colors hover:border-accent"
-                      >
-                        <ToolIcon name={tool} size={22} />
-                        {tool}
-                      </motion.span>
-                    ))}
+                    {group.tools.map((tool) => {
+                      const showIcon = !NO_ICON_GROUPS.has(group.group);
+                      return (
+                        <motion.span
+                          key={tool}
+                          variants={reduce ? undefined : chip}
+                          whileHover={reduce ? undefined : { y: -2 }}
+                          className={
+                            showIcon
+                              ? "inline-flex cursor-default items-center gap-2 rounded-full border border-line bg-panel py-1.5 pl-1.5 pr-3.5 text-sm text-ink transition-colors hover:border-accent"
+                              : "inline-flex cursor-default items-center rounded-full border border-line bg-panel px-4 py-1.5 text-sm text-ink transition-colors hover:border-accent"
+                          }
+                        >
+                          {showIcon && <ToolIcon name={tool} size={22} />}
+                          {tool}
+                        </motion.span>
+                      );
+                    })}
                   </div>
                 </motion.div>
               ))}

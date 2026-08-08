@@ -10,7 +10,7 @@
   --ink: 17 25 43;
   --inkmuted: 91 100 120;
   --line: 215 220 229;
-  --accent: 54 84 244;
+  --accent: 139 92 246;
   --coral: 255 91 60;
   color-scheme: light;
 }
@@ -21,7 +21,7 @@
   --ink: 233 237 245;
   --inkmuted: 150 160 180;
   --line: 40 48 64;
-  --accent: 122 145 255;
+  --accent: 139 92 246;
   --coral: 255 120 96;
   color-scheme: dark;
 }
@@ -318,5 +318,15 @@ body {
 .work-glyph-glow {
   background: radial-gradient(circle, rgb(var(--accent) / 0.18), transparent 70%);
   filter: blur(18px);
+}
+
+/* Ambient glow behind the Contact card — a soft violet wash top-left,
+   restrained so it reads on both the light paper and dark panel. */
+.contact-card-glow {
+  background: radial-gradient(
+    ellipse 60% 50% at 20% 0%,
+    rgb(var(--accent) / 0.16),
+    transparent 70%
+  );
 }
 

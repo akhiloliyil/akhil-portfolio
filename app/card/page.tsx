@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import QRCode from "qrcode";
 import { getContent } from "@/lib/content-store";
 import SaveContact from "@/components/SaveContact";
-import NebulaBackground from "@/components/NebulaBackground";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -82,17 +81,25 @@ export default async function CardPage() {
   const { profile } = await getContent();
   const origin = await getOrigin();
   const cardUrl = `${origin}/card`;
+  const displayDomain = origin.replace(/^https?:\/\//, "");
 
   // QR points back to this card so a non-NFC visitor reaches the same hub.
+  // Dark-on-transparent so it drops straight onto the white backing below.
   const qrSvg = await QRCode.toString(cardUrl, {
     type: "svg",
     margin: 0,
     errorCorrectionLevel: "M",
-    color: { dark: "#111827", light: "#00000000" },
+    color: { dark: "#0a0a10", light: "#00000000" },
   });
 
   const phoneTel = profile.phone.replace(/\s+/g, "");
   const phoneWa = profile.phone.replace(/\D/g, "");
+
+  // "Lead Product Designer · UI/UX & CX · Design Systems" — split on the
+  // separator so the first clause reads as the headline role and the rest
+  // as a smaller supporting line, matching the two-tier title treatment.
+  const [titleMain, ...titleRest] = profile.title.split("·").map((s) => s.trim());
+  const titleSub = titleRest.join(" · ");
 
   const links: {
     key: string;
@@ -102,20 +109,30 @@ export default async function CardPage() {
     external?: boolean;
   }[] = [
     { key: "whatsapp", label: "WhatsApp", sub: profile.phone, href: `https://wa.me/${phoneWa}`, external: true },
-    { key: "call", label: "Call", sub: profile.phone, href: `tel:${phoneTel}` },
-    { key: "email", label: "Email", sub: profile.email, href: `mailto:${profile.email}` },
-    { key: "linkedin", label: "LinkedIn", sub: "Connect", href: profile.linkedin, external: true },
-    { key: "portfolio", label: "Portfolio", sub: "See selected work", href: origin, external: true },
+    { key: "call", label: "Call Mobile", sub: profile.phone, href: `tel:${phoneTel}` },
+    { key: "email", label: "Email Address", sub: profile.email, href: `mailto:${profile.email}` },
+    { key: "linkedin", label: "LinkedIn", sub: "Connect on LinkedIn", href: profile.linkedin, external: true },
+    { key: "portfolio", label: "Portfolio", sub: displayDomain, href: origin, external: true },
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-paper px-5 py-10 sm:py-16">
-      <NebulaBackground />
+    // Fixed dark palette regardless of the visitor's site-wide theme choice
+    // — a tap-to-connect card should look the same on every phone it's
+    // opened on, not flip to a light page if that's their stored preference.
+    <main className="relative min-h-screen overflow-hidden bg-[#0a0a10] px-5 py-10 text-white sm:py-16">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 15%, rgb(124 58 237 / 0.25), transparent 55%), radial-gradient(circle at 85% 80%, rgb(56 189 248 / 0.16), transparent 55%)",
+        }}
+      />
 
-      {/* Back to portfolio — pinned to the window's top-right corner */}
+      {/* Back to portfolio — pinned to the window's top-left corner */}
       <a
         href="/"
-        className="focus-ring fixed left-4 top-4 z-20 inline-flex items-center gap-2 rounded-sm border border-line bg-panel/80 px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-inkmuted backdrop-blur transition-colors hover:border-accent hover:text-accent sm:left-6 sm:top-6"
+        className="focus-ring fixed left-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-white/60 backdrop-blur transition-colors hover:border-accent hover:text-accent sm:left-6 sm:top-6"
       >
         <svg
           viewBox="0 0 24 24"
@@ -132,31 +149,45 @@ export default async function CardPage() {
         Back to portfolio
       </a>
 
-      <div className="mx-auto w-full max-w-md">
+      <div className="relative mx-auto w-full max-w-md">
         {/* Header / identity */}
         <header className="flex flex-col items-center text-center">
-          <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-accent bg-panel">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={PROFILE_IMAGE}
-              alt={`${profile.name} portrait`}
-              className="h-full w-full object-cover"
+          <div className="relative">
+            <div
+              aria-hidden
+              className="absolute inset-0 scale-110 rounded-full bg-gradient-to-br from-sky-400 to-accent opacity-50 blur-2xl"
             />
+            <div className="relative rounded-full bg-gradient-to-br from-sky-400 to-accent p-[3px]">
+              <div className="h-28 w-28 overflow-hidden rounded-full bg-[#0a0a10]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={PROFILE_IMAGE}
+                  alt={`${profile.name} portrait`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
           </div>
-          <h1 className="mt-5 font-display text-2xl font-semibold tracking-tight text-ink">
+
+          <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-white">
             {profile.name}
           </h1>
-          <p className="mt-2 max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-wider text-inkmuted">
-            {profile.title}
+          <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-wider text-accent">
+            {titleMain}
           </p>
-          <p className="mt-2 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+          {titleSub && (
+            <p className="mt-1 max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-wider text-white/45">
+              {titleSub}
+            </p>
+          )}
+          <span className="mt-4 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-white/60">
             {profile.location}
-          </p>
+          </span>
         </header>
 
         {/* Primary CTA */}
         <div className="mt-8">
-          <SaveContact variant="solid" className="w-full justify-center py-4 text-sm" />
+          <SaveContact variant="gradient" className="w-full justify-center py-4 text-sm" />
         </div>
 
         {/* Link list */}
@@ -165,22 +196,23 @@ export default async function CardPage() {
             <li key={l.key}>
               <a
                 href={l.href}
-                {...(l.key === "resume" ? { download: "Akhil-Kumar-Resume.pdf" } : {})}
                 {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
-                className="focus-ring group flex items-center gap-4 rounded-sm border border-line bg-panel px-5 py-4 text-ink transition-colors hover:border-accent hover:text-accent"
+                className="focus-ring group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 text-white transition-colors hover:border-accent/50"
               >
-                <Icon name={l.key} />
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/5 text-accent">
+                  <Icon name={l.key} />
+                </span>
                 <span className="flex flex-col">
-                  <span className="font-mono text-xs uppercase tracking-wider">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-white/45">
                     {l.label}
                   </span>
-                  <span className="mt-0.5 text-xs text-inkmuted group-hover:text-accent/80">
+                  <span className="mt-0.5 text-sm font-medium text-white">
                     {l.sub}
                   </span>
                 </span>
                 <svg
                   viewBox="0 0 24 24"
-                  className="ml-auto h-4 w-4 text-inkmuted transition-transform group-hover:translate-x-0.5 group-hover:text-accent"
+                  className="ml-auto h-4 w-4 shrink-0 text-white/30 transition-transform group-hover:translate-x-0.5 group-hover:text-accent"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -195,25 +227,32 @@ export default async function CardPage() {
           ))}
         </ul>
 
-        {/* QR — for people without NFC. Hidden on phones (the visitor is
-            already on the card there, so it's redundant). */}
-        <section className="mt-10 hidden flex-col items-center sm:flex">
-          <div
-            className="rounded-lg bg-white p-4 shadow-[0_1px_0_0_rgba(17,25,43,0.06)]"
-            // Fixed light backing so the QR stays scannable in dark mode too.
-          >
-            <div
-              className="h-40 w-40"
-              dangerouslySetInnerHTML={{ __html: qrSvg }}
-            />
-          </div>
-          <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-inkmuted">
-            Scan to open this card
+        {/* QR — a real, functional code encoding this card's URL. */}
+        <section className="mt-8 flex flex-col items-center rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-8">
+          <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent">
+            NFC Quick Share
           </p>
+          <p className="mt-2 max-w-[16rem] text-center text-sm text-white/55">
+            Scan this code to instantly open my profile
+          </p>
+          <div className="mt-5 rounded-xl bg-white p-4">
+            <div className="h-36 w-36" dangerouslySetInnerHTML={{ __html: qrSvg }} />
+          </div>
         </section>
 
-        <footer className="mt-10 text-center font-mono text-[10px] uppercase tracking-wider text-inkmuted">
-          © {new Date().getFullYear()} {profile.name}
+        <details className="mt-8 text-center [&::-webkit-details-marker]:hidden">
+          <summary className="cursor-pointer list-none font-mono text-xs uppercase tracking-wider text-accent underline underline-offset-4 focus-ring">
+            How to use this card
+          </summary>
+          <p className="mx-auto mt-3 max-w-xs text-xs leading-relaxed text-white/50">
+            Tap your phone against the card to save these details instantly —
+            no app needed. No NFC reader handy? Scan the QR code above with
+            your camera instead.
+          </p>
+        </details>
+
+        <footer className="mt-8 text-center font-mono text-[10px] uppercase tracking-wider text-white/35">
+          © {new Date().getFullYear()} {profile.name}. All rights reserved.
         </footer>
       </div>
     </main>

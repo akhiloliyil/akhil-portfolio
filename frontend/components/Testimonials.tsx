@@ -6,7 +6,11 @@ import { useReducedMotion } from "motion/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { testimonials as seedTestimonials } from "@/data/content";
+import { profile, testimonials as seedTestimonials } from "@/data/content";
+
+// The name mentioned *inside* the quotes (they're testimony about Akhil,
+// not by him) — highlighted wherever it appears in the quote text.
+const OWNER_FIRST_NAME = profile.name.split(/\s+/)[0];
 
 function Chevron({ dir }: { dir: "left" | "right" }) {
   return (
@@ -33,6 +37,39 @@ function initials(name: string) {
     .map((w) => w[0])
     .join("")
     .toUpperCase();
+}
+
+function escapeRegExp(s: string) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+// Picks out Akhil's name and the reviewer's company inside the quote text
+// and gives each its own colour — the rest of the sentence reads as plain
+// prose. (The reviewer's own name, e.g. "Naveen", doesn't appear in their
+// own quote, so that's not one of the search terms.)
+function renderQuote(quote: string, company?: string) {
+  const firstName = OWNER_FIRST_NAME;
+  const terms = [firstName, company].filter(Boolean) as string[];
+  if (!terms.length) return quote;
+
+  const pattern = new RegExp(`(${terms.map(escapeRegExp).join("|")})`, "g");
+  return quote.split(pattern).map((part, i) => {
+    if (part === firstName) {
+      return (
+        <span key={i} className="font-semibold text-accent">
+          {part}
+        </span>
+      );
+    }
+    if (part === company) {
+      return (
+        <strong key={i} className="font-semibold text-ink">
+          {part}
+        </strong>
+      );
+    }
+    return part;
+  });
 }
 
 export default function Testimonials({
@@ -87,11 +124,40 @@ export default function Testimonials({
     const root = slidesRef.current;
     if (!root || reduce) return;
     const quote = root.querySelectorAll<HTMLElement>("blockquote")[selected];
-    if (!quote) return;
+    const t = testimonials[selected];
+    if (!quote || !t) return;
     gsap.registerPlugin(SplitText);
     let split: SplitText | null = null;
     const ctx = gsap.context(() => {
       split = new SplitText(quote, { type: "words, lines" });
+
+      // SplitText rebuilds the blockquote into plain word-divs, discarding
+      // any nested <span> markup that was there before it ran — so the
+      // name/company highlight has to be re-applied here, after the split,
+      // by matching each word div's own text instead of relying on JSX.
+      const clean = (s: string) => s.replace(/[.,!?;:"']+$/, "").replace(/^[.,!?;:"']+/, "");
+      const firstName = OWNER_FIRST_NAME;
+      const companyWords = t.company ? t.company.split(/\s+/) : [];
+      const words = split.words as HTMLElement[];
+
+      words.forEach((w) => {
+        if (clean(w.textContent ?? "") === firstName) {
+          w.classList.add("font-semibold", "text-accent");
+        }
+      });
+      if (companyWords.length) {
+        for (let i = 0; i <= words.length - companyWords.length; i++) {
+          const slice = words.slice(i, i + companyWords.length);
+          const isMatch = slice.every(
+            (w, j) => clean(w.textContent ?? "") === companyWords[j]
+          );
+          if (isMatch) {
+            slice.forEach((w) => w.classList.add("font-semibold"));
+            break;
+          }
+        }
+      }
+
       gsap.from(split.words, {
         opacity: 0,
         yPercent: 60,
@@ -105,12 +171,12 @@ export default function Testimonials({
       ctx.revert();
       split?.revert();
     };
-  }, [selected, reduce]);
+  }, [selected, reduce, testimonials]);
 
   if (!testimonials.length) return null;
 
   return (
-    <section id="testimonials" className="border-b border-line bg-paper">
+    <section id="testimonials" className="border-b border-line bg-panel">
       <div className="mx-auto max-w-4xl px-6 py-20 sm:py-28">
         <div className="flex items-center justify-between gap-6">
           <div>
@@ -119,17 +185,17 @@ export default function Testimonials({
             </p>
             <h2
               ref={headingRef}
-              className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
+              className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl"
             >
               What people say
             </h2>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               type="button"
               aria-label="Previous"
               onClick={() => embla?.scrollPrev()}
-              className="focus-ring grid h-10 w-10 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
+              className="focus-ring grid h-11 w-11 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
             >
               <Chevron dir="left" />
             </button>
@@ -137,55 +203,57 @@ export default function Testimonials({
               type="button"
               aria-label="Next"
               onClick={() => embla?.scrollNext()}
-              className="focus-ring grid h-10 w-10 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
+              className="focus-ring grid h-11 w-11 place-items-center rounded-full bg-accent text-white transition-opacity hover:opacity-90"
             >
               <Chevron dir="right" />
             </button>
           </div>
         </div>
 
-        <div className="mt-12 overflow-hidden" ref={emblaRef}>
-          <div className="flex items-center" ref={slidesRef}>
-            {testimonials.map((t, i) => (
-              <figure
-                key={i}
-                className="min-w-0 shrink-0 grow-0 basis-full px-1 sm:px-4"
-              >
-                {/* Decorative quote mark */}
-                <svg
-                  viewBox="0 0 48 48"
-                  className="h-12 w-12 text-accent/25"
-                  fill="currentColor"
-                  aria-hidden="true"
+        <div className="mt-10 rounded-2xl border border-line bg-paper p-8 sm:p-12">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex items-start" ref={slidesRef}>
+              {testimonials.map((t, i) => (
+                <figure
+                  key={i}
+                  className="min-w-0 shrink-0 grow-0 basis-full"
                 >
-                  <path d="M18 10c-6 3-10 9-10 17v11h12V26h-7c0-4 2-7 6-9l-1-7zm22 0c-6 3-10 9-10 17v11h12V26h-7c0-4 2-7 6-9l-1-7z" />
-                </svg>
+                  {/* Decorative quote mark */}
+                  <svg
+                    viewBox="0 0 48 48"
+                    className="h-10 w-10 text-accent/30"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M18 10c-6 3-10 9-10 17v11h12V26h-7c0-4 2-7 6-9l-1-7zm22 0c-6 3-10 9-10 17v11h12V26h-7c0-4 2-7 6-9l-1-7z" />
+                  </svg>
 
-                <blockquote className="mt-4 text-lg leading-relaxed text-ink sm:text-xl sm:leading-relaxed">
-                  {t.quote}
-                </blockquote>
+                  <blockquote className="mt-4 font-serif text-lg leading-relaxed text-ink sm:text-xl sm:leading-relaxed">
+                    {renderQuote(t.quote, t.company)}
+                  </blockquote>
 
-                <figcaption className="mt-8 flex items-center gap-4 border-t border-line pt-6">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-accent/40 bg-accent/10 font-display text-sm font-semibold text-accent">
-                    {initials(t.name)}
-                  </span>
-                  <span>
-                    <span className="block font-display text-base font-semibold text-ink">
-                      {t.name}
+                  <figcaption className="mt-8 flex items-center gap-4 border-t border-line pt-6">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-accent/50 font-display text-sm font-semibold text-accent">
+                      {initials(t.name)}
                     </span>
-                    <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-wider text-inkmuted">
-                      {t.role}
-                      {t.company ? ` · ${t.company}` : ""}
+                    <span>
+                      <span className="block font-display text-base font-semibold text-ink">
+                        {t.name}
+                      </span>
+                      <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-wider text-accent">
+                        {t.role}
+                        {t.company ? ` · ${t.company}` : ""}
+                      </span>
                     </span>
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Dots */}
-        <div className="mt-10 flex justify-center gap-2">
+        <div className="mt-8 flex justify-center gap-2">
           {testimonials.map((_, i) => (
             <button
               key={i}

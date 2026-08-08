@@ -1,11 +1,16 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { Mail, Phone } from "lucide-react";
 import { profile as seedProfile } from "@/data/content";
-import SelectionFrame from "./SelectionFrame";
 import Magnetic from "./Magnetic";
 import ShareButton from "./ShareButton";
 import SaveContact from "./SaveContact";
+
+// Sentence-case pill style shared by every link in the row except the
+// gradient "Save contact" CTA — dark, bordered, rounded-full.
+const pill =
+  "focus-ring inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent";
 
 export default function Contact({
   profile = seedProfile,
@@ -22,45 +27,50 @@ export default function Contact({
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="relative overflow-hidden rounded-3xl border border-line bg-paper px-8 py-16 text-center sm:px-16 sm:py-20"
         >
-          <SelectionFrame
-            tag="Frame · Contact"
-            className="border border-line bg-paper px-8 py-14 text-center sm:px-16"
-          >
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+          <div className="contact-card-glow pointer-events-none absolute inset-0" />
+
+          <div className="relative">
+            <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-panel px-3 py-2 font-mono text-[9px] uppercase tracking-[0.08em] text-inkmuted sm:px-4 sm:text-[11px] sm:tracking-[0.15em]">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
               Open to lead product design &amp; UX/CX roles
-            </p>
-            <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
-              Let's design something people actually enjoy using.
+            </span>
+
+            <h2 className="mx-auto mt-6 max-w-2xl font-serif text-4xl leading-[1.1] text-ink sm:text-6xl">
+              Let&apos;s design something people{" "}
+              <em className="bg-gradient-to-r from-sky-400 to-accent bg-clip-text text-transparent not-italic">
+                actually
+              </em>{" "}
+              enjoy using.
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-inkmuted">
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-inkmuted">
               Based in {profile.location}. Available for full-time roles and
               select freelance product work.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Magnetic>
-                <SaveContact variant="solid" />
+                <SaveContact variant="gradient" />
               </Magnetic>
               <Magnetic>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="focus-ring inline-block rounded-sm bg-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-paper transition-colors hover:bg-accent"
-                >
+                <a href={`mailto:${profile.email}`} className={`${pill} bg-ink text-paper hover:text-paper`}>
+                  <Mail className="h-4 w-4" strokeWidth={2} />
                   {profile.email}
                 </a>
               </Magnetic>
-              <a
-                href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-                className="focus-ring rounded-sm border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
-              >
+              <a href={`tel:${profile.phone.replace(/\s+/g, "")}`} className={`${pill} bg-panel`}>
+                <Phone className="h-4 w-4" strokeWidth={2} />
                 {profile.phone}
               </a>
               <a
                 href={`https://wa.me/${profile.phone.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-ring inline-flex items-center gap-2 rounded-sm border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
+                className={pill}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -72,22 +82,25 @@ export default function Contact({
                 </svg>
                 WhatsApp
               </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="focus-ring rounded-sm border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
-              >
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" className={pill}>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+                </svg>
                 LinkedIn
               </a>
               <ShareButton
                 title={`${profile.name} — ${profile.title}`}
                 text={`Portfolio of ${profile.name}`}
-                className="focus-ring inline-flex items-center gap-2 rounded-sm border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
+                className={pill}
               />
             </div>
 
-            <p className="mt-6 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
+            <p className="mt-8 font-mono text-[11px] uppercase tracking-wider text-inkmuted">
               Tap an NFC card?{" "}
               <a
                 href="/card"
@@ -96,12 +109,13 @@ export default function Contact({
                 Open the tap-to-connect card →
               </a>
             </p>
-          </SelectionFrame>
+          </div>
         </motion.div>
 
         <footer className="mt-10 flex flex-col items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-inkmuted sm:flex-row">
           <span>
-            © {new Date().getFullYear()} {profile.name}
+            © {new Date().getFullYear()} {profile.name} · Product Designer
+            based in Dubai, UAE
           </span>
           <span>Built with Next.js &amp; Tailwind CSS</span>
         </footer>

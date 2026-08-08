@@ -45,8 +45,20 @@ function makeStars(): Star[] {
  * entry and out on leave. The glow and stars only paint in dark mode — they
  * don't read against the light-theme paper, where the photo is also dialled
  * down to a faint tint. Drop as the first child of any `relative` section.
+ *
+ * `parallax` swaps the backdrop from "absolute, stretched to the full
+ * section" to "sticky, pinned at one viewport tall" — for sections much
+ * taller than 100vh, the stretched version forces `background-size: cover`
+ * to zoom the photo to cover the whole (huge) height, which reads as a
+ * blown-up, stretched image. Pinning it at viewport height instead keeps
+ * the photo at its natural scale and lets it drift past as a proper
+ * parallax backdrop while the section scrolls.
  */
-export default function NebulaBackground() {
+export default function NebulaBackground({
+  parallax = false,
+}: {
+  parallax?: boolean;
+} = {}) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const layerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -202,7 +214,11 @@ export default function NebulaBackground() {
     <div
       ref={wrapRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className={
+        parallax
+          ? "pointer-events-none sticky top-0 -mb-[100vh] h-screen overflow-hidden"
+          : "pointer-events-none absolute inset-0 overflow-hidden"
+      }
     >
       <div ref={layerRef} className="absolute inset-0 will-change-transform">
         <div className="nebula-photo" />

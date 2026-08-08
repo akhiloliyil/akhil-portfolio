@@ -711,6 +711,7 @@ export const testimonials: Testimonial[] = [
       "I had the pleasure of working with Akhil at Danube Home, where he consistently demonstrated exceptional skills as a UI/UX Designer, Web Designer, and Front-End Developer. He has a keen eye for design and a deep understanding of user experience principles, which he seamlessly integrates into his work. His ability to create visually appealing and user-friendly interfaces is truly impressive — and he ensures his designs are not only beautiful but also functional and responsive. His attention to detail and commitment to high-quality work make him an invaluable asset to any team.",
     name: "Naveen Varma",
     role: "D2C & Ecommerce Platform Strategist",
+    company: "Danube Home",
   },
   {
     quote:
