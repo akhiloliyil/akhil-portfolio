@@ -87,7 +87,7 @@ export default function NebulaBackground() {
     let glowTargetOpacity = 0;
 
     const resize = () => {
-      const rect = section.getBoundingClientRect();
+      const rect = wrap.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
       canvas.width = width * dpr;
@@ -147,7 +147,7 @@ export default function NebulaBackground() {
 
     const onMove = (e: PointerEvent) => {
       if (reduce) return;
-      const rect = section.getBoundingClientRect();
+      const rect = wrap.getBoundingClientRect();
       const px = e.clientX - rect.left;
       const py = e.clientY - rect.top;
       targetX = (px / rect.width - 0.5) * MAX_PARALLAX * 2;
@@ -163,7 +163,7 @@ export default function NebulaBackground() {
     };
 
     const ro = new ResizeObserver(resize);
-    ro.observe(section);
+    ro.observe(wrap);
     resize();
 
     const mo = new MutationObserver(() => {

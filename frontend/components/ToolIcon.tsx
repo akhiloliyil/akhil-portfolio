@@ -157,31 +157,43 @@ function tint(tone: string, alpha: number) {
 export function ToolIcon({
   name,
   size = 28,
+  variant = "chip",
 }: {
   name: string;
   size?: number;
+  variant?: "chip" | "glow";
 }) {
   const visual = VISUALS[name] ?? FALLBACK(name);
-  const background = tint(visual.tone, 0.14);
+  const isGlow = variant === "glow";
+  const background = isGlow ? "#0c0f18" : tint(visual.tone, 0.14);
+  const glowRing = tint(visual.tone, 0.5);
+  const glowHalo = tint(visual.tone, 0.35);
 
   return (
     <span
       aria-hidden
-      className="inline-flex shrink-0 items-center justify-center rounded-xl border border-line"
+      className={
+        isGlow
+          ? "inline-flex shrink-0 items-center justify-center rounded-2xl"
+          : "inline-flex shrink-0 items-center justify-center rounded-xl border border-line"
+      }
       style={{
         width: size,
         height: size,
         background,
+        boxShadow: isGlow
+          ? `0 0 0 1px ${glowRing}, 0 0 ${size * 0.6}px ${glowHalo}`
+          : undefined,
       }}
     >
       {visual.kind === "icon" ? (
         <visual.Icon
-          style={{ color: visual.tone, width: size * 0.58, height: size * 0.58 }}
+          style={{ color: visual.tone, width: size * 0.5, height: size * 0.5 }}
         />
       ) : (
         <span
           className="font-mono font-semibold leading-none"
-          style={{ color: visual.tone, fontSize: size * 0.4 }}
+          style={{ color: visual.tone, fontSize: size * 0.35 }}
         >
           {visual.label}
         </span>
