@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { profile, testimonials as seedTestimonials } from "@/data/content";
+import NebulaBackground from "./NebulaBackground";
 
 // The name mentioned *inside* the quotes (they're testimony about Akhil,
 // not by him) — highlighted wherever it appears in the quote text.
@@ -176,8 +177,8 @@ export default function Testimonials({
   if (!testimonials.length) return null;
 
   return (
-    <section id="testimonials" className="border-b border-line bg-panel">
-      <div className="mx-auto max-w-4xl px-6 py-20 sm:py-28">
+    <section id="testimonials" className="relative border-b border-line bg-[#050508]">
+      <div className="relative mx-auto max-w-4xl px-6 py-20 sm:py-28">
         <div className="flex items-center justify-between gap-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">

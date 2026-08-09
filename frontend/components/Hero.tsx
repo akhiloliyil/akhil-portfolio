@@ -110,6 +110,41 @@ export default function Hero({
     };
   }, []);
 
+  // "Lead Product Designer · UI/UX & CX · Design Systems" — first clause
+  // reads as the eyebrow, the rest as the supporting line under the name.
+  const [titleFirst, ...titleRestParts] = profile.title
+    .split("·")
+    .map((s) => s.trim());
+  const titleRest = titleRestParts.join(" • ");
+
+  // profile.focus mixes single tags ("Design Systems") with "·"-joined
+  // lists ("React · Next.js · React Native") — flatten to one tag per pill,
+  // deduping repeats (the sectors list happens to end by repeating "Design
+  // Systems"). The first two tags and the last one get an accent treatment;
+  // the long tools/sectors lists in between stay neutral.
+  const focusPills = (() => {
+    const seen = new Set<string>();
+    const pills: { label: string; tone: "highlight" | "emphasis" | "neutral" }[] = [];
+    profile.focus.forEach((entry, i) => {
+      const isFirst = i <= 1;
+      const isLast = i === profile.focus.length - 1;
+      entry
+        .split("·")
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .forEach((label) => {
+          const key = label.toLowerCase();
+          if (seen.has(key)) return;
+          seen.add(key);
+          pills.push({
+            label,
+            tone: isFirst ? "highlight" : isLast ? "emphasis" : "neutral",
+          });
+        });
+    });
+    return pills;
+  })();
+
   const cardFrame = (
     <SelectionFrame
       tag={`AKHIL.UI · ${profile.location}`}
@@ -233,53 +268,78 @@ export default function Hero({
         </span>
       </motion.div>
 
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-12 pb-14 sm:pt-0 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-12 pb-14 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            Portfolio — Dubai, UAE
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
+            {titleFirst}
           </p>
           <h1
             ref={headlineRef}
-            className="mt-3 overflow-hidden font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl"
+            className="mt-3 overflow-hidden font-display text-5xl font-bold leading-[1.02] tracking-tight text-ink sm:text-7xl"
           >
             {profile.name}
           </h1>
-          <p className="mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted">
-            {profile.title}
-          </p>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-inkmuted sm:text-lg">
+          {titleRest && (
+            <p className="mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted">
+              {titleRest}
+            </p>
+          )}
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-inkmuted sm:text-lg">
             {profile.blurb}
           </p>
 
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {profile.focus.map((f) => (
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {focusPills.map((f) => (
               <li
-                key={f}
-                className="rounded-sm border border-line bg-panel px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted"
+                key={f.label}
+                className={
+                  f.tone === "highlight"
+                    ? "rounded-full border border-accent/40 px-3 py-1.5 text-sm font-medium text-accent"
+                    : f.tone === "emphasis"
+                      ? "rounded-full border border-accent/40 px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-accent"
+                      : "rounded-full border border-line bg-panel px-3 py-1.5 text-sm text-ink"
+                }
               >
-                {f}
+                {f.label}
               </li>
             ))}
           </ul>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             <Magnetic>
               <a
                 href="#work"
-                className="focus-ring inline-block rounded-sm bg-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-paper transition-colors hover:bg-accent"
+                className="focus-ring inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,rgb(var(--accent)),#4f7cff)] px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] transition-[filter] hover:brightness-110"
               >
                 View selected work
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
               </a>
             </Magnetic>
             <Magnetic>
-              <SaveContact variant="solid" />
+              <SaveContact variant="pill" />
             </Magnetic>
-            <a
-              href={`mailto:${profile.email}`}
-              className="focus-ring rounded-sm border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-accent hover:text-accent"
-            >
-              {profile.email}
-            </a>
+            <div className="font-mono text-xs">
+              <span className="block uppercase tracking-wider text-inkmuted">
+                Direct line
+              </span>
+              <a
+                href={`mailto:${profile.email}`}
+                className="text-accent underline-offset-4 hover:underline"
+              >
+                {profile.email}
+              </a>
+            </div>
             <ResumeButton />
           </div>
         </div>
@@ -331,21 +391,24 @@ export default function Hero({
             </motion.div>
           </motion.div>
         </div>
+      </div>
 
-        <dl className="relative grid grid-cols-3 gap-4 overflow-hidden rounded-2xl border border-white/10 bg-black/35 px-6 py-5 text-center shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)] backdrop-blur-xl sm:px-8 sm:py-6 lg:col-span-2">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent"
-          />
-          {stats.map((stat) => {
+      <div className="relative border-t border-white/10 bg-[#0a0a12]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
+        />
+        <dl className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-white/10 px-6 py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
+          {stats.map((stat, i) => {
             const s = parseStat(stat.value);
             return (
-              <div key={stat.label} className="relative">
-                <dt className="font-display text-2xl font-bold text-white sm:text-3xl">
+              <div
+                key={stat.label}
+                className={`relative py-6 text-center first:pt-0 last:pb-0 sm:py-0 sm:text-left ${
+                  i > 0 ? "sm:pl-8" : ""
+                } ${i < stats.length - 1 ? "sm:pr-8" : ""}`}
+              >
+                <dt className="font-display text-5xl font-extrabold leading-none text-white sm:text-6xl">
                   {s.numeric ? (
                     <>
                       {s.prefix}
@@ -356,7 +419,7 @@ export default function Hero({
                     stat.value
                   )}
                 </dt>
-                <dd className="mt-1 text-xs capitalize leading-snug text-white/60 sm:text-sm">
+                <dd className="mt-3 text-sm font-medium capitalize leading-snug text-white/80 sm:text-base">
                   {stat.label}
                 </dd>
               </div>

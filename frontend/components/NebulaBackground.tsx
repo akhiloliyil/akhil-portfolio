@@ -221,7 +221,7 @@ export default function NebulaBackground({
       }
     >
       <div ref={layerRef} className="absolute inset-0 will-change-transform">
-        <div className="nebula-photo" />
+        {/* <div className="nebula-photo" /> */}
         <canvas ref={canvasRef} className="nebula-stars" />
       </div>
     </div>

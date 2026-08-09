@@ -59,7 +59,7 @@ body {
    on top, twinkling and parallaxing toward the cursor (dark theme only —
    white dots don't read on light paper, and the photo itself is dialled
    down there to stay out of the way of the clean paper look). */
-.nebula-photo {
+/* .nebula-photo {
   position: absolute;
   inset: -6%;
   background-image: url("/images/Space-Background-Images.jpg");
@@ -68,7 +68,7 @@ body {
   opacity: 0.05;
   filter: saturate(0.5) brightness(1.6);
   animation: nebula-pan 60s ease-in-out infinite alternate;
-}
+} */
 .dark .nebula-photo {
   opacity: 0.15;
   filter: none;
@@ -202,6 +202,7 @@ body {
     transform: translate(-50%, -50%) translateY(-10px);
   }
 }
+
 
 /* Selected Work — desktop horizontal pinned scroll. The `work-horizontal`
    class is added by JS only on large screens with motion allowed; otherwise

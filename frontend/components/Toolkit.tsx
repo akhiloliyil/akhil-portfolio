@@ -30,20 +30,9 @@ export default function Toolkit({
   return (
     <section id="toolkit" className="relative border-b border-line">
       {/* No overflow-hidden here — it would clip the containing block and
-          silently break the sticky icon orbit below. NebulaBackground and
-          the glow layer both self-contain via absolute inset-0 / sticky. */}
+          silently break the sticky icon orbit below. NebulaBackground
+          self-contains via absolute inset-0 / sticky. */}
       <NebulaBackground parallax />
-      {/* Violet/blue glow, dark theme only — the icon orbit and gradient
-          headline read as washed-out without it, but it's too loud to show
-          against the light-theme paper. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 hidden dark:block"
-        style={{
-          background:
-            "radial-gradient(circle at 18% 30%, rgb(124 58 237 / 0.28), transparent 55%), radial-gradient(circle at 82% 70%, rgb(var(--accent) / 0.22), transparent 55%)",
-        }}
-      />
       <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>

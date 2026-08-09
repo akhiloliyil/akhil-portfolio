@@ -14,20 +14,11 @@ import { getContent } from "@/lib/content-store";
 // Read the editable content fresh each request so admin edits show immediately.
 export const dynamic = "force-dynamic";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
+export default async function Home() {
   const c = await getContent();
-  const sp = await searchParams;
-  // Résumé view: the URL carries a `resume` hint (e.g. ?resume).
-  const resumeView = JSON.stringify(sp).toLowerCase().includes("resume");
 
   const enabled = new Set(c.sections.filter((s) => s.enabled).map((s) => s.id));
-  // Experience is résumé-only — hidden normally, shown only with ?resume.
-  const on = (id: string) =>
-    enabled.has(id) && (id !== "experience" || resumeView);
+  const on = (id: string) => enabled.has(id);
   const navLinks = c.sections
     .filter((s) => on(s.id))
     .map((s) => ({ href: `#${s.id}`, label: s.label }));

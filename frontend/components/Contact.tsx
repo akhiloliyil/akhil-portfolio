@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { Mail, Phone } from "lucide-react";
 import { profile as seedProfile } from "@/data/content";
 import Magnetic from "./Magnetic";
+import NebulaBackground from "./NebulaBackground";
 import ShareButton from "./ShareButton";
 import SaveContact from "./SaveContact";
 
@@ -20,8 +21,8 @@ export default function Contact({
   const reduce = useReducedMotion();
 
   return (
-    <section id="contact" className="bg-panel">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <section id="contact" className="relative  bg-[#050508]">
+      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
         <motion.div
           initial={reduce ? undefined : { opacity: 0, y: 24 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}

@@ -9,12 +9,13 @@
  *   "solid"    — filled accent button (primary CTA)
  *   "outline"  — bordered button that matches the Contact-section links
  *   "gradient" — rounded violet→blue pill, the Contact-section hero CTA
+ *   "pill"     — bordered rounded-full pill with a download icon, the Hero CTA
  */
 export default function SaveContact({
   variant = "outline",
   className = "",
 }: {
-  variant?: "solid" | "outline" | "gradient";
+  variant?: "solid" | "outline" | "gradient" | "pill";
   className?: string;
 }) {
   const base =
@@ -23,8 +24,10 @@ export default function SaveContact({
     variant === "gradient"
       ? "rounded-full px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] bg-[linear-gradient(135deg,rgb(var(--accent)),#4f7cff)] hover:brightness-110"
       : variant === "solid"
-        ? "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider bg-accent text-white hover:bg-ink"
-        : "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider border border-ink text-ink hover:border-accent hover:text-accent";
+        ? "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider bg-accent text-white hover:bg-panel"
+        : variant === "pill"
+          ? "rounded-full px-5 py-3 font-mono text-xs uppercase tracking-wider border border-line bg-panel text-ink hover:border-accent hover:text-accent"
+          : "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider border border-ink text-ink hover:border-accent hover:text-accent";
 
   return (
     <a
@@ -43,6 +46,19 @@ export default function SaveContact({
           aria-hidden="true"
         >
           <path d="M12 5v14M5 12h14" />
+        </svg>
+      ) : variant === "pill" ? (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
         </svg>
       ) : (
         <svg

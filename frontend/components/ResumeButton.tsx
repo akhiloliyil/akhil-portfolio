@@ -20,7 +20,7 @@ export default function ResumeButton() {
     <a
       href="/api/resume"
       download="Akhil-Kumar-Resume.pdf"
-      className="focus-ring inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-3 font-mono text-xs uppercase tracking-wider text-white transition-colors hover:bg-ink"
+      className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-mono text-xs uppercase tracking-wider text-white transition-colors hover:bg-panel"
     >
       <svg
         viewBox="0 0 24 24"
