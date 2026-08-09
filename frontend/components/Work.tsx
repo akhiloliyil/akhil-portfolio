@@ -274,7 +274,7 @@ export default function Work({
   }, []);
 
   return (
-    <section id="work" ref={rootRef} className="relative border-b border-white/[0.07] bg-[#050508] text-white">
+    <section id="work" ref={rootRef} className="relative border-b border-line bg-paper text-ink">
       <div className="work-inner py-20 sm:py-28">
         <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-4 border-b border-line px-6 pb-6">
           <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">

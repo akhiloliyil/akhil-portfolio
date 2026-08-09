@@ -84,7 +84,7 @@ export default function DesignProcess({
       className="
         relative
         overflow-visible
-        bg-[#070a10]
+        bg-paper
         py-24
         lg:py-32
       "
@@ -112,7 +112,7 @@ export default function DesignProcess({
             h-[700px]
             w-[700px]
             rounded-full
-            bg-[radial-gradient(circle,rgba(126,34,206,0.24)_0%,rgba(88,28,135,0.12)_35%,transparent_72%)]
+            bg-[radial-gradient(circle,rgb(var(--accent)/0.16)_0%,rgb(var(--accent)/0.07)_35%,transparent_72%)]
             blur-[30px]
           "
         />
@@ -126,7 +126,7 @@ export default function DesignProcess({
             h-[800px]
             w-[800px]
             rounded-full
-            bg-[radial-gradient(circle,rgba(14,55,125,0.25)_0%,rgba(15,23,42,0.12)_40%,transparent_72%)]
+            bg-[radial-gradient(circle,rgb(var(--accent)/0.12)_0%,rgb(var(--accent)/0.05)_40%,transparent_72%)]
             blur-[40px]
           "
         />
@@ -142,7 +142,7 @@ export default function DesignProcess({
             -translate-x-1/2
             -translate-y-1/2
             rounded-full
-            bg-[radial-gradient(circle,rgba(34,211,238,0.025),transparent_70%)]
+            bg-[radial-gradient(circle,rgb(var(--accent)/0.05),transparent_70%)]
           "
         />
       </div>
@@ -225,15 +225,15 @@ export default function DesignProcess({
                   items-center
                   rounded-full
                   border
-                  border-cyan-400/20
-                  bg-cyan-400/[0.04]
+                  border-accent/20
+                  bg-accent/[0.06]
                   px-4
                   py-1.5
                   text-[11px]
                   font-semibold
                   uppercase
                   tracking-[0.02em]
-                  text-cyan-400
+                  text-accent
                 "
               >
                 Design Process
@@ -243,14 +243,14 @@ export default function DesignProcess({
 
               <h2
                 className="
-                  max-w-[430px]
                   font-display
                   text-[48px]
                   font-semibold
                   leading-[0.98]
                   tracking-[-0.045em]
-                  text-[#f7f7fa]
+                  text-ink
                   sm:text-[56px]
+                  lg:max-w-[430px]
                   lg:text-[58px]
                   xl:text-[62px]
                 "
@@ -263,11 +263,11 @@ export default function DesignProcess({
               <p
                 className="
                   mt-7
-                  max-w-[440px]
                   text-[15px]
                   leading-[1.7]
-                  text-[#9498aa]
+                  text-inkmuted
                   sm:text-[16px]
+                  lg:max-w-[440px]
                 "
               >
                 A repeatable, outcome-focused process that connects
@@ -286,8 +286,8 @@ export default function DesignProcess({
                   gap-4
                   rounded-[14px]
                   border
-                  border-white/[0.08]
-                  bg-white/[0.015]
+                  border-line
+                  bg-panel
                   px-5
                   py-4
                   shadow-[0_20px_60px_rgba(0,0,0,0.2)]
@@ -334,7 +334,7 @@ export default function DesignProcess({
                   className="
                     text-[13px]
                     font-medium
-                    text-[#e7e8ed]
+                    text-ink
                   "
                 >
                   Currently accepting projects for Q2 2025
@@ -370,7 +370,7 @@ export default function DesignProcess({
                   top-0
                   h-full
                   w-px
-                  bg-[#123344]
+                  bg-line
                 "
               />
 
@@ -389,8 +389,8 @@ export default function DesignProcess({
                     h-full
                     w-px
                     origin-top
-                    bg-cyan-400
-                    shadow-[0_0_12px_rgba(34,211,238,0.65)]
+                    bg-accent
+                    shadow-[0_0_12px_rgba(139,92,246,0.65)]
                   "
                   style={{
                     scaleY: scrollYProgress,
@@ -460,13 +460,13 @@ export default function DesignProcess({
                           place-items-center
                           rounded-full
                           border
-                          border-cyan-400/40
-                          bg-[#070a10]
+                          border-accent/40
+                          bg-paper
                           text-[15px]
                           font-semibold
                           tracking-[-0.02em]
-                          text-cyan-400
-                          shadow-[0_0_20px_rgba(34,211,238,0.08)]
+                          text-accent
+                          shadow-[0_0_20px_rgba(139,92,246,0.15)]
                         "
                       >
                         {String(index + 1).padStart(2, "0")}
@@ -483,15 +483,14 @@ export default function DesignProcess({
                         min-w-0
                         rounded-[22px]
                         border
-                        border-[#1a2132]
-                        bg-[linear-gradient(135deg,rgba(15,17,27,0.96),rgba(9,12,22,0.96))]
+                        border-line
+                        bg-panel
                         p-7
-                        shadow-[0_20px_60px_rgba(0,0,0,0.18)]
+                        shadow-[0_20px_60px_rgba(0,0,0,0.06)]
                         transition-all
                         duration-300
-                        hover:border-cyan-400/20
-                        hover:bg-[linear-gradient(135deg,rgba(18,21,33,0.98),rgba(10,14,25,0.98))]
-                        hover:shadow-[0_25px_70px_rgba(0,0,0,0.28)]
+                        hover:border-accent/30
+                        hover:shadow-[0_25px_70px_rgba(0,0,0,0.1)]
                         sm:p-7
                         lg:min-h-[230px]
                         lg:p-8
@@ -514,7 +513,7 @@ export default function DesignProcess({
                             font-semibold
                             leading-tight
                             tracking-[-0.025em]
-                            text-[#f3f4f8]
+                            text-ink
                             sm:text-[21px]
                           "
                         >
@@ -531,8 +530,8 @@ export default function DesignProcess({
                             shrink-0
                             place-items-center
                             rounded-[10px]
-                            bg-white/[0.045]
-                            text-[#8992a7]
+                            bg-panel
+                            text-inkmuted
                           "
                         >
                           <Icon
@@ -550,7 +549,7 @@ export default function DesignProcess({
                           max-w-[690px]
                           text-[14px]
                           leading-[1.65]
-                          text-[#969daf]
+                          text-inkmuted
                           sm:text-[15px]
                         "
                       >
@@ -575,14 +574,14 @@ export default function DesignProcess({
                               items-center
                               rounded-full
                               border
-                              border-white/[0.07]
-                              bg-white/[0.035]
+                              border-line
+                              bg-panel
                               px-3
                               py-1.5
                               text-[11px]
                               font-medium
                               leading-none
-                              text-[#969dad]
+                              text-inkmuted
                             "
                           >
                             {tag}

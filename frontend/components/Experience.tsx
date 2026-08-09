@@ -112,7 +112,7 @@ function ExperienceItem({
 
         ${
           index !== total - 1
-            ? "border-b border-[#272433]"
+            ? "border-b border-line"
             : ""
         }
       `}
@@ -128,7 +128,7 @@ function ExperienceItem({
             text-[18px]
             font-semibold
             tracking-[-0.02em]
-            text-[#00c7e8]
+            text-accent
 
             sm:text-[19px]
           "
@@ -161,7 +161,7 @@ function ExperienceItem({
             h-[13px]
             w-[13px]
             rounded-full
-            bg-[#9b5cff]
+            bg-accent
           "
         />
       </div>
@@ -183,7 +183,7 @@ function ExperienceItem({
               font-semibold
               leading-tight
               tracking-[-0.025em]
-              text-white
+              text-ink
 
               sm:text-[25px]
             "
@@ -197,7 +197,7 @@ function ExperienceItem({
                 font-display
                 text-[18px]
                 font-normal
-                text-[#9da0b7]
+                text-inkmuted
 
                 sm:text-[19px]
               "
@@ -220,7 +220,7 @@ function ExperienceItem({
               font-display
               text-[15px]
               leading-[1.65]
-              text-[#9da0b7]
+              text-inkmuted
 
               sm:text-[16px]
               lg:text-[17px]
@@ -255,18 +255,18 @@ function ExperienceItem({
                   uppercase
                   tracking-[0.14em]
 
-                  text-[#00c7e8]
+                  text-accent
 
                   transition-colors
                   duration-300
 
-                  hover:text-white
+                  hover:text-ink
 
                   focus:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-[#9b5cff]
+                  focus-visible:ring-accent
                   focus-visible:ring-offset-4
-                  focus-visible:ring-offset-[#0a0a10]
+                  focus-visible:ring-offset-paper
                 "
               >
                 <span>View more</span>
@@ -381,7 +381,7 @@ function ExperienceItem({
 
                           text-[14px]
                           leading-[1.7]
-                          text-[#9da0b7]
+                          text-inkmuted
 
                           sm:text-[15px]
                         "
@@ -394,7 +394,7 @@ function ExperienceItem({
                             w-1.5
                             shrink-0
                             rounded-full
-                            bg-[#9b5cff]
+                            bg-accent
                           "
                         />
 
@@ -420,7 +420,7 @@ function ExperienceItem({
               text-[10px]
               uppercase
               tracking-[0.12em]
-              text-[#6f7287]
+              text-inkmuted
             "
           >
             {role.location}
@@ -445,7 +445,7 @@ export default function Experience({
   const reduce = useReducedMotion();
 
   return (
-    <section className="bg-[#050509] py-24 sm:py-32">
+    <section className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
 
         {/* ===================================================
@@ -483,7 +483,7 @@ export default function Experience({
             font-semibold
             leading-[1.05]
             tracking-[-0.04em]
-            text-white
+            text-ink
 
             sm:text-[52px]
             lg:text-[58px]
@@ -528,9 +528,9 @@ export default function Experience({
             rounded-[28px]
 
             border
-            border-[#272433]
+            border-line
 
-            bg-[#0a0a10]
+            bg-panel
 
             px-7
             py-8
@@ -596,7 +596,7 @@ export default function Experience({
                 text-[11px]
                 uppercase
                 tracking-[0.16em]
-                text-[#77798d]
+                text-inkmuted
               "
             >
               Education
@@ -612,7 +612,7 @@ export default function Experience({
                       font-display
                       text-[18px]
                       font-semibold
-                      text-white
+                      text-ink
                     "
                   >
                     {item.degree}
@@ -622,7 +622,7 @@ export default function Experience({
                     className="
                       mt-2
                       text-[15px]
-                      text-[#9da0b7]
+                      text-inkmuted
                     "
                   >
                     {item.school}
@@ -635,7 +635,7 @@ export default function Experience({
                       text-[10px]
                       uppercase
                       tracking-[0.12em]
-                      text-[#77798d]
+                      text-inkmuted
                     "
                   >
                     {item.period}

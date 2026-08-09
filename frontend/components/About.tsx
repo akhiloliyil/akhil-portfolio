@@ -106,10 +106,10 @@ export default function About({
       className="
         relative
         overflow-hidden
-        bg-[#050508]
+        bg-paper
         py-24
-        text-white
-        md:py-32
+        text-ink
+        lg:py-32
       "
     >
       {/* =====================================================
@@ -134,7 +134,7 @@ export default function About({
             h-[850px]
             w-[850px]
             rounded-full
-            bg-[radial-gradient(circle,rgba(126,34,206,0.24)_0%,rgba(88,28,135,0.12)_35%,transparent_72%)]
+            bg-[radial-gradient(circle,rgb(var(--accent)/0.16)_0%,rgb(var(--accent)/0.07)_35%,transparent_72%)]
             blur-[30px]
           "
         />
@@ -148,12 +148,12 @@ export default function About({
             h-[850px]
             w-[850px]
             rounded-full
-            bg-[radial-gradient(circle,rgba(14,55,125,0.25)_0%,rgba(15,23,42,0.12)_40%,transparent_72%)]
+            bg-[radial-gradient(circle,rgb(var(--accent)/0.12)_0%,rgb(var(--accent)/0.05)_40%,transparent_72%)]
             blur-[40px]
           "
         />
 
-        {/* Very subtle center cyan glow */}
+        {/* Very subtle center glow */}
         <div
           className="
             absolute
@@ -164,7 +164,7 @@ export default function About({
             -translate-x-1/2
             -translate-y-1/2
             rounded-full
-            bg-[radial-gradient(circle,rgba(34,211,238,0.025),transparent_70%)]
+            bg-[radial-gradient(circle,rgb(var(--accent)/0.05),transparent_70%)]
           "
         />
       </div>
@@ -201,15 +201,15 @@ export default function About({
               items-center
               rounded-full
               border
-              border-cyan-400/20
-              bg-cyan-400/[0.03]
+              border-accent/20
+              bg-accent/[0.06]
               px-4
               py-2
               text-[11px]
               font-semibold
               uppercase
               tracking-[0.02em]
-              text-cyan-400
+              text-accent
             "
           >
             About & Philosophy
@@ -237,14 +237,14 @@ export default function About({
             <motion.h2
               {...fadeUp}
               className="
-                max-w-2xl
                 font-display
                 text-4xl
                 font-semibold
                 leading-[1.05]
                 tracking-[-0.04em]
-                text-[#f7f7fa]
+                text-ink
                 sm:text-5xl
+                lg:max-w-2xl
                 lg:text-[52px]
               "
             >
@@ -255,8 +255,8 @@ export default function About({
                   <span
                     className="
                       bg-gradient-to-r
-                      from-cyan-400
-                      to-[#8b5cf6]
+                      from-sky-400
+                      to-accent
                       bg-clip-text
                       text-transparent
                     "
@@ -279,10 +279,10 @@ export default function About({
                 <p
                   key={p.slice(0, 24)}
                   className="
-                    max-w-xl
                     text-base
                     leading-[1.75]
-                    text-[#9698aa]
+                    text-inkmuted
+                    lg:max-w-xl
                   "
                 >
                   {p}
@@ -300,8 +300,8 @@ export default function About({
             className="
               rounded-[22px]
               border
-              border-[#1a2132]
-              bg-[linear-gradient(135deg,rgba(15,17,27,0.96),rgba(9,12,22,0.96))]
+              border-line
+              bg-panel
               p-7
               shadow-[0_20px_60px_rgba(0,0,0,0.22)]
               sm:p-8
@@ -313,7 +313,7 @@ export default function About({
                 text-[11px]
                 uppercase
                 tracking-[0.08em]
-                text-cyan-400
+                text-accent
               "
             >
               Commitment to quality
@@ -326,7 +326,7 @@ export default function About({
                 text-2xl
                 font-semibold
                 tracking-[-0.025em]
-                text-[#f3f4f8]
+                text-ink
               "
             >
               What I Deliver
@@ -336,7 +336,7 @@ export default function About({
               className="
                 mt-5
                 border-t
-                border-white/[0.07]
+                border-line
               "
             />
 
@@ -372,15 +372,15 @@ export default function About({
                         justify-center
                         rounded-xl
                         border
-                        border-cyan-400/15
-                        bg-cyan-400/[0.05]
+                        border-accent/15
+                        bg-accent/10
                       "
                     >
                       <Icon
                         className="
                           h-5
                           w-5
-                          text-cyan-400
+                          text-accent
                         "
                         strokeWidth={1.8}
                       />
@@ -393,7 +393,7 @@ export default function About({
                           font-display
                           text-base
                           font-semibold
-                          text-[#f0f1f5]
+                          text-ink
                         "
                       >
                         {meta?.title ?? d}
@@ -404,7 +404,7 @@ export default function About({
                           mt-1
                           text-sm
                           leading-[1.65]
-                          text-[#969daf]
+                          text-inkmuted
                         "
                       >
                         {d}
@@ -426,7 +426,7 @@ export default function About({
           className="
             mt-16
             border-t
-            border-white/[0.07]
+            border-line
             pt-10
           "
         >
@@ -436,7 +436,7 @@ export default function About({
               text-[11px]
               uppercase
               tracking-[0.08em]
-              text-[#8e94a6]
+              text-inkmuted
             "
           >
             Core Expertise
@@ -459,7 +459,7 @@ export default function About({
                     text-[11px]
                     uppercase
                     tracking-[0.08em]
-                    text-cyan-400
+                    text-accent
                   "
                 >
                   {group.group}
@@ -487,15 +487,15 @@ export default function About({
                         cursor-default
                         rounded-full
                         border
-                        border-white/[0.07]
-                        bg-white/[0.035]
+                        border-line
+                        bg-panel
                         px-3
                         py-1.5
                         text-sm
-                        text-[#969daf]
+                        text-inkmuted
                         transition-colors
-                        hover:border-cyan-400/30
-                        hover:text-cyan-300
+                        hover:border-accent/40
+                        hover:text-accent
                       "
                     >
                       {it}

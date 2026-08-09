@@ -177,7 +177,7 @@ export default function Testimonials({
   if (!testimonials.length) return null;
 
   return (
-    <section id="testimonials" className="relative border-b border-line bg-[#050508]">
+    <section id="testimonials" className="relative border-b border-line bg-paper">
       <div className="relative mx-auto max-w-4xl px-6 py-20 sm:py-28">
         <div className="flex items-center justify-between gap-6">
           <div>

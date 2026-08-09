@@ -189,6 +189,27 @@ export default function Hero({
     </SelectionFrame>
   );
 
+  // Plain circular portrait, no frame/handles/skeleton — used below `lg`
+  // instead of cardFrame, which is too busy for the tighter tablet/mobile
+  // layout. Gradient ring echoes the site's accent without needing the
+  // full card treatment.
+  const portraitCircle = (
+    <div className="relative h-28 w-28 shrink-0 rounded-full bg-gradient-to-br from-sky-400 to-accent p-[3px] shadow-[0_8px_40px_-12px_rgb(var(--accent)/0.6)] sm:h-[280px] sm:w-[280px]">
+      <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-paper bg-paper font-display text-2xl font-semibold text-accent">
+        {portraitOk ? (
+          <img
+            src={PROFILE_IMAGE}
+            alt={`${profile.name} portrait`}
+            className="h-full w-full object-cover"
+            onError={() => setPortraitOk(false)}
+          />
+        ) : (
+          "AK"
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <section
       id="top"
@@ -268,8 +289,8 @@ export default function Hero({
         </span>
       </motion.div>
 
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 pt-12 pb-14 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-        <div>
+      <div className="relative mx-auto grid max-w-6xl gap-8 px-6 pt-12 pb-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
+        <div className="order-2 sm:order-1">
           <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
             {titleFirst}
           </p>
@@ -345,7 +366,7 @@ export default function Hero({
         </div>
 
         <div
-          className="flex justify-center lg:justify-end"
+          className="order-1 flex justify-center sm:order-2 sm:justify-end lg:justify-end"
           style={{ perspective: 1000 }}
         >
           <motion.div
@@ -355,7 +376,7 @@ export default function Hero({
                 ? undefined
                 : { duration: 7, repeat: Infinity, ease: "easeInOut" }
             }
-            className={`w-full max-w-sm ${
+            className={`w-auto lg:w-full lg:max-w-sm ${
               heroCinematic ? "lg:max-w-none" : ""
             }`}
           >
@@ -372,33 +393,31 @@ export default function Hero({
                     }
               }
             >
-              {heroCinematic ? (
-                <>
-                  {/* Mobile always shows the framed card — the cinematic dust
-                      portrait (and its hover reveal) is desktop-only. */}
-                  <div className="lg:hidden">{cardFrame}</div>
-                  <div className="hidden lg:block">
-                    <CinematicPortrait
-                      src={CINEMATIC_IMAGE}
-                      colorSrc={COLOR_IMAGE || undefined}
-                      alt={`${profile.name} portrait`}
-                    />
-                  </div>
-                </>
-              ) : (
-                cardFrame
-              )}
+              {/* Below `lg` — plain circular portrait, no frame. The full
+                  card/cinematic treatment is desktop-only. */}
+              <div className="lg:hidden">{portraitCircle}</div>
+              <div className="hidden lg:block">
+                {heroCinematic ? (
+                  <CinematicPortrait
+                    src={CINEMATIC_IMAGE}
+                    colorSrc={COLOR_IMAGE || undefined}
+                    alt={`${profile.name} portrait`}
+                  />
+                ) : (
+                  cardFrame
+                )}
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </div>
 
-      <div className="relative border-t border-white/10 bg-[#0a0a12]">
+      <div className="relative border-t border-line bg-panel">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
         />
-        <dl className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-white/10 px-6 py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
+        <dl className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-line px-6 py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
           {stats.map((stat, i) => {
             const s = parseStat(stat.value);
             return (
@@ -408,7 +427,7 @@ export default function Hero({
                   i > 0 ? "sm:pl-8" : ""
                 } ${i < stats.length - 1 ? "sm:pr-8" : ""}`}
               >
-                <dt className="font-display text-5xl font-extrabold leading-none text-white sm:text-6xl">
+                <dt className="font-display text-5xl font-extrabold leading-none text-ink sm:text-6xl">
                   {s.numeric ? (
                     <>
                       {s.prefix}
@@ -419,7 +438,7 @@ export default function Hero({
                     stat.value
                   )}
                 </dt>
-                <dd className="mt-3 text-sm font-medium capitalize leading-snug text-white/80 sm:text-base">
+                <dd className="mt-3 text-sm font-medium capitalize leading-snug text-inkmuted sm:text-base">
                   {stat.label}
                 </dd>
               </div>

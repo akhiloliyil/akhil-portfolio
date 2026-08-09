@@ -28,6 +28,7 @@
 
 /* Smooth the palette swap when toggling themes (but not other transitions). */
 body {
+  min-width: 300px;
   background-color: rgb(var(--paper));
   color: rgb(var(--ink));
   transition: background-color 300ms ease, color 300ms ease;
@@ -209,8 +210,10 @@ body {
    the section stays a normal vertical stack (mobile / reduced-motion). */
 /* Uniform section heights on desktop — every section fills at least the
    viewport, with its content vertically centred. Work is excluded (it pins
-   to 100vh on its own). */
-@media (min-width: 1024px) {
+   to 100vh on its own). Gated to 1280px (not lg's 1024) so tablet landscape
+   isn't stretched to fill a full screen's worth of empty space around
+   content shorter than the viewport — that's what "desktop" here means. */
+@media (min-width: 1280px) {
   main > section:not(#work) {
     min-height: 100vh;
     display: flex;
