@@ -290,7 +290,7 @@ export default function Hero({
       </motion.div>
 
       <div className="relative mx-auto grid max-w-6xl gap-8 px-6 pt-12 pb-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
-        <div className="order-2 sm:order-1">
+        <div className="order-2 text-center sm:order-1 sm:text-left">
           <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
             {titleFirst}
           </p>
@@ -301,15 +301,15 @@ export default function Hero({
             {profile.name}
           </h1>
           {titleRest && (
-            <p className="mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted">
+            <p className="mx-auto mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted sm:mx-0">
               {titleRest}
             </p>
           )}
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-inkmuted sm:text-lg">
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-inkmuted sm:mx-0 sm:text-lg">
             {profile.blurb}
           </p>
 
-          <ul className="mt-5 flex flex-wrap gap-2">
+          <ul className="mt-5 flex flex-wrap justify-center gap-2 sm:justify-start">
             {focusPills.map((f) => (
               <li
                 key={f.label}
@@ -326,7 +326,7 @@ export default function Hero({
             ))}
           </ul>
 
-          <div className="mt-7 flex flex-wrap items-center gap-4">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
             <Magnetic>
               <a
                 href="#work"
