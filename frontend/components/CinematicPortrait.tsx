@@ -44,6 +44,20 @@ export default function CinematicPortrait({
     let raf = 0;
     let hasImg = false;
 
+    // Dust/ring/vignette colours are tuned per theme — light specks read as
+    // stardust on the dark paper, but vanish against the light one, so we
+    // mirror them to dark ink specks there. Tracks the `dark` class the same
+    // way NebulaBackground does.
+    let dark = document.documentElement.classList.contains("dark");
+    const readRGB = (name: string) =>
+      getComputedStyle(document.documentElement)
+        .getPropertyValue(name)
+        .trim()
+        .split(/\s+/)
+        .join(", ");
+    let paperRGB = readRGB("--paper");
+    let inkRGB = readRGB("--ink");
+
     type Dot = { x: number; y: number; b: number; ph: number; amp: number };
     let dots: Dot[] = [];
 
@@ -151,8 +165,12 @@ export default function CinematicPortrait({
         }
         const tw = animate ? 0.5 + 0.5 * Math.sin(time * 2.4 + d.ph * 2.5) : 1;
         const a = Math.min(0.95, (d.b / 255) * 1.05) * tw;
-        const g = Math.min(255, 205 + ((d.b / 255) * 45) | 0);
-        ctx.fillStyle = `rgba(${g},${g},${Math.min(255, g + 6)},${a})`;
+        if (dark) {
+          const g = Math.min(255, 205 + ((d.b / 255) * 45) | 0);
+          ctx.fillStyle = `rgba(${g},${g},${Math.min(255, g + 6)},${a})`;
+        } else {
+          ctx.fillStyle = `rgba(${inkRGB},${a})`;
+        }
         ctx.fillRect(x, y, 1.25, 1.25);
       }
 
@@ -168,7 +186,7 @@ export default function CinematicPortrait({
         // soft inner edge so the reveal blends into the dust
         const vg = ctx.createRadialGradient(m.x, m.y, rr * 0.62, m.x, m.y, rr);
         vg.addColorStop(0, "rgba(0,0,0,0)");
-        vg.addColorStop(1, "rgba(5,6,10,0.9)");
+        vg.addColorStop(1, `rgba(${paperRGB},0.9)`);
         ctx.fillStyle = vg;
         ctx.fillRect(m.x - rr, m.y - rr, rr * 2, rr * 2);
         ctx.restore();
@@ -184,7 +202,9 @@ export default function CinematicPortrait({
           const y = m.y + Math.sin(a) * r;
           const tw = animate ? 0.5 + 0.5 * Math.sin(time * 3 + p.ph * 3) : 1;
           const al = Math.min(0.95, p.b * 0.95 * tw);
-          ctx.fillStyle = `rgba(244,246,252,${al})`;
+          ctx.fillStyle = dark
+            ? `rgba(244,246,252,${al})`
+            : `rgba(${inkRGB},${al})`;
           ctx.fillRect(x, y, p.s, p.s);
         }
 
@@ -234,9 +254,21 @@ export default function CinematicPortrait({
     });
     ro.observe(wrap);
 
+    const mo = new MutationObserver(() => {
+      dark = document.documentElement.classList.contains("dark");
+      paperRGB = readRGB("--paper");
+      inkRGB = readRGB("--ink");
+      if (reduce) render(false);
+    });
+    mo.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      mo.disconnect();
     };
   }, [src, reduce]);
 
@@ -281,7 +313,7 @@ export default function CinematicPortrait({
       )}
 
       <div
-        className={`pointer-events-none absolute inset-x-0 bottom-5 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-white/45 transition-opacity ${
+        className={`pointer-events-none absolute inset-x-0 bottom-5 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-ink/45 transition-opacity ${
           revealed ? "opacity-0" : "opacity-100"
         }`}
       >
