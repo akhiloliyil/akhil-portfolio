@@ -291,7 +291,7 @@ export default function Hero({
 
       <div className="relative mx-auto grid max-w-[1380px] px-6 lg:px-10 xl:px-12 gap-8 pt-12 pb-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
         <div className="order-2 text-center sm:order-1 sm:text-left">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
+          <p className="load-in font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
             {titleFirst}
           </p>
           <h1
@@ -301,15 +301,15 @@ export default function Hero({
             {profile.name}
           </h1>
           {titleRest && (
-            <p className="mx-auto mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted sm:mx-0">
+            <p className="load-in mx-auto mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted sm:mx-0" style={{ "--d": "0.45s" } as React.CSSProperties}>
               {titleRest}
             </p>
           )}
-          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-inkmuted sm:mx-0 sm:text-lg">
+          <p className="load-in mx-auto mt-5 max-w-xl text-base leading-relaxed text-inkmuted sm:mx-0 sm:text-lg" style={{ "--d": "0.55s" } as React.CSSProperties}>
             {profile.blurb}
           </p>
 
-          <ul className="mt-5 flex flex-wrap justify-center gap-2 sm:justify-start">
+          <ul className="load-in mt-5 flex flex-wrap justify-center gap-2 sm:justify-start" style={{ "--d": "0.65s" } as React.CSSProperties}>
             {focusPills.map((f) => (
               <li
                 key={f.label}
@@ -326,7 +326,7 @@ export default function Hero({
             ))}
           </ul>
 
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
+          <div className="load-in mt-7 flex flex-wrap items-center justify-center gap-4 sm:justify-start" style={{ "--d": "0.75s" } as React.CSSProperties}>
             <Magnetic>
               <a
                 href="#work"
@@ -366,8 +366,8 @@ export default function Hero({
         </div>
 
         <div
-          className="order-1 flex justify-center sm:order-2 sm:justify-end lg:justify-end"
-          style={{ perspective: 1000 }}
+          className="load-in order-1 flex justify-center sm:order-2 sm:justify-end lg:justify-end"
+          style={{ perspective: 1000, "--d": "0.25s" } as React.CSSProperties}
         >
           <motion.div
             animate={reduce ? undefined : { y: [0, -12, 0] }}
@@ -417,7 +417,7 @@ export default function Hero({
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
         />
-        <dl className="mx-auto grid max-w-[1380px] px-6 lg:px-10 xl:px-12 grid-cols-1 divide-y divide-line py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
+        <dl style={{ "--d": "0.9s" } as React.CSSProperties} className="load-in mx-auto grid max-w-[1380px] px-6 lg:px-10 xl:px-12 grid-cols-1 divide-y divide-line py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
           {stats.map((stat, i) => {
             const s = parseStat(stat.value);
             return (

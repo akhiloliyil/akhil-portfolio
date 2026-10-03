@@ -10,6 +10,7 @@ import Toolkit from "@/components/Toolkit";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import SmoothScroll from "@/components/SmoothScroll";
+import SectionReveal from "@/components/SectionReveal";
 import { getContent } from "@/lib/content-store";
 
 // Read the editable content fresh each request so admin edits show immediately.
@@ -27,6 +28,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-paper">
       <SmoothScroll />
+      <SectionReveal />
       <Nav links={navLinks} />
       <Hero profile={c.profile} stats={c.stats} />
       {on("about") && <About about={c.about} />}

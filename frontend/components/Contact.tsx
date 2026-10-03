@@ -22,7 +22,7 @@ export default function Contact({
 
   return (
     <section id="contact" className="relative bg-paper">
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
+      <div className="relative mx-auto max-w-[1380px] px-6 py-20 sm:py-28 lg:px-10 xl:px-12">
         <motion.div
           initial={reduce ? undefined : { opacity: 0, y: 24 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}

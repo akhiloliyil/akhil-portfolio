@@ -99,7 +99,7 @@ export default function WorkV2({
         </p>
 
         <div className="mt-6 flex flex-wrap items-end justify-between gap-8">
-          <h2 className="font-display text-[clamp(3.25rem,10vw,9rem)] font-bold leading-[0.9] tracking-[-0.04em] text-ink">
+          <h2 className="font-display text-[clamp(1.75rem,5vw,4.5rem)] font-bold leading-[0.9] tracking-[-0.04em] text-ink">
             Proof, not
             <br />
             promises

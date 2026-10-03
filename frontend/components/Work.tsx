@@ -227,28 +227,30 @@ export default function Work({
   return (
     <section id="industries" ref={rootRef} className="relative border-b border-line bg-paper text-ink">
       <div className="work-inner py-20 sm:py-28">
-        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-4 border-b border-line px-6 pb-6">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-              ( Where I&apos;ve designed )
-            </p>
-            <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Industry experience
-            </h2>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="hidden font-mono text-xs uppercase tracking-wider text-inkmuted sm:block">
-              {industries.length} industries · scroll to explore
-            </span>
-            <a
-              href="#work"
-              className="focus-ring inline-flex items-center gap-1.5 rounded-sm border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:border-accent hover:text-accent"
-            >
-              Skip to work
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M12 5v14M19 12l-7 7-7-7" />
-              </svg>
-            </a>
+        <div className="mx-auto w-full max-w-[1380px] px-6 lg:px-10 xl:px-12">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-6">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+                ( Where I&apos;ve designed )
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                Industry experience
+              </h2>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="hidden font-mono text-xs uppercase tracking-wider text-inkmuted sm:block">
+                {industries.length} industries · scroll to explore
+              </span>
+              <a
+                href="#work"
+                className="focus-ring inline-flex items-center gap-1.5 rounded-sm border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:border-accent hover:text-accent"
+              >
+                Skip to work
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M19 12l-7 7-7-7" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
