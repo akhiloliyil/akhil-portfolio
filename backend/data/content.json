@@ -480,6 +480,7 @@
     {
       "id": "y-vision",
       "category": "web",
+      "resumeTitleOnly": true,
       "name": "Y-Vision — Digital Agency Website",
       "org": "Middle East",
       "link": "https://www.y-vizion.com/",

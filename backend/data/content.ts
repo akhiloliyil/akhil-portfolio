@@ -120,6 +120,8 @@ export type Project = {
   // How it was built (React Native, Next.js, Vibe Coding…) — shown as extra
   // accent chips on the Selected Work cards, alongside the design chips.
   build?: string[];
+  // Résumé PDF lists only the project name (no summary).
+  resumeTitleOnly?: boolean;
   frameType: "app" | "dashboard" | "ecommerce";
 };
 
@@ -665,6 +667,7 @@ export const projects: Project[] = [
       "Designed responsive layouts for desktop and mobile",
     ],
     stack: ["Web Design", "Conversion UX", "Brand Experience", "Responsive UI"],
+    resumeTitleOnly: true,
     frameType: "ecommerce",
   },
 ];

@@ -200,6 +200,7 @@ export async function buildResume(data: ResumeData = SEED) {
     doc.setFontSize(8.5);
     doc.setTextColor(...MUTED);
     doc.text(p.org, pageW - M, y, { align: "right" });
+    if (p.resumeTitleOnly) return;
     y += 14;
     text(p.summary, M, 9, MUTED, { maxW: contentW });
   });
