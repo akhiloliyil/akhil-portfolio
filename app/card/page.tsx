@@ -125,7 +125,7 @@ export default async function CardPage() {
         className="pointer-events-none fixed inset-0"
         style={{
           background:
-            "radial-gradient(circle at 50% 0%, rgb(212 240 79 / 0.14), transparent 50%), radial-gradient(circle at 10% 60%, rgb(212 240 79 / 0.06), transparent 45%), radial-gradient(circle at 90% 90%, rgb(255 120 96 / 0.10), transparent 50%)",
+            "radial-gradient(circle at 50% 0%, rgb(212 240 79 / 0.14), transparent 50%), radial-gradient(circle at 10% 60%, rgb(212 240 79 / 0.06), transparent 45%), radial-gradient(circle at 90% 90%, rgb(163 230 53 / 0.08), transparent 50%)",
         }}
       />
 
