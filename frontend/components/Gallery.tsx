@@ -40,7 +40,7 @@ export default function Gallery({
       className="relative overflow-hidden border-b border-line"
     >
       <NebulaBackground />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
+      <div className="page-container relative py-20 sm:py-28">
         <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">

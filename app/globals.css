@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* One page width for every section, so edges line up top to bottom
+   (menu, hero, sections, contact). Change it here, not per component. */
+@layer components {
+  .page-container {
+    @apply mx-auto w-full max-w-[1380px] px-6 lg:px-10 xl:px-12;
+  }
+}
+
 /* Palette as RGB channel triplets so Tailwind opacity modifiers (bg-paper/70)
    keep working. Swap the values under .dark to retheme the whole site. */
 :root {

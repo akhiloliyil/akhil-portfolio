@@ -289,7 +289,7 @@ export default function Hero({
         </span>
       </motion.div>
 
-      <div className="relative mx-auto grid max-w-[1380px] px-6 lg:px-10 xl:px-12 gap-8 pt-12 pb-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
+      <div className="page-container relative grid gap-8 pt-12 pb-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
         <div className="order-2 text-center sm:order-1 sm:text-left">
           <p className="load-in font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
             {titleFirst}
@@ -417,7 +417,7 @@ export default function Hero({
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
         />
-        <dl style={{ "--d": "0.9s" } as React.CSSProperties} className="load-in mx-auto grid max-w-[1380px] px-6 lg:px-10 xl:px-12 grid-cols-1 divide-y divide-line py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
+        <dl style={{ "--d": "0.9s" } as React.CSSProperties} className="load-in page-container grid grid-cols-1 divide-y divide-line py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
           {stats.map((stat, i) => {
             const s = parseStat(stat.value);
             return (

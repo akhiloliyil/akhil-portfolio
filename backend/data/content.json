@@ -134,7 +134,12 @@
         "Omnichannel Experience",
         "Frontend Collaboration"
       ],
-      "frameType": "app"
+      "frameType": "app",
+      "build": [
+        "Next.js",
+        "React Native",
+        "Vibe Coding"
+      ]
     },
     {
       "id": "hexa",
@@ -162,7 +167,10 @@
         "React Native",
         "Frontend Implementation"
       ],
-      "frameType": "app"
+      "frameType": "app",
+      "build": [
+        "React Native"
+      ]
     },
     {
       "id": "danube-app",
@@ -190,7 +198,11 @@
         "React Native",
         "Frontend Implementation"
       ],
-      "frameType": "app"
+      "frameType": "app",
+      "build": [
+        "React Native",
+        "Vibe Coding"
+      ]
     },
     {
       "id": "danubehome-web",
@@ -218,7 +230,11 @@
         "Next.js",
         "Frontend Implementation"
       ],
-      "frameType": "ecommerce"
+      "frameType": "ecommerce",
+      "build": [
+        "Next.js",
+        "Vibe Coding"
+      ]
     },
     {
       "id": "oms",
@@ -247,7 +263,10 @@
         "ReactJS",
         "Frontend Implementation"
       ],
-      "frameType": "dashboard"
+      "frameType": "dashboard",
+      "build": [
+        "ReactJS"
+      ]
     },
     {
       "id": "price-tag",
@@ -274,7 +293,10 @@
         "Retail Operations",
         "Dashboard Design"
       ],
-      "frameType": "dashboard"
+      "frameType": "dashboard",
+      "build": [
+        "ReactJS"
+      ]
     },
     {
       "id": "omnichannel",
@@ -303,7 +325,11 @@
         "Product Thinking",
         "UX Strategy"
       ],
-      "frameType": "app"
+      "frameType": "app",
+      "build": [
+        "UI Design",
+        "Front-end Conversion"
+      ]
     },
     {
       "id": "pim",
@@ -331,7 +357,10 @@
         "Dashboard Design",
         "Product Management"
       ],
-      "frameType": "dashboard"
+      "frameType": "dashboard",
+      "build": [
+        "ReactJS"
+      ]
     },
     {
       "id": "trade-partner-program",
@@ -359,7 +388,10 @@
         "AI-Assisted Development",
         "Frontend Implementation"
       ],
-      "frameType": "dashboard"
+      "frameType": "dashboard",
+      "build": [
+        "ReactJS"
+      ]
     },
     {
       "id": "sleephubz",
@@ -388,7 +420,12 @@
         "Conversion Optimization",
         "Frontend Collaboration"
       ],
-      "frameType": "ecommerce"
+      "frameType": "ecommerce",
+      "build": [
+        "Next.js",
+        "UI Design",
+        "Front-end Conversion"
+      ]
     },
     {
       "id": "kingdom-bridge",
@@ -409,7 +446,11 @@
         "Responsive UI"
       ],
       "frameType": "ecommerce",
-      "link": "https://www.kingdombridge-est.com/"
+      "link": "https://www.kingdombridge-est.com/",
+      "build": [
+        "AI-Assisted Design",
+        "Vibe Coding"
+      ]
     },
     {
       "id": "hamparaa-lux",
@@ -429,7 +470,12 @@
         "Brand Experience",
         "Responsive UI"
       ],
-      "frameType": "ecommerce"
+      "frameType": "ecommerce",
+      "build": [
+        "Next.js",
+        "UI Design",
+        "Front-end Conversion"
+      ]
     },
     {
       "id": "y-vision",
@@ -450,7 +496,11 @@
         "Brand Experience",
         "Responsive UI"
       ],
-      "frameType": "ecommerce"
+      "frameType": "ecommerce",
+      "build": [
+        "AI-Assisted Design",
+        "Vibe Coding"
+      ]
     }
   ],
   "experience": [
@@ -615,6 +665,13 @@
       "projectId": "yara"
     },
     {
+      "title": "Omnichannel Retail Experience",
+      "tag": "AI · Omnichannel CX",
+      "url": "Concept · Danube Home",
+      "src": "/images/projects/Ominichannel.png",
+      "projectId": "omnichannel"
+    },
+    {
       "title": "Hexa — Showroom App",
       "tag": "Mobile · Sales",
       "url": "hexa.danubehome.com",
@@ -632,14 +689,34 @@
       "title": "Danube Property — App",
       "tag": "Mobile · Real Estate",
       "url": "danubeproperties.com",
-      "src": "/images/projects/IMG_2971.jpeg"
+      "src": "/images/projects/IMG_2971.jpeg",
+      "build": [
+        "React Native",
+        "UI Design",
+        "Front-end Conversion"
+      ]
     },
     {
       "title": "Seller Hub — Marketplace",
       "tag": "Mobile · Dashboard",
       "url": "sellerhub.danubehome.com",
       "src": "/images/projects/IMG_2972.jpeg",
-      "link": "https://sellerhub.danubehome.com/"
+      "link": "https://sellerhub.danubehome.com/",
+      "build": [
+        "ReactJS",
+        "UI Design",
+        "Front-end Conversion"
+      ]
+    },
+    {
+      "title": "Mico Marketplace",
+      "tag": "Marketplace & Commerce · Multi-Tenant Commerce · Product Design · UX Architecture · Design Systems · Design-to-Code",
+      "url": "Marketplace & Commerce",
+      "src": "/images/projects/mico.png",
+      "build": [
+        "Vibe Coding"
+      ],
+      "hidden": true
     },
     {
       "title": "Danubehome.com",
@@ -656,35 +733,69 @@
       "projectId": "oms"
     },
     {
+      "title": "Product Information Management (PIM)",
+      "tag": "Enterprise · Dashboard",
+      "url": "pim.danubehome.com",
+      "src": "/images/projects/PMI.png",
+      "projectId": "pim"
+    },
+    {
+      "title": "Dynamic Price Tag Editor",
+      "tag": "Enterprise · Retail Pricing",
+      "url": "Danube Home · Enterprise",
+      "src": "/images/projects/PriceTage.png",
+      "projectId": "price-tag"
+    },
+    {
       "title": "Sleephubz.com",
       "tag": "E-commerce",
       "url": "sleephubz.com",
-      "src": "https://picsum.photos/seed/sleephubz/1280/854",
+      "src": "/images/projects/SleepHubz.png",
       "projectId": "sleephubz"
     },
     {
       "title": "AI Product Search — Personal AI Shopper",
       "tag": "AI · E-commerce Search",
       "url": "danubehome.com",
-      "src": "/images/projects/AISearch.png"
+      "src": "/images/projects/AISearch.png",
+      "build": [
+        "Next.js",
+        "Vibe Coding"
+      ]
     },
     {
       "title": "Imagine AI — Shopping Looks",
       "tag": "AI · Mood Boards",
       "url": "danubehome.com",
-      "src": "/images/projects/AIImagine.png"
+      "src": "/images/projects/AIImagine.png",
+      "build": [
+        "AI-Assisted Design",
+        "Next.js",
+        "Vibe Coding"
+      ]
     },
     {
       "title": "Electronics Store — E-commerce",
       "tag": "E-commerce · Electronics",
       "url": "E-commerce · Web UI",
-      "src": "/images/projects/eletronicsEcommerce.png"
+      "src": "/images/projects/eletronicsEcommerce.png",
+      "build": [
+        "AI-Assisted Design",
+        "UI Design",
+        "Front-end Conversion"
+      ]
     },
     {
       "title": "Car Rental App",
       "tag": "Mobile · Car Rental",
       "url": "Jetour · Mobile UI",
-      "src": "/images/projects/multi-screen-canvas.jpg"
+      "src": "/images/projects/multi-screen-canvas.jpg",
+      "build": [
+        "AI-Assisted Design",
+        "React Native",
+        "UI Design",
+        "Front-end Conversion"
+      ]
     },
     {
       "title": "Kingdom Bridge — Real Estate",

@@ -7,6 +7,7 @@ import {
   projects as seedProjects,
   projectCategories,
 } from "@/data/content";
+import IndustryExperience from "./IndustryExperience";
 
 // Arrow-button colours cycle per card, like sticker accents on a case board.
 const ARROW_COLORS = ["#6fd3e3", "#8b5cf6", "#f5b14c", "#ff7860", "#d4f04f"];
@@ -69,6 +70,7 @@ export default function WorkV2({
         year: yearOf(project.period),
         domain: shot?.url ?? hostOf(project.link) ?? project.org,
         chips: project.stack.slice(0, 3),
+        build: project.build ?? [],
       };
     }),
     ...gallery
@@ -82,6 +84,7 @@ export default function WorkV2({
         year: undefined as string | undefined,
         domain: g.url,
         chips: g.tag.split("·").map((t) => t.trim()),
+        build: g.build ?? [],
       })),
   ];
 
@@ -93,9 +96,9 @@ export default function WorkV2({
       id="work"
       className="relative border-b border-line bg-paper py-20 text-ink sm:py-28"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className="page-container">
         <p className="font-mono text-xs uppercase tracking-[0.4em] text-accent sm:text-sm">
-          ( Selected work )
+          ( Selected work · design to code )
         </p>
 
         <div className="mt-6 flex flex-wrap items-end justify-between gap-8">
@@ -186,6 +189,8 @@ export default function WorkV2({
                   </div>
 
                   <div className="flex flex-wrap gap-2.5 p-5 sm:p-7">
+                    {/* Design chips, then build-tech chips in accent so
+                        "how it was built" reads apart from "what was designed". */}
                     {card.chips.map((s) => (
                       <span
                         key={s}
@@ -194,12 +199,25 @@ export default function WorkV2({
                         {s}
                       </span>
                     ))}
+                    {card.build
+                      .filter((b) => !card.chips.includes(b))
+                      .map((b) => (
+                        <span
+                          key={`build-${b}`}
+                          className="rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-sm text-accent"
+                        >
+                          {b}
+                        </span>
+                      ))}
                   </div>
                 </Wrapper>
               </motion.li>
             );
           })}
         </motion.ul>
+
+        {/* Revealed with the full list, as the close of "View all work". */}
+        {(showAll || !hasMore) && <IndustryExperience />}
       </div>
     </section>
   );

@@ -117,6 +117,9 @@ export type Project = {
   summary: string;
   details: string[];
   stack: string[];
+  // How it was built (React Native, Next.js, Vibe Coding…) — shown as extra
+  // accent chips on the Selected Work cards, alongside the design chips.
+  build?: string[];
   frameType: "app" | "dashboard" | "ecommerce";
 };
 
@@ -200,6 +203,127 @@ export const industries: Industry[] = [
     focus: ["Reservations", "Guest Services", "Loyalty"],
   },
 ];
+
+// Client history by sector — shown in the "Industry experience" popup below
+// Selected Work. `groups` splits a sector's clients (e.g. current vs earlier).
+export type IndustryClients = {
+  label: string;
+  groups: { title?: string; clients: string[] }[];
+  experience: string;
+};
+export const industryExperience = {
+  intro:
+    "Over 16+ years, I’ve designed and developed digital experiences across multiple industries — from early responsive web and corporate platforms to modern e-commerce, marketplace, mobile and enterprise products.",
+  industries: [
+    {
+      label: "E-commerce & Retail",
+      groups: [
+        {
+          title: "Current / Recent",
+          clients: [
+            "Danube Home — E-commerce & Marketplace",
+            "SleepHubz — Mattress E-commerce",
+            "Organic & Real — E-commerce",
+          ],
+        },
+        {
+          title: "Earlier Experience",
+          clients: [
+            "Laksyah",
+            "Farm & Garden",
+            "The Jewellery Store",
+            "Treevoli",
+            "BuyMyWatch",
+            "Shopinc",
+          ],
+        },
+      ],
+      experience:
+        "Product discovery, catalogues, navigation, product presentation, responsive UI and conversion-focused experiences.",
+    },
+    {
+      label: "Healthcare & HealthTech",
+      groups: [{ clients: ["Opsfolio", "CitusHealth", "Point of Care Network"] }],
+      experience:
+        "Healthcare-focused digital platforms, information architecture, service journeys and responsive interfaces.",
+    },
+    {
+      label: "FinTech & Financial Services",
+      groups: [{ clients: ["ICICI Venture"] }],
+      experience:
+        "Financial-services digital experiences, information architecture and responsive interfaces.",
+    },
+    {
+      label: "Corporate & B2B",
+      groups: [
+        {
+          clients: [
+            "EMI Tech Group",
+            "Climate Change Gulf",
+            "EwokeSoft",
+            "Rudler Rocks",
+            "Riethmüller",
+            "Vorwerk",
+            "TIBA Petro",
+            "Programmatico",
+          ],
+        },
+      ],
+      experience:
+        "Corporate websites, brand-led digital experiences, information architecture and responsive design.",
+    },
+    {
+      label: "Real Estate & Construction",
+      groups: [{ clients: ["Benitt Homes", "Era Homes", "Anna Property"] }],
+      experience:
+        "Property discovery, project presentation, lead-generation journeys and responsive experiences.",
+    },
+    {
+      label: "Travel & Tourism",
+      groups: [{ clients: ["Dakshin Trails", "Daksh India", "Rare Routes"] }],
+      experience:
+        "Travel discovery, destination presentation, itinerary-focused experiences and conversion journeys.",
+    },
+    {
+      label: "Education",
+      groups: [
+        {
+          clients: [
+            "AECC Global",
+            "Europe Study Centre",
+            "Emirates Literature Festival",
+          ],
+        },
+      ],
+      experience:
+        "Education discovery, content architecture, lead-generation and event-focused digital experiences.",
+    },
+    {
+      label: "Hospitality & Food",
+      groups: [
+        { clients: ["Copper Dog", "Ramusake", "Rasheed Foods", "Küchenwunder"] },
+      ],
+      experience:
+        "Restaurant and hospitality websites, menu/content presentation and location-focused experiences.",
+    },
+    {
+      label: "Digital, Advertising & Technology",
+      groups: [
+        {
+          clients: [
+            "Tonnit Design",
+            "BlueShield Australia",
+            "Online Traffic Education",
+            "Dunnto Impress",
+            "Beautisky",
+          ],
+        },
+      ],
+      experience:
+        "Marketing websites, service platforms, content experiences and responsive digital interfaces.",
+    },
+  ] as IndustryClients[],
+};
 
 export const projects: Project[] = [
   {
@@ -704,6 +828,10 @@ export type Shot = {
   link?: string;
   src: string;
   projectId?: string;
+  // Build tech for standalone shots (projects carry their own `build`).
+  build?: string[];
+  // Keep the shot in the data but leave it off the page.
+  hidden?: boolean;
 };
 
 // Placeholder imagery via Lorem Picsum (stable per seed). Swap `src` for real
@@ -716,6 +844,13 @@ export const gallery: Shot[] = [
     url: "yara.danubehome.com",
     src: "/images/projects/yara.png",
     projectId: "yara",
+  },
+  {
+    title: "Omnichannel Retail Experience",
+    tag: "AI · Omnichannel CX",
+    url: "Concept · Danube Home",
+    src: "/images/projects/Ominichannel.png",
+    projectId: "omnichannel",
   },
   {
     title: "Hexa — Showroom App",
@@ -745,6 +880,14 @@ export const gallery: Shot[] = [
     link: "https://sellerhub.danubehome.com/",
   },
   {
+    title: "Mico Marketplace",
+    tag: "Marketplace & Commerce · Multi-Tenant Commerce · Product Design · UX Architecture · Design Systems · Design-to-Code",
+    url: "Marketplace & Commerce",
+    src: "/images/projects/mico.png",
+    build: ["Vibe Coding"],
+    hidden: true,
+  },
+  {
     title: "Danubehome.com",
     tag: "E-commerce",
     url: "danubehome.com",
@@ -759,10 +902,24 @@ export const gallery: Shot[] = [
     projectId: "oms",
   },
   {
+    title: "Product Information Management (PIM)",
+    tag: "Enterprise · Dashboard",
+    url: "pim.danubehome.com",
+    src: "/images/projects/PMI.png",
+    projectId: "pim",
+  },
+  {
+    title: "Dynamic Price Tag Editor",
+    tag: "Enterprise · Retail Pricing",
+    url: "Danube Home · Enterprise",
+    src: "/images/projects/PriceTage.png",
+    projectId: "price-tag",
+  },
+  {
     title: "Sleephubz.com",
     tag: "E-commerce",
     url: "sleephubz.com",
-    src: "https://picsum.photos/seed/sleephubz/1280/854",
+    src: "/images/projects/SleepHubz.png",
     projectId: "sleephubz",
   },  {
     title: "AI Product Search — Personal AI Shopper",

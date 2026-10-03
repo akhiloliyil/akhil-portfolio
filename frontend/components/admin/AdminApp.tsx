@@ -455,6 +455,7 @@ export default function AdminApp() {
                 <Area label="Summary" value={p.summary} onChange={(v) => set({ ...p, summary: v })} />
                 <StringList area label="Details" values={p.details} onChange={(v) => set({ ...p, details: v })} />
                 <StringList label="Stack" values={p.stack} onChange={(v) => set({ ...p, stack: v })} />
+                <StringList label="Built with (React Native, Next.js, Vibe Coding…)" values={p.build ?? []} onChange={(v) => set({ ...p, build: v.length ? v : undefined })} />
               </>
             )}
           />
@@ -502,6 +503,9 @@ export default function AdminApp() {
                   <Select label="Linked project" value={s.projectId ?? ""} onChange={(v) => set({ ...s, projectId: v || undefined })} options={[{ value: "", label: "— none —" }, ...content.projects.map((p) => ({ value: p.id, label: p.name }))]} />
                 </div>
                 <ImageField label="Image" value={s.src} onChange={(v) => set({ ...s, src: v })} />
+                {!s.projectId && (
+                  <StringList label="Built with (standalone shots only)" values={s.build ?? []} onChange={(v) => set({ ...s, build: v.length ? v : undefined })} />
+                )}
               </>
             )}
           />

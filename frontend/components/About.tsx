@@ -181,14 +181,7 @@ export default function About({
       ====================================================== */}
 
       <div
-        className="
-          relative
-          mx-auto
-          max-w-[1380px]
-          px-6
-          lg:px-10
-          xl:px-12
-        "
+        className="page-container relative"
       >
         {/* ===================================================
             HEADER

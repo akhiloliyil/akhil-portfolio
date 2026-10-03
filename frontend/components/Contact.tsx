@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import { Mail, Phone } from "lucide-react";
 import { profile as seedProfile } from "@/data/content";
 import Magnetic from "./Magnetic";
@@ -18,16 +17,11 @@ export default function Contact({
 }: {
   profile?: typeof seedProfile;
 }) {
-  const reduce = useReducedMotion();
-
   return (
     <section id="contact" className="relative bg-paper">
-      <div className="relative mx-auto max-w-[1380px] px-6 py-20 sm:py-28 lg:px-10 xl:px-12">
-        <motion.div
-          initial={reduce ? undefined : { opacity: 0, y: 24 }}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      <div className="page-container relative py-20 sm:py-28">
+        {/* Entrance comes from the page-wide SectionReveal. */}
+        <div
           className="relative overflow-hidden rounded-3xl border border-line bg-paper px-8 py-16 text-center sm:px-16 sm:py-20"
         >
           <div className="contact-card-glow pointer-events-none absolute inset-0" />
@@ -111,7 +105,7 @@ export default function Contact({
               </a>
             </p>
           </div>
-        </motion.div>
+        </div>
 
         <footer className="mt-10 flex flex-col items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-inkmuted sm:flex-row">
           <span>

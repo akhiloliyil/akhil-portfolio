@@ -40,7 +40,7 @@ export default function Nav({ links = defaultLinks }: { links?: NavLink[] }) {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 mx-auto max-w-[1380px] px-6 lg:px-10 xl:px-12 pt-4">
+    <header className="page-container sticky top-0 z-50 pt-4">
       {/* Floating pill bar — logo tile, centered links, accent CTA. */}
       <div className="rounded-[2rem] border border-line bg-paper/80 shadow-[0_8px_30px_-12px_rgb(0_0_0/0.25)] backdrop-blur-md supports-[backdrop-filter]:bg-paper/65">
         <div className="flex items-center justify-between gap-4 py-2 pl-2 pr-2 sm:py-2.5 sm:pl-2.5">

@@ -446,7 +446,7 @@ export default function Experience({
 
   return (
     <section id="experience" className="bg-paper py-24 lg:py-32">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
+      <div className="page-container">
 
         {/* ===================================================
             SECTION HEADING

@@ -137,7 +137,7 @@ export default function Toolkit({
           silently break the sticky icon orbit below. NebulaBackground
           self-contains via absolute inset-0 / sticky. */}
       <NebulaBackground parallax />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
+      <div className="page-container relative py-20 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
             <div className="lg:sticky lg:top-28 lg:flex lg:min-h-[70vh] lg:items-center">

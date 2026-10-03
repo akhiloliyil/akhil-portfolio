@@ -153,16 +153,7 @@ export default function DesignProcess({
       ====================================================== */}
 
       <div
-        className="
-          relative
-          z-10
-          mx-auto
-          max-w-[1380px]
-          overflow-visible
-          px-6
-          lg:px-10
-          xl:px-12
-        "
+        className="page-container relative z-10 overflow-visible"
       >
         <div
           className="

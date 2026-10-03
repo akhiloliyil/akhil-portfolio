@@ -227,7 +227,7 @@ export default function Work({
   return (
     <section id="industries" ref={rootRef} className="relative border-b border-line bg-paper text-ink">
       <div className="work-inner py-20 sm:py-28">
-        <div className="mx-auto w-full max-w-[1380px] px-6 lg:px-10 xl:px-12">
+        <div className="page-container">
           <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-6">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
