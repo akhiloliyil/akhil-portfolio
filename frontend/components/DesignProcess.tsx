@@ -329,7 +329,7 @@ export default function DesignProcess({
                     text-ink
                   "
                 >
-                  Currently accepting projects for Q2 2025
+                  Open to Lead Product Design · UI/UX &amp; CX roles
                 </span>
               </div>
             </motion.div>

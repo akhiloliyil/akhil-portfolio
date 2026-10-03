@@ -12,10 +12,14 @@ import CountUp from "react-countup";
 import { profile as seedProfile, stats as seedStats } from "@/data/content";
 import SelectionFrame from "./SelectionFrame";
 import Magnetic from "./Magnetic";
-import CinematicPortrait from "./CinematicPortrait";
+import dynamic from "next/dynamic";
 import ResumeButton from "./ResumeButton";
-import SaveContact from "./SaveContact";
 import NebulaBackground from "./NebulaBackground";
+import { useMediaQuery, DESKTOP } from "./useMediaQuery";
+
+// Desktop-only particle portrait: code-split, and never mounted on phones
+// (it pulls ~4 MB of portrait PNGs and runs a canvas loop).
+const CinematicPortrait = dynamic(() => import("./CinematicPortrait"), { ssr: false });
 
 /** Split a stat value like "10+" into { end: 10, prefix: "", suffix: "+" }. */
 function parseStat(value: string) {
@@ -29,15 +33,25 @@ function parseStat(value: string) {
   };
 }
 
+// Qualitative impact tiles that sit beside the numeric stats — no invented numbers.
+const CAPABILITIES = [
+  { value: "Web + Mobile", label: "React · Next.js · React Native" },
+  { value: "UX + CX", label: "Customer journeys · Product design" },
+  { value: "AI + Design", label: "Conversational · Generative · AI search" },
+];
+
 /** Fallback portrait path; the live path comes from profile.portrait. */
 const DEFAULT_PORTRAIT = "/images/profile.jpg";
 
 export default function Hero({
   profile = seedProfile,
   stats = seedStats,
+  showResume = false,
 }: {
   profile?: typeof seedProfile;
   stats?: typeof seedStats;
+  // Résumé download only on the `/?resume` link.
+  showResume?: boolean;
 }) {
   const PROFILE_IMAGE = profile.portrait || DEFAULT_PORTRAIT;
   // The cinematic (desktop) canvas can use its own image; falls back to the card one.
@@ -49,6 +63,7 @@ export default function Hero({
   const sectionRef = useRef<HTMLElement>(null);
   const [portraitOk, setPortraitOk] = useState(true);
   const reduce = useReducedMotion();
+  const isDesktop = useMediaQuery(DESKTOP);
 
   // Cursor position within the hero, normalized to [-0.5, 0.5], spring-smoothed.
   const px = useMotionValue(0);
@@ -110,40 +125,14 @@ export default function Hero({
     };
   }, []);
 
-  // "Lead Product Designer · UI/UX & CX · Design Systems" — first clause
-  // reads as the eyebrow, the rest as the supporting line under the name.
-  const [titleFirst, ...titleRestParts] = profile.title
-    .split("·")
-    .map((s) => s.trim());
-  const titleRest = titleRestParts.join(" • ");
+  // "Lead Product Designer · UI/UX & CX" → "Lead Product Designer — UI/UX & CX".
+  const [roleMain, ...roleRest] = profile.title.split("·").map((t) => t.trim());
+  const role = roleRest.length ? `${roleMain} — ${roleRest.join(" · ")}` : roleMain;
 
-  // profile.focus mixes single tags ("Design Systems") with "·"-joined
-  // lists ("React · Next.js · React Native") — flatten to one tag per pill,
-  // deduping repeats (the sectors list happens to end by repeating "Design
-  // Systems"). The first two tags and the last one get an accent treatment;
-  // the long tools/sectors lists in between stay neutral.
-  const focusPills = (() => {
-    const seen = new Set<string>();
-    const pills: { label: string; tone: "highlight" | "emphasis" | "neutral" }[] = [];
-    profile.focus.forEach((entry, i) => {
-      const isFirst = i <= 1;
-      const isLast = i === profile.focus.length - 1;
-      entry
-        .split("·")
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .forEach((label) => {
-          const key = label.toLowerCase();
-          if (seen.has(key)) return;
-          seen.add(key);
-          pills.push({
-            label,
-            tone: isFirst ? "highlight" : isLast ? "emphasis" : "neutral",
-          });
-        });
-    });
-    return pills;
-  })();
+  // One scannable line: years · location · focus areas.
+  const years = stats[0]?.value ? `${stats[0].value} years` : "";
+  const place = profile.location.replace("United Arab Emirates", "UAE");
+  const meta = [years, place, ...profile.focus].filter(Boolean);
 
   const cardFrame = (
     <SelectionFrame
@@ -194,12 +183,14 @@ export default function Hero({
   // layout. Gradient ring echoes the site's accent without needing the
   // full card treatment.
   const portraitCircle = (
-    <div className="relative h-28 w-28 shrink-0 rounded-full bg-accent p-[3px] shadow-[0_8px_40px_-12px_rgb(var(--accent)/0.6)] sm:h-[280px] sm:w-[280px]">
+    <div className="relative h-[220px] w-[220px] shrink-0 rounded-full bg-accent p-[3px] shadow-[0_8px_40px_-12px_rgb(var(--accent)/0.6)] md:h-[280px] md:w-[280px]">
       <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-paper bg-paper font-display text-2xl font-semibold text-accent">
         {portraitOk ? (
           <img
             src={PROFILE_IMAGE}
             alt={`${profile.name} portrait`}
+            width={280}
+            height={280}
             className="h-full w-full object-cover"
             onError={() => setPortraitOk(false)}
           />
@@ -208,6 +199,23 @@ export default function Hero({
         )}
       </div>
     </div>
+  );
+
+  // Phones: a small avatar beside the status line, so the first screen is
+  // name → role → value → CTAs, not a large photo pushing them down.
+  const avatar = (
+    <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-accent bg-paper sm:hidden">
+      {portraitOk ? (
+        <img
+          src={PROFILE_IMAGE}
+          alt=""
+          width={48}
+          height={48}
+          className="h-full w-full object-cover"
+          onError={() => setPortraitOk(false)}
+        />
+      ) : null}
+    </span>
   );
 
   return (
@@ -223,7 +231,7 @@ export default function Hero({
       {/* Drifting canvas marks — design tokens scattered on the artboard */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 hidden lg:block"
         style={reduce ? undefined : { x: marksX, y: marksY }}
       >
         <span
@@ -289,48 +297,58 @@ export default function Hero({
         </span>
       </motion.div>
 
-      <div className="page-container relative grid gap-8 pt-12 pb-14 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
-        <div className="order-2 text-center sm:order-1 sm:text-left">
-          <p className="load-in font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
-            {titleFirst}
-          </p>
+      <div className="page-container relative grid gap-8 pt-8 pb-10 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-6 sm:pt-10 sm:pb-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12">
+        <div className="text-left">
+          <div className="load-in flex items-center gap-3">
+            {avatar}
+            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/80 px-3 py-1.5 font-mono text-[10px] uppercase leading-snug tracking-[0.1em] text-inkmuted sm:text-[11px] sm:tracking-[0.12em]">
+              <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60 motion-safe:animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              Open to Lead Product Design · UI/UX &amp; CX roles
+            </p>
+          </div>
           <h1
             ref={headlineRef}
-            className="mt-3 overflow-hidden font-display text-5xl font-bold leading-[1.02] tracking-tight text-ink sm:text-7xl"
+            className="mt-5 overflow-hidden font-display text-[2.75rem] font-bold leading-[1.02] tracking-tight text-ink min-[390px]:text-5xl sm:text-7xl"
           >
             {profile.name}
           </h1>
-          {titleRest && (
-            <p className="load-in mx-auto mt-3 max-w-xl font-mono text-sm uppercase tracking-wide text-inkmuted sm:mx-0" style={{ "--d": "0.45s" } as React.CSSProperties}>
-              {titleRest}
-            </p>
-          )}
-          <p className="load-in mx-auto mt-5 max-w-xl text-base leading-relaxed text-inkmuted sm:mx-0 sm:text-lg" style={{ "--d": "0.55s" } as React.CSSProperties}>
+          <p
+            className="load-in mt-2 text-balance font-display text-[1.375rem] font-semibold leading-tight tracking-tight text-accent sm:mt-3 sm:text-[2rem]"
+            style={{ "--d": "0.4s" } as React.CSSProperties}
+          >
+            {role}
+          </p>
+          <p
+            className="load-in mt-4 max-w-xl text-base leading-relaxed text-inkmuted sm:mt-5 sm:text-lg"
+            style={{ "--d": "0.5s" } as React.CSSProperties}
+          >
             {profile.blurb}
           </p>
 
-          <ul className="load-in mt-5 flex flex-wrap justify-center gap-2 sm:justify-start" style={{ "--d": "0.65s" } as React.CSSProperties}>
-            {focusPills.map((f) => (
-              <li
-                key={f.label}
-                className={
-                  f.tone === "highlight"
-                    ? "rounded-full border border-accent/40 px-3 py-1.5 text-sm font-medium text-accent"
-                    : f.tone === "emphasis"
-                      ? "rounded-full border border-accent/40 px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-accent"
-                      : "rounded-full border border-line bg-panel px-3 py-1.5 text-sm text-ink"
-                }
-              >
-                {f.label}
+          <ul
+            aria-label="Profile summary"
+            className="load-in mt-4 flex flex-wrap gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink sm:mt-5 sm:gap-x-3 sm:text-[13px]"
+            style={{ "--d": "0.6s" } as React.CSSProperties}
+          >
+            {meta.map((m, i) => (
+              <li key={m} className="flex items-center gap-2.5 sm:gap-3">
+                {m}
+                {i < meta.length - 1 && <span aria-hidden="true" className="text-accent">·</span>}
               </li>
             ))}
           </ul>
 
-          <div className="load-in mt-7 flex flex-wrap items-center justify-center gap-4 sm:justify-start" style={{ "--d": "0.75s" } as React.CSSProperties}>
+          <div
+            className="load-in mt-7 grid gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center"
+            style={{ "--d": "0.7s" } as React.CSSProperties}
+          >
             <Magnetic>
               <a
                 href="#work"
-                className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-onaccent shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] transition-[filter] hover:brightness-110"
+                className="focus-ring flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-onaccent shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] transition-[filter] hover:brightness-110 sm:inline-flex sm:w-auto"
               >
                 View selected work
                 <svg
@@ -347,32 +365,49 @@ export default function Hero({
                 </svg>
               </a>
             </Magnetic>
-            <Magnetic>
-              <SaveContact variant="pill" />
-            </Magnetic>
-            <div className="font-mono text-xs">
-              <span className="block uppercase tracking-wider text-inkmuted">
-                Direct line
-              </span>
-              <a
-                href={`mailto:${profile.email}`}
-                className="text-accent underline-offset-4 hover:underline"
-              >
-                {profile.email}
-              </a>
-            </div>
-            <ResumeButton />
+            {showResume && (
+              <ResumeButton variant="outline" className="min-h-12 w-full justify-center sm:w-auto" />
+            )}
+          </div>
+
+          <div
+            className="load-in mt-3 flex flex-wrap items-center gap-x-5 font-mono text-xs sm:mt-4"
+            style={{ "--d": "0.8s" } as React.CSSProperties}
+          >
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="focus-ring inline-flex min-h-11 items-center gap-1.5 text-inkmuted underline-offset-4 hover:text-accent hover:underline"
+            >
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+              </svg>
+              LinkedIn
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center text-inkmuted underline-offset-4 hover:text-accent hover:underline"
+            >
+              Email
+            </a>
+            <a
+              href="#contact"
+              className="focus-ring inline-flex min-h-11 items-center text-inkmuted underline-offset-4 hover:text-accent hover:underline"
+            >
+              All contact options →
+            </a>
           </div>
         </div>
 
         <div
-          className="load-in order-1 flex justify-center sm:order-2 sm:justify-end lg:justify-end"
+          className="load-in hidden justify-end sm:flex"
           style={{ perspective: 1000, "--d": "0.25s" } as React.CSSProperties}
         >
           <motion.div
-            animate={reduce ? undefined : { y: [0, -12, 0] }}
+            animate={reduce || !isDesktop ? undefined : { y: [0, -12, 0] }}
             transition={
-              reduce
+              reduce || !isDesktop
                 ? undefined
                 : { duration: 7, repeat: Infinity, ease: "easeInOut" }
             }
@@ -382,7 +417,7 @@ export default function Hero({
           >
             <motion.div
               style={
-                reduce
+                reduce || !isDesktop
                   ? undefined
                   : {
                       x: cardX,
@@ -397,7 +432,7 @@ export default function Hero({
                   card/cinematic treatment is desktop-only. */}
               <div className="lg:hidden">{portraitCircle}</div>
               <div className="hidden lg:block">
-                {heroCinematic ? (
+                {!isDesktop ? null : heroCinematic ? (
                   <CinematicPortrait
                     src={CINEMATIC_IMAGE}
                     colorSrc={COLOR_IMAGE || undefined}
@@ -412,39 +447,52 @@ export default function Hero({
         </div>
       </div>
 
+      {/* Selected impact — the numbers on record, then the capabilities
+          they add up to. Numbers come from content (admin-editable). */}
       <div className="relative border-t border-line bg-panel">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-20 left-1/4 h-48 w-48 rounded-full bg-accent/30 blur-[70px]"
         />
-        <dl style={{ "--d": "0.9s" } as React.CSSProperties} className="load-in page-container grid grid-cols-1 divide-y divide-line py-10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:py-14">
-          {stats.map((stat, i) => {
-            const s = parseStat(stat.value);
-            return (
-              <div
-                key={stat.label}
-                className={`relative py-6 text-center first:pt-0 last:pb-0 sm:py-0 sm:text-left ${
-                  i > 0 ? "sm:pl-8" : ""
-                } ${i < stats.length - 1 ? "sm:pr-8" : ""}`}
-              >
-                <dt className="font-display text-5xl font-extrabold leading-none text-ink sm:text-6xl">
-                  {s.numeric ? (
-                    <>
-                      {s.prefix}
-                      <CountUp end={s.end} duration={2} />
-                      {s.suffix}
-                    </>
-                  ) : (
-                    stat.value
-                  )}
+        <div
+          style={{ "--d": "0.9s" } as React.CSSProperties}
+          className="load-in page-container relative py-10 sm:py-12"
+        >
+          <h2 className="font-mono text-[11px] uppercase tracking-[0.25em] text-accent">
+            Selected impact
+          </h2>
+          <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-0 lg:divide-x lg:divide-line">
+            {stats.map((stat) => {
+              const s = parseStat(stat.value);
+              return (
+                <div key={stat.label} className="lg:px-6 lg:first:pl-0">
+                  <dt className="font-display text-4xl font-extrabold leading-none text-ink sm:text-5xl">
+                    {s.numeric ? (
+                      <>
+                        {s.prefix}
+                        <CountUp end={s.end} duration={2} enableScrollSpy scrollSpyOnce />
+                        {s.suffix}
+                      </>
+                    ) : (
+                      stat.value
+                    )}
+                  </dt>
+                  <dd className="mt-2 text-sm leading-snug text-inkmuted first-letter:uppercase">
+                    {stat.label}
+                  </dd>
+                </div>
+              );
+            })}
+            {CAPABILITIES.map((c) => (
+              <div key={c.value} className="lg:px-6">
+                <dt className="font-display text-2xl font-bold leading-[1.1] text-ink sm:text-[1.75rem]">
+                  {c.value}
                 </dt>
-                <dd className="mt-3 text-sm font-medium capitalize leading-snug text-inkmuted sm:text-base">
-                  {stat.label}
-                </dd>
+                <dd className="mt-2 text-sm leading-snug text-inkmuted">{c.label}</dd>
               </div>
-            );
-          })}
-        </dl>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

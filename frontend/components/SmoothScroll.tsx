@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
  * Mounts Lenis for inertial smooth scrolling and upgrades in-page anchor
@@ -9,9 +11,33 @@ import Lenis from "lenis";
  * the user prefers reduced motion — native scroll takes over.
  */
 export default function SmoothScroll() {
+  // Pinned sections (Industries, Design → Code) measure their scroll
+  // positions once. If anything above them grows later (images, fonts,
+  // lazy media), the stale pin leaves its spacer as a blank gap — so
+  // re-measure whenever the page height changes.
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    let height = document.body.scrollHeight;
+    let timer = 0;
+    const ro = new ResizeObserver(() => {
+      const h = document.body.scrollHeight;
+      if (h === height) return;
+      height = h;
+      clearTimeout(timer);
+      timer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+    });
+    ro.observe(document.body);
+    return () => {
+      clearTimeout(timer);
+      ro.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Native momentum scrolling is better on touch screens; Lenis is for
+    // mouse and trackpad only.
     const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce), (pointer: coarse)"
     ).matches;
     if (reduce) return;
 

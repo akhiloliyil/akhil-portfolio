@@ -13,6 +13,16 @@ import { toolkit as seedToolkit } from "@/data/content";
 import NebulaBackground from "./NebulaBackground";
 import ToolkitOrbit from "./ToolkitOrbit";
 import { ToolIcon, allToolNames } from "./ToolIcon";
+import { useMediaQuery, DESKTOP } from "./useMediaQuery";
+
+// Phones: the short, positioning-first set. Everything else sits behind
+// "View full toolkit" so tools never dominate the mobile page.
+const PRIMARY = [
+  { group: "Design", tools: ["Figma", "FigJam", "Photoshop", "Illustrator"] },
+  { group: "Product", tools: ["UX Research", "IA", "Prototyping", "Design Systems", "Usability Testing"] },
+  { group: "AI", tools: ["ChatGPT", "Claude", "Figma AI", "Google AI tools"] },
+  { group: "Development", tools: ["React", "Next.js", "React Native", "HTML", "CSS"] },
+];
 
 // Scroll-scrubbed reveal: each group's scroll progress is split into equal
 // slots (label first, then every chip), so one item lands per stretch of
@@ -122,7 +132,7 @@ function StaticGroup({ name, tools, showIcon }: { name: string; tools: string[];
 
 // These groups' tools skip the icon — both in their own chips (text-only)
 // and in the animated orbit pool on the left (real product logos only).
-const NO_ICON_GROUPS = new Set(["Platforms", "Practice", "Soft Skills", "Languages"]);
+const NO_ICON_GROUPS = new Set(["Product & UX", "Platforms", "Practice", "Soft Skills", "Languages"]);
 
 export default function Toolkit({
   toolkit = seedToolkit,
@@ -130,6 +140,7 @@ export default function Toolkit({
   toolkit?: typeof seedToolkit;
 }) {
   const reduce = useReducedMotion();
+  const isDesktop = useMediaQuery(DESKTOP);
 
   return (
     <section id="toolkit" className="relative border-b border-line">
@@ -137,15 +148,18 @@ export default function Toolkit({
           silently break the sticky icon orbit below. NebulaBackground
           self-contains via absolute inset-0 / sticky. */}
       <NebulaBackground parallax />
-      <div className="page-container relative py-20 sm:py-28">
+      <div className="page-container relative py-14 sm:py-20 lg:py-28">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-          <div>
+          {/* Animated orbit: desktop only (never mounted on phones). */}
+          <div className="hidden lg:block">
             <div className="lg:sticky lg:top-28 lg:flex lg:min-h-[70vh] lg:items-center">
-              <ToolkitOrbit
-                tools={allToolNames(
-                  toolkit.filter((group) => !NO_ICON_GROUPS.has(group.group))
-                )}
-              />
+              {isDesktop && (
+                <ToolkitOrbit
+                  tools={allToolNames(
+                    toolkit.filter((group) => !NO_ICON_GROUPS.has(group.group))
+                  )}
+                />
+              )}
             </div>
           </div>
 
@@ -154,7 +168,7 @@ export default function Toolkit({
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               {allToolNames(toolkit).length}+ tools, one stack
             </span>
-            <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl">
+            <h2 className="mt-4 max-w-xl font-display text-[1.75rem] font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl">
               Design tooling and the{" "}
               <span className="text-accent">
                 ship-it stack
@@ -167,9 +181,33 @@ export default function Toolkit({
               project from idea to shipped.
             </p>
 
-            <div className="mt-9 flex flex-col gap-7">
+            {/* Phones / tablets: compact primary set + full list on demand. */}
+            <div className="mt-6 lg:hidden">
+              <div className="grid gap-px overflow-hidden rounded-[20px] border border-line bg-line sm:grid-cols-2">
+                {PRIMARY.map((g) => (
+                  <div key={g.group} className="bg-panel p-4">
+                    <h3 className="font-mono text-[11px] uppercase tracking-wider text-accent">{g.group}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink">{g.tools.join(" · ")}</p>
+                  </div>
+                ))}
+              </div>
+              <details className="group mt-4">
+                <summary className="focus-ring inline-flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-line px-5 font-mono text-xs uppercase tracking-wider text-ink [&::-webkit-details-marker]:hidden">
+                  <span className="group-open:hidden">View full toolkit</span>
+                  <span className="hidden group-open:inline">Hide full toolkit</span>
+                  <span aria-hidden="true" className="transition-transform group-open:rotate-180">↓</span>
+                </summary>
+                <div className="mt-5 flex flex-col gap-5">
+                  {toolkit.map(({ group: name, tools }) => (
+                    <StaticGroup key={name} name={name} tools={tools} showIcon={!NO_ICON_GROUPS.has(name)} />
+                  ))}
+                </div>
+              </details>
+            </div>
+
+            <div className="mt-9 hidden flex-col gap-7 lg:flex">
               {toolkit.map(({ group: name, tools }) => {
-                const Group = reduce ? StaticGroup : ToolGroup;
+                const Group = reduce || !isDesktop ? StaticGroup : ToolGroup;
                 return (
                   <Group
                     key={name}

@@ -1,19 +1,14 @@
 export const profile = {
   name: "Akhil Kumar",
-  title: "Lead Product Designer · AI Product & UX · UX/CX · Design Systems",
+  title: "Lead Product Designer · UI/UX & CX",
   location: "Dubai, United Arab Emirates",
   email: "akhiloliyil@gmail.com",
   phone: "+971 565862460",
   linkedin: "https://www.linkedin.com/in/akhil-kumar-49789656/",
   blurb:
-    "I design AI-driven digital products and customer experiences — 16+ years across UI/UX, Product Design, CX, and Front-End Development. I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps, and enterprise platforms, connecting UX, CX, AI, and technology from customer journey to production.",
-  focus: [
-    "AI Product Design",
-    "Generative AI",
-    "React · Next.js · React Native",
-    "E-commerce & Retail · Marketplace · HealthTech · FinTech · Enterprise & B2B",
-    "Vibe Coding",
-  ],
+    "I design complex digital products and customer experiences, from e-commerce and enterprise platforms to AI-powered experiences, turning business problems into simple, scalable, high-performing products.",
+  // Hero summary line, after years and location.
+  focus: ["Product Design", "UX/CX", "Design Systems", "React"],
   // Hero portrait style: "card" (framed) or "cinematic" (particle portrait).
   heroStyle: "card",
   // Hero portrait image (uploaded via /ak-admin, or a same-origin path).
@@ -26,18 +21,18 @@ export const profile = {
 };
 
 export const stats = [
-  { value: "16+", label: "years across design & front-end" },
-  { value: "8", label: "companies, UAE & India" },
-  { value: "150+", label: "shipped product platforms" },
+  { value: "16+", label: "years experience" },
+  { value: "10+", label: "digital products & platforms" },
+  { value: "8", label: "companies · UAE & India" },
 ];
 
 export const about = {
-  lead: "I design AI-driven digital products and customer experiences that turn complex business challenges into simple, scalable, and high-performing experiences.",
+  lead: "I design complex digital products and customer experiences that turn business problems into simple, scalable, and high-performing experiences.",
   paragraphs: [
-    "With 16+ years of experience across UI/UX, Product Design, CX, and Front-End Development, I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps, and enterprise platforms.",
-    "My strength is connecting UX + CX + AI + technology — from customer journeys, product strategy, information architecture and user flows to design systems, prototyping and production.",
-    "I start with the customer and business problem, not just the interface. I simplify complex workflows and translate user needs and business goals into intuitive, scalable experiences.",
-    "I use Generative AI, AI UX, AI-assisted design and vibe coding throughout the product lifecycle, from research and ideation to prototyping and front-end implementation."
+    "With 16+ years across UI/UX, Product Design, CX and Front-End Development, I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps and enterprise platforms.",
+    "My strength is connecting UX, CX and technology: from customer journeys, information architecture and user flows to design systems, prototyping and production.",
+    "I start with the customer and business problem, not the interface. I simplify complex workflows and translate user needs and business goals into intuitive, scalable experiences.",
+    "Where AI genuinely helps customers, as with conversational search, recommendations and product visualisation, I design it as a product experience. I also use AI tools in my own process for research, ideation and prototyping."
   ],
   flow: [
     "Customer Journey",
@@ -52,11 +47,10 @@ export const about = {
     "Optimization"
   ],
   delivers: [
-    "AI-enabled experiences, conversational interfaces, intelligent search, recommendations, personalization, content generation and AI-assisted workflows",
     "UX strategy, user research, customer journey mapping, information architecture, user flows, interaction design, usability testing and conversion optimization",
-    "Scalable components, design tokens, responsive patterns, accessibility (WCAG) and multi-platform consistency",
     "E-commerce, marketplaces, PIM, OMS, catalog, seller platforms, customer portals, checkout, promotions, loyalty and growth experiences",
-    "Rapid ideation, prototyping, UI generation, design exploration and faster design-to-development workflows",
+    "Scalable components, design tokens, responsive patterns, accessibility (WCAG) and multi-platform consistency",
+    "Conversational interfaces, intelligent search, recommendations, personalization and generative product visualisation",
     "React, Next.js and React Native, enabling strong collaboration with engineering teams"
   ],
   expertise: [
@@ -122,6 +116,8 @@ export type Project = {
   build?: string[];
   // Résumé PDF lists only the project name (no summary).
   resumeTitleOnly?: boolean;
+  // Kept off the home page except on the `/?resume` link.
+  hidden?: boolean;
   frameType: "app" | "dashboard" | "ecommerce";
 };
 
@@ -151,7 +147,7 @@ export const industries: Industry[] = [
     summary:
       "Omnichannel shopping across web, app and store — product discovery, search, checkout, promotions, loyalty and marketplace journeys.",
     focus: ["Product Discovery", "Checkout", "Marketplace"],
-    work: "Danube Home · SleepHubz · YARA AI · Hamparaa.lux",
+    work: "Home & furniture retail · SleepHubz · YARA AI · Hamparaa.lux",
   },
   {
     label: "Healthcare & HealthTech",
@@ -195,7 +191,7 @@ export const industries: Industry[] = [
     summary:
       "Property discovery, project showcases, payment plans and customer portals for buyers and investors.",
     focus: ["Property Search", "Payment Plans", "Customer Portal"],
-    work: "Danube Properties · Kingdom Bridge",
+    work: "Real estate app · Kingdom Bridge",
   },
   {
     label: "Hospitality",
@@ -223,7 +219,7 @@ export const industryExperience = {
         {
           title: "Current / Recent",
           clients: [
-            "Danube Home — E-commerce & Marketplace",
+            "Home & Furniture E-commerce & Marketplace",
             "SleepHubz — Mattress E-commerce",
             "Organic & Real — E-commerce",
           ],
@@ -332,8 +328,7 @@ export const projects: Project[] = [
     id: "yara",
     category: "ai",
     name: "YARA — AI Shopping Assistant",
-    org: "Danube Home",
-    link: "https://www.danubehome.com/ae/en/yara-ai-search",
+    org: "Home & Furniture Retail, UAE",
     summary:
       "Led the end-to-end product design of YARA, an AI-powered shopping assistant that transformed the customer journey across web, mobile, and in-store retail. Defined the conversational UX strategy, AI interaction patterns, and scalable design system across an omnichannel experience.",
     details: [
@@ -362,7 +357,7 @@ export const projects: Project[] = [
     id: "hexa",
     category: "enterprise",
     name: "Hexa — Showroom Sales App",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     period: "Jan 2024 — Present",
     summary:
       "Led the end-to-end UX and product design of Hexa, an enterprise mobile app for showroom sales teams — streamlining in-store operations, accelerating order processing, and improving inventory visibility through an intuitive, role-based experience with real-time insights.",
@@ -388,14 +383,13 @@ export const projects: Project[] = [
     frameType: "app",
   },
   {
-    id: "danube-app",
+    id: "retail-app",
     category: "commerce",
-    name: "Danube Home — Mobile App",
-    org: "Danube Home",
+    name: "Home & Furniture Shopping App",
+    org: "Home & Furniture Retail, UAE",
     period: "Jan 2023 — Present",
-    link: "https://www.danubehome.com",
     summary:
-      "Led the end-to-end UX and product design of the Danube Home mobile app — a seamless omnichannel shopping experience across iOS and Android, with scalable mobile design patterns and production-ready React Native implementation.",
+      "Led the end-to-end UX and product design of a home & furniture retailer's mobile app — a seamless omnichannel shopping experience across iOS and Android, with scalable mobile design patterns and production-ready React Native implementation.",
     details: [
       "Led UX strategy and mobile product design",
       "Conducted UX research, customer journey mapping, and competitor analysis",
@@ -417,14 +411,13 @@ export const projects: Project[] = [
     frameType: "app",
   },
   {
-    id: "danubehome-web",
+    id: "retail-web",
     category: "commerce",
-    name: "Danubehome.com — E-commerce",
-    org: "Danube Home",
+    name: "Home & Furniture E-commerce Website",
+    org: "Home & Furniture Retail, UAE",
     period: "Sep 2020 — Present",
-    link: "https://www.danubehome.com",
     summary:
-      "Led end-to-end product design for Danube Home's omnichannel e-commerce platform — driving UX strategy, customer experience, and scalable design systems, then translating approved designs into production-ready ReactJS and Next.js interfaces with pixel-perfect fidelity.",
+      "Led end-to-end product design for a home & furniture retailer's omnichannel e-commerce platform — driving UX strategy, customer experience, and scalable design systems, then translating approved designs into production-ready ReactJS and Next.js interfaces with pixel-perfect fidelity.",
     details: [
       "Led UX research, customer journey mapping, and information architecture",
       "Designed wireframes, interactive prototypes, and high-fidelity UI",
@@ -449,7 +442,7 @@ export const projects: Project[] = [
     id: "oms",
     category: "enterprise",
     name: "Order Management System (OMS)",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     period: "Sep 2020 — Present",
     summary:
       "Led the end-to-end UX and product design of an enterprise Order Management System that streamlined order processing, inventory management, and operational workflows across teams — simplifying complex flows, improving real-time visibility, and delivering a scalable, role-based platform.",
@@ -479,7 +472,7 @@ export const projects: Project[] = [
     id: "price-tag",
     category: "enterprise",
     name: "Dynamic Price Tag Editor",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     summary:
       "Led the end-to-end UX and product design of a Dynamic Price Tag Editor — an enterprise platform that simplifies large-scale retail pricing, catalog management, and in-store printing workflows, reducing manual effort and improving pricing accuracy across high-volume operations.",
     details: [
@@ -507,7 +500,7 @@ export const projects: Project[] = [
     id: "omnichannel",
     category: "ai",
     name: "Omnichannel Retail Experience",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     role: "Concept Case Study · Lead Product Designer · Product Strategy · AI UX · Omnichannel CX",
     summary:
       "A forward-looking omnichannel retail concept that seamlessly connects physical stores with digital commerce — reimagining the customer journey from discovery and personalization to visualization and checkout through AI-driven experiences and connected touchpoints.",
@@ -537,7 +530,7 @@ export const projects: Project[] = [
     id: "pim",
     category: "enterprise",
     name: "Product Information Management (PIM)",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     summary:
       "Led the end-to-end UX and product design of a Product Information Management platform that centralized product data, digital assets, and catalog management across channels — simplifying complex workflows, improving data accuracy, and supporting ERP and e-commerce integrations.",
     details: [
@@ -566,9 +559,9 @@ export const projects: Project[] = [
     id: "trade-partner-program",
     category: "enterprise",
     name: "Trade Partner Program — B2B Rewards Platform",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     summary:
-      "Designed and developed the Trade Partner Program, an interactive B2B rewards platform for Danube Home's retail partner ecosystem — supporting four partner programs (Privilege Partner, Interior Designer, Consultant, and Holiday Home) with a unified experience for onboarding, rewards management, exclusive campaigns, and account management.",
+      "Designed and developed the Trade Partner Program, an interactive B2B rewards platform for a retailer's partner ecosystem — supporting four partner programs (Privilege Partner, Interior Designer, Consultant, and Holiday Home) with a unified experience for onboarding, rewards management, exclusive campaigns, and account management.",
     details: [
       "Designed the end-to-end UX and developed the interactive front end using React.js and Next.js",
       "Built immersive 3D visuals, scroll-based animations, and micro-interactions with Three.js, GSAP, and Framer Motion",
@@ -595,7 +588,7 @@ export const projects: Project[] = [
     id: "sleephubz",
     category: "commerce",
     name: "Sleephubz.com — E-commerce",
-    org: "Danube Home",
+    org: "Home & Furniture Retail, UAE",
     link: "https://www.sleephubz.com/ae/en",
     summary:
       "Led end-to-end UX and product design for SleepHubz.com, an e-commerce platform for mattresses and sleep solutions — creating intuitive shopping experiences, optimizing customer journeys, and building a scalable design system that lifted usability, engagement, and conversion across web and mobile.",
@@ -668,6 +661,7 @@ export const projects: Project[] = [
     ],
     stack: ["Web Design", "Conversion UX", "Brand Experience", "Responsive UI"],
     resumeTitleOnly: true,
+    hidden: true,
     frameType: "ecommerce",
   },
 ];
@@ -683,14 +677,14 @@ export type Role = {
 
 export const experience: Role[] = [
   {
-    company: "Danube Home",
+    company: "Home & Furniture Retail Group, UAE",
     title: "UI/UX & CX Lead Designer · Product Designer · Front-End Developer (React, Next.js, React Native)",
     period: "Sep 2020 — Present",
     location: "United Arab Emirates · On-site",
     blurb:
       "Largest furniture and home-improvement brand in the Middle East.",
     highlights: [
-      "Led Product Design, UI/UX & CX across Danube Home’s e-commerce & marketplace ecosystem, mobile apps, enterprise platforms, PIM, OMS, and internal business applications.",
+      "Led Product Design, UI/UX & CX across a leading UAE home & furniture retailer’s e-commerce & marketplace ecosystem, mobile apps, enterprise platforms, PIM, OMS, and internal business applications.",
       "Led the design of SellerHub, the e-commerce and marketplace platform powering product discovery, search, navigation, checkout, orders, seller journeys, and customer experiences.",
       "Designed SleepHubz, a specialized mattress e-commerce platform focused on product discovery, comparison, personalization, and conversion.",
       "Designed enterprise platforms including PIM, OMS, Pricely, HEXA, and Vibe, simplifying complex product, catalog, pricing, order, store-operation, creative-content, and operational workflows.",
@@ -835,6 +829,8 @@ export type Shot = {
   build?: string[];
   // Keep the shot in the data but leave it off the page.
   hidden?: boolean;
+  // Extra screens shown as tabs in the details popup (after the main shot).
+  screens?: { label: string; src: string; alt: string; notes?: string[] }[];
 };
 
 // Placeholder imagery via Lorem Picsum (stable per seed). Swap `src` for real
@@ -844,43 +840,42 @@ export const gallery: Shot[] = [
   {
     title: "YARA — AI Assistant",
     tag: "AI · Conversational UI",
-    url: "yara.danubehome.com",
+    url: "Live · AI shopping assistant",
     src: "/images/projects/yara.png",
     projectId: "yara",
   },
   {
     title: "Omnichannel Retail Experience",
     tag: "AI · Omnichannel CX",
-    url: "Concept · Danube Home",
+    url: "Concept",
     src: "/images/projects/Ominichannel.png",
     projectId: "omnichannel",
   },
   {
     title: "Hexa — Showroom App",
     tag: "Mobile · Sales",
-    url: "hexa.danubehome.com",
+    url: "Internal · Showroom sales app",
     src: "/images/projects/HexaApp.jpeg",
     projectId: "hexa",
   },
   {
-    title: "Danube Home — App",
+    title: "Home & Furniture — App",
     tag: "React Native",
-    url: "app.danubehome.com",
+    url: "Live · iOS & Android",
     src: "/images/projects/DHMobileApp.jpeg",
-    projectId: "danube-app",
+    projectId: "retail-app",
   },
   {
-    title: "Danube Property — App",
+    title: "Real Estate — App",
     tag: "Mobile · Real Estate",
-    url: "danubeproperties.com",
+    url: "Live · iOS & Android",
     src: "/images/projects/IMG_2971.jpeg",
   },
   {
     title: "Seller Hub — Marketplace",
     tag: "Mobile · Dashboard",
-    url: "sellerhub.danubehome.com",
+    url: "Live · Seller platform",
     src: "/images/projects/IMG_2972.jpeg",
-    link: "https://sellerhub.danubehome.com/",
   },
   {
     title: "Mico Marketplace",
@@ -891,30 +886,30 @@ export const gallery: Shot[] = [
     hidden: true,
   },
   {
-    title: "Danubehome.com",
+    title: "Home & Furniture E-commerce",
     tag: "E-commerce",
-    url: "danubehome.com",
-    src: "/images/projects/danubeHome.png",
-    projectId: "danubehome-web",
+    url: "Live · E-commerce",
+    src: "/images/projects/retailEcommerce.png",
+    projectId: "retail-web",
   },
   {
     title: "Order Management (OMS)",
     tag: "Dashboard",
-    url: "oms.danubehome.com",
+    url: "Internal · Order management",
     src: "/images/projects/OMS.png",
     projectId: "oms",
   },
   {
     title: "Product Information Management (PIM)",
     tag: "Enterprise · Dashboard",
-    url: "pim.danubehome.com",
+    url: "Internal · Product data",
     src: "/images/projects/PMI.png",
     projectId: "pim",
   },
   {
     title: "Dynamic Price Tag Editor",
     tag: "Enterprise · Retail Pricing",
-    url: "Danube Home · Enterprise",
+    url: "Internal · Enterprise",
     src: "/images/projects/PriceTage.png",
     projectId: "price-tag",
   },
@@ -927,14 +922,15 @@ export const gallery: Shot[] = [
   },  {
     title: "AI Product Search — Personal AI Shopper",
     tag: "AI · E-commerce Search",
-    url: "danubehome.com",
+    url: "Live · E-commerce",
     src: "/images/projects/AISearch.png",
   },
   {
     title: "Imagine AI — Shopping Looks",
     tag: "AI · Mood Boards",
-    url: "danubehome.com",
+    url: "Live · E-commerce",
     src: "/images/projects/AIImagine.png",
+    hidden: true,
   },
   {
     title: "Electronics Store — E-commerce",
@@ -966,6 +962,7 @@ export const gallery: Shot[] = [
     url: "y-vizion.com",
     src: "/images/projects/yVision.png",
     projectId: "y-vision",
+    hidden: true,
   },
 ];
 
@@ -1099,23 +1096,25 @@ export type Testimonial = {
   name: string;
   role: string;
   company?: string;
+  // Recommender's LinkedIn profile; the name links to it when set.
+  linkedin?: string;
 };
 
 // Real LinkedIn recommendations.
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "I had the pleasure of working with Akhil at Danube Home, where he consistently demonstrated exceptional skills as a UI/UX Designer, Web Designer, and Front-End Developer. He has a keen eye for design and a deep understanding of user experience principles, which he seamlessly integrates into his work. His ability to create visually appealing and user-friendly interfaces is truly impressive — and he ensures his designs are not only beautiful but also functional and responsive. His attention to detail and commitment to high-quality work make him an invaluable asset to any team.",
+      "I had the pleasure of working with Akhil at [a leading UAE home & furniture retailer], where he consistently demonstrated exceptional skills as a UI/UX Designer, Web Designer, and Front-End Developer. He has a keen eye for design and a deep understanding of user experience principles, which he seamlessly integrates into his work. His ability to create visually appealing and user-friendly interfaces is truly impressive — and he ensures his designs are not only beautiful but also functional and responsive. His attention to detail and commitment to high-quality work make him an invaluable asset to any team.",
     name: "Naveen Varma",
     role: "D2C & Ecommerce Platform Strategist",
-    company: "Danube Home",
+    company: "Home & Furniture Retail Group, UAE",
   },
   {
     quote:
       "Akhil is an excellent UI/UX React front-end developer with a strong eye for design and functionality. I had the pleasure of working with him on several projects, and he consistently delivers visually appealing, user-friendly designs while ensuring smooth functionality and performance. He combines strong React expertise with a deep understanding of UI/UX principles, and he's a great team player — always open to feedback and highly collaborative. I highly recommend him for any UI/UX React front-end role.",
     name: "Rishal KS",
     role: "Assistant Manager, UI/UX",
-    company: "Danube Home",
+    company: "Home & Furniture Retail Group, UAE",
   },
   {
     quote:
@@ -1141,13 +1140,16 @@ export type SectionToggle = { id: string; label: string; enabled: boolean };
 
 // Controls which sections show on the site + in the nav. Edit in /ak-admin.
 export const sections: SectionToggle[] = [
-  { id: "about", label: "About", enabled: true },
-  { id: "industries", label: "Industries", enabled: true },
   { id: "work", label: "Work", enabled: true },
+  { id: "systems", label: "Complex systems", enabled: true },
+  { id: "design-systems", label: "Design systems", enabled: true },
   { id: "process", label: "Process", enabled: true },
+  { id: "leadership", label: "How I lead", enabled: true },
   { id: "experience", label: "Experience", enabled: true },
-  { id: "gallery", label: "Gallery", enabled: true },
+  { id: "about", label: "About", enabled: true },
   { id: "toolkit", label: "Toolkit", enabled: true },
-  { id: "testimonials", label: "Praise", enabled: true },
+  { id: "testimonials", label: "Recommendations", enabled: true },
   { id: "contact", label: "Contact", enabled: true },
+  { id: "industries", label: "Industries", enabled: false },
+  { id: "gallery", label: "Gallery", enabled: false },
 ];

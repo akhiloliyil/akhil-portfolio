@@ -6,7 +6,7 @@
    (menu, hero, sections, contact). Change it here, not per component. */
 @layer components {
   .page-container {
-    @apply mx-auto w-full max-w-[1380px] px-6 lg:px-10 xl:px-12;
+    @apply mx-auto w-full max-w-[1380px] px-5 sm:px-6 lg:px-10 xl:px-12;
   }
 }
 
@@ -225,7 +225,7 @@ body {
    isn't stretched to fill a full screen's worth of empty space around
    content shorter than the viewport — that's what "desktop" here means. */
 @media (min-width: 1280px) {
-  main > section:not(#industries) {
+  main > section:not(#industries):not(#design-to-code) {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -328,6 +328,100 @@ body {
   overflow: visible;
   pointer-events: none;
   transform: translateY(-50%);
+}
+
+/* Design → Code — same pinned horizontal scroll as Industry experience.
+   Base = grid (reduced-motion desktop); swipe carousel below lg;
+   `d2c-horizontal` is added by JS on lg + motion. */
+.d2c-track {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.d2c-line,
+.d2c-fill {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .d2c-track {
+    display: flex;
+    max-width: none;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.5rem;
+    padding-bottom: 1.5rem;
+    scrollbar-width: none;
+  }
+  .d2c-track::-webkit-scrollbar {
+    display: none;
+  }
+  .d2c-card {
+    width: 80vw;
+    max-width: 22rem;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+}
+.d2c-horizontal {
+  height: 100vh;
+}
+.d2c-horizontal .d2c-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Clears the floating nav, which overlaps the pinned section. */
+  padding-top: 7.5rem;
+  padding-bottom: 1.5rem;
+}
+.d2c-horizontal .d2c-viewport {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.d2c-horizontal .d2c-track {
+  display: flex;
+  align-items: stretch;
+  gap: 2.5rem;
+  max-width: none;
+  width: auto;
+  margin: 0;
+  will-change: transform;
+}
+.d2c-horizontal .d2c-card {
+  width: min(30vw, 23rem);
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.d2c-horizontal .d2c-line {
+  display: block;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+.d2c-horizontal .d2c-fill {
+  display: block;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  height: 1.5px;
+  margin-top: -0.75px;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: rgb(var(--accent));
+  box-shadow: 0 0 12px rgb(var(--accent) / 0.65);
 }
 
 /* Soft glow behind each project's glyph icon. */

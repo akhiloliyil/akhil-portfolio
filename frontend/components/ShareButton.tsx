@@ -11,10 +11,12 @@ export default function ShareButton({
   title,
   text,
   className,
+  labelClassName,
 }: {
   title: string;
   text?: string;
   className?: string;
+  labelClassName?: string;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -39,7 +41,7 @@ export default function ShareButton({
   };
 
   return (
-    <button type="button" onClick={onShare} className={className}>
+    <button type="button" onClick={onShare} className={className} aria-label={copied ? "Link copied" : "Share"}>
       <svg
         viewBox="0 0 24 24"
         className="h-4 w-4"
@@ -55,7 +57,7 @@ export default function ShareButton({
         <circle cx="18" cy="19" r="3" />
         <path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5" />
       </svg>
-      {copied ? "Link copied" : "Share"}
+      <span className={labelClassName}>{copied ? "Link copied" : "Share"}</span>
     </button>
   );
 }

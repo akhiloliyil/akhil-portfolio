@@ -68,6 +68,8 @@ const VISUALS: Record<string, ToolVisual> = {
   // Design
   "Adobe XD": { kind: "icon", Icon: TbBrandAdobeXd, tone: "#FF61F6" },
   Figma: { kind: "icon", Icon: SiFigma, tone: "#F24E1E" },
+  FigJam: { kind: "icon", Icon: SiFigma, tone: "#9747FF" },
+  "UI Design": { kind: "icon", Icon: PenSquare, tone: ACCENT },
   Photoshop: { kind: "icon", Icon: TbBrandAdobePhotoshop, tone: "#31A8FF" },
   Illustrator: { kind: "icon", Icon: TbBrandAdobeIllustrator, tone: "#FF9A00" },
   Balsamiq: { kind: "icon", Icon: PenSquare, tone: ACCENT },
@@ -77,6 +79,9 @@ const VISUALS: Record<string, ToolVisual> = {
 
   // Front-End
   HTML5: { kind: "icon", Icon: SiHtml5, tone: "#E34F26" },
+  HTML: { kind: "icon", Icon: SiHtml5, tone: "#E34F26" },
+  CSS: { kind: "text", label: "{}", tone: "#663399" },
+  React: { kind: "icon", Icon: SiReact, tone: "#61DAFB" },
   "CSS3 / SASS": { kind: "icon", Icon: SiSass, tone: "#CC6699" },
   "JavaScript (ES6+)": { kind: "icon", Icon: SiJavascript, tone: "#F7DF1E" },
   jQuery: { kind: "icon", Icon: SiJquery, tone: "#0769AD" },

@@ -70,8 +70,10 @@ export default function NebulaBackground({
     const section = wrap?.parentElement;
     if (!wrap || !layer || !canvas || !section) return;
 
+    // Phones, tablets and touch screens get the static starfield — no
+    // continuous animation loop draining battery behind the content.
     const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce), (max-width: 1023px), (pointer: coarse)"
     ).matches;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;

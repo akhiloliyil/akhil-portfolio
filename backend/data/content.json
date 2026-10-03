@@ -1,18 +1,16 @@
 {
   "profile": {
     "name": "Akhil Kumar",
-    "title": "Lead Product Designer · AI Product & UX · UX/CX · Design Systems",
+    "title": "Lead Product Designer · UI/UX & CX",
     "location": "Dubai, United Arab Emirates",
     "email": "akhiloliyil@gmail.com",
     "phone": "+971 565862460",
     "linkedin": "https://www.linkedin.com/in/akhil-kumar-49789656/",
-    "blurb": "I design AI-driven digital products and customer experiences — 16+ years across UI/UX, Product Design, CX, and Front-End Development. I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps, and enterprise platforms, connecting UX, CX, AI, and technology from customer journey to production.",
+    "blurb": "Designing complex digital products, customer experiences, e-commerce platforms, enterprise systems and AI-powered experiences.",
     "focus": [
-      "AI Product Design",
-      "Generative AI",
-      "React · Next.js · React Native",
-      "E-commerce & Retail · Marketplace · HealthTech · FinTech · Enterprise & B2B",
-      "Vibe Coding"
+      "Product Design",
+      "UX/CX",
+      "Design Systems"
     ],
     "heroStyle": "cinematic",
     "portrait": "/images/uploads/akhil-kumar-3e6ab44b.jpg",
@@ -22,24 +20,24 @@
   "stats": [
     {
       "value": "16+",
-      "label": "years across design & front-end"
+      "label": "years experience"
+    },
+    {
+      "value": "10+",
+      "label": "digital products & platforms"
     },
     {
       "value": "8",
-      "label": "companies, UAE & India"
-    },
-    {
-      "value": "75+",
-      "label": "shipped product platforms"
+      "label": "companies · UAE & India"
     }
   ],
   "about": {
-    "lead": "I design AI-driven digital products and customer experiences that turn complex business challenges into simple, scalable, and high-performing experiences.",
+    "lead": "I design complex digital products and customer experiences that turn business problems into simple, scalable, and high-performing experiences.",
     "paragraphs": [
-      "With 16+ years of experience across UI/UX, Product Design, CX, and Front-End Development, I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps, and enterprise platforms.",
-      "My strength is connecting UX + CX + AI + technology — from customer journeys, product strategy, information architecture and user flows to design systems, prototyping and production.",
-      "I start with the customer and business problem, not just the interface. I simplify complex workflows and translate user needs and business goals into intuitive, scalable experiences.",
-      "I use Generative AI, AI UX, AI-assisted design and vibe coding throughout the product lifecycle, from research and ideation to prototyping and front-end implementation."
+      "With 16+ years across UI/UX, Product Design, CX and Front-End Development, I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps and enterprise platforms.",
+      "My strength is connecting UX, CX and technology: from customer journeys, information architecture and user flows to design systems, prototyping and production.",
+      "I start with the customer and business problem, not the interface. I simplify complex workflows and translate user needs and business goals into intuitive, scalable experiences.",
+      "Where AI genuinely helps customers, as with conversational search, recommendations and product visualisation, I design it as a product experience. I also use AI tools in my own process for research, ideation and prototyping."
     ],
     "flow": [
       "Customer Journey",
@@ -54,30 +52,27 @@
       "Optimization"
     ],
     "delivers": [
-      "AI-enabled experiences, conversational interfaces, intelligent search, recommendations, personalization, content generation and AI-assisted workflows",
       "UX strategy, user research, customer journey mapping, information architecture, user flows, interaction design, usability testing and conversion optimization",
-      "Scalable components, design tokens, responsive patterns, accessibility (WCAG) and multi-platform consistency",
       "E-commerce, marketplaces, PIM, OMS, catalog, seller platforms, customer portals, checkout, promotions, loyalty and growth experiences",
-      "Rapid ideation, prototyping, UI generation, design exploration and faster design-to-development workflows",
+      "Scalable components, design tokens, responsive patterns, accessibility (WCAG) and multi-platform consistency",
+      "Conversational interfaces, intelligent search, recommendations, personalization and generative product visualisation",
       "React, Next.js and React Native, enabling strong collaboration with engineering teams"
     ],
     "expertise": [
       {
         "group": "Core Expertise",
         "items": [
-          "AI Product Design",
-          "AI UX",
-          "Generative AI",
-          "UI/UX",
           "Product Design",
+          "UI/UX",
           "UX/CX Strategy",
           "UX Research",
           "Design Systems",
           "E-commerce UX",
           "Marketplace UX",
+          "Enterprise UX",
           "Mobile App Design",
-          "Conversion Optimization",
-          "Vibe Coding"
+          "AI Product Design",
+          "Conversion Optimization"
         ]
       },
       {
@@ -110,19 +105,18 @@
     {
       "id": "yara",
       "category": "ai",
-      "name": "YARA — AI Shopping Assistant",
-      "org": "Danube Home",
-      "link": "https://www.danubehome.com/ae/en/yara-ai-search",
-      "summary": "Led the end-to-end product design of YARA, an AI-powered shopping assistant that transformed the customer journey across web, mobile, and in-store retail. Defined the conversational UX strategy, AI interaction patterns, and scalable design system across an omnichannel experience.",
+      "name": "YARA AI — Intelligent Retail & Shopping Assistant",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Led the UI/UX design and experience strategy for YARA AI, an intelligent shopping assistant that enhances customer journeys across retail stores, kiosks, web and mobile, connecting physical and digital shopping while improving product discovery, engagement and purchase decisions.",
       "details": [
-        "Led AI UX strategy and product design for a next-generation conversational shopping assistant",
-        "Ran user research, customer journey mapping, and AI interaction design to simplify product discovery and decision-making",
-        "Designed conversational user flows, wireframes, and interactive prototypes for text and voice shopping",
-        "Created AI-powered discovery with intent-aware search, personalized recommendations, and contextual assistance",
-        "Connected web, mobile, and physical stores via QR-based discovery and real-time in-store assistance",
-        "Designed \"Imagine with YARA\" — visualize furniture and décor in curated interior settings before purchase",
-        "Built reusable conversational UI components within a scalable AI design system",
-        "Collaborated with AI engineers, PMs, and frontend developers to turn complex AI capabilities into intuitive experiences"
+        "Owned the end-to-end design process: UX research, user flows, wireframes, high-fidelity UI, interactive prototypes and a scalable omnichannel design system",
+        "AI-powered product discovery with intelligent search",
+        "Conversational AI with text and voice interactions",
+        "Personalized product recommendations and AI-powered product comparison",
+        "\"Imagine with YARA\" — visualize products in realistic interior spaces before purchase",
+        "QR-enabled showroom experience linking customers to product details",
+        "Rich product content (videos, A+ Content, specifications, reviews) with real-time availability and pricing",
+        "Worked with product managers, AI engineers, developers and business stakeholders"
       ],
       "stack": [
         "AI UX",
@@ -142,52 +136,79 @@
       ]
     },
     {
-      "id": "hexa",
-      "category": "enterprise",
-      "name": "Hexa — Showroom Sales App",
-      "org": "Danube Home",
-      "period": "Jan 2024 — Present",
-      "summary": "Led the end-to-end UX and product design of Hexa, an enterprise mobile app for showroom sales teams — streamlining in-store operations, accelerating order processing, and improving inventory visibility through an intuitive, role-based experience with real-time insights.",
+      "id": "ai-product-search",
+      "category": "ai",
+      "name": "AI Product Search & Shopping Assistant",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Led the UX strategy and interface design for an AI-powered product discovery platform that changes how customers search, compare and purchase across web, mobile and retail — natural-language and voice search, personalized recommendations, side-by-side comparison and AI-generated insights.",
       "details": [
-        "Led UX strategy and product design for a role-based enterprise sales application",
-        "Ran stakeholder workshops, user research, workflow analysis, and competitor benchmarking to surface operational pain points",
-        "Designed information architecture, user flows, wireframes, and interactive prototypes for complex sales workflows",
-        "Built reusable mobile components within a scalable enterprise design system",
-        "Designed role-based dashboards for executives, supervisors, and managers with personalized KPIs and insights",
-        "Streamlined product discovery — advanced search, rich detail pages, multi-basket order management, and real-time stock visibility",
-        "Improved customer management with detailed profiles, purchase history, sales status tracking, and personalized service workflows",
-        "Collaborated with React Native developers to ship production-ready mobile interfaces with design consistency and usability"
+        "Led end-to-end UI/UX design and customer experience strategy",
+        "AI-powered conversational search with text and voice",
+        "Recommendations based on intent, preferences and shopping behavior",
+        "Product comparison across specifications, pricing, ratings, reviews, features and availability",
+        "AI-generated product summaries highlighting benefits, differences and buying recommendations",
+        "Smart filtering by category, budget, brand, material, size, color and use case",
+        "Semantic search, contextual suggestions and related products",
+        "Reusable design-system components for AI interfaces across web, mobile and retail"
       ],
       "stack": [
-        "UX Research",
-        "Enterprise UX",
-        "User Journey",
-        "Wireframing",
-        "Design System",
-        "React Native",
-        "Frontend Implementation"
+        "AI UX",
+        "Conversational Search",
+        "Product Comparison",
+        "Design System"
       ],
-      "frameType": "app",
+      "frameType": "ecommerce",
       "build": [
-        "React Native"
+        "Next.js"
       ]
     },
     {
-      "id": "danube-app",
+      "id": "retail-web",
       "category": "commerce",
-      "name": "Danube Home — Mobile App",
-      "org": "Danube Home",
-      "link": "https://www.danubehome.com",
-      "period": "Jan 2023 — Present",
-      "summary": "Led the end-to-end UX and product design of the Danube Home mobile app — a seamless omnichannel shopping experience across iOS and Android, with scalable mobile design patterns and production-ready React Native implementation.",
+      "name": "Home & Furniture E-commerce Website",
+      "org": "Home & Furniture Retail, UAE",
+      "period": "Sep 2020 — Present",
+      "summary": "Led the UI/UX design for a large-scale omnichannel e-commerce platform delivering a seamless shopping experience across desktop, tablet and mobile — improving product discovery, streamlining purchase journeys and supporting business growth.",
       "details": [
-        "Led UX strategy and mobile product design",
-        "Conducted UX research, customer journey mapping, and competitor analysis",
-        "Designed information architecture, user flows, wireframes, and interactive prototypes",
-        "Built reusable mobile components within a scalable design system",
-        "Designed predictive search and personalized shopping experiences",
-        "Optimized PLP, PDP, Cart, Checkout, Wallets, Reward Points, Gift Cards, Click & Collect, Order Tracking, and Delivery Rescheduling",
-        "Collaborated with React Native developers to implement responsive, production-ready mobile interfaces"
+        "Owned the end-to-end design process: UX research, journey mapping, information architecture, wireframes, high-fidelity UI, prototyping and design systems",
+        "Homepage experiences with promotional campaigns and personalized content",
+        "Navigation with advanced search, layered filtering and category browsing",
+        "PLP with sorting, filtering and faceted navigation; PDP with rich content, specifications, reviews and recommendations",
+        "Conversion-focused cart and checkout with multiple payment options",
+        "Wallets, Reward Points and Gift Cards for engagement and loyalty",
+        "Order tracking, order management, delivery rescheduling and Click & Collect",
+        "Partnered with product managers, developers and stakeholders on a responsive build in React.js and SCSS"
+      ],
+      "stack": [
+        "UX Research",
+        "Journey Mapping",
+        "Information Architecture",
+        "Wireframing",
+        "Design System",
+        "Conversion UX"
+      ],
+      "frameType": "ecommerce",
+      "build": [
+        "React.js",
+        "SCSS"
+      ]
+    },
+    {
+      "id": "retail-app",
+      "category": "commerce",
+      "name": "Home & Furniture Shopping App",
+      "org": "Home & Furniture Retail, UAE",
+      "period": "Jan 2023 — Present",
+      "summary": "Designed the end-to-end user experience for a home & furniture retailer's mobile app — a seamless omnichannel shopping experience for discovering, purchasing and managing home-furnishing products, built in React Native.",
+      "details": [
+        "Led UX research, journey mapping, information architecture, wireframing, high-fidelity UI, prototyping and a scalable design system",
+        "Advanced product search with predictive suggestions and smart filters",
+        "PLP with layered navigation, filtering and sorting; rich PDP with images, specifications, reviews and recommendations",
+        "Secure multi-step checkout with multiple payment options and a digital wallet",
+        "Loyalty reward points, and gift card purchase, redemption and balance tracking",
+        "Real-time order tracking, cancellations, returns and delivery rescheduling",
+        "Click & Collect, and address management with autocomplete and saved addresses",
+        "Collaborated with product managers, developers and business stakeholders"
       ],
       "stack": [
         "UX Research",
@@ -205,53 +226,21 @@
       ]
     },
     {
-      "id": "danubehome-web",
-      "category": "commerce",
-      "name": "Danubehome.com — E-commerce",
-      "org": "Danube Home",
-      "period": "Sep 2020 — Present",
-      "link": "https://www.danubehome.com",
-      "summary": "Led end-to-end product design for Danube Home's omnichannel e-commerce platform — driving UX strategy, customer experience, and scalable design systems, then translating approved designs into production-ready ReactJS and Next.js interfaces with pixel-perfect fidelity.",
-      "details": [
-        "Led UX research, customer journey mapping, and information architecture",
-        "Designed wireframes, interactive prototypes, and high-fidelity UI",
-        "Established and maintained a scalable design system across web and mobile",
-        "Designed AI-powered product discovery with YARA AI",
-        "Optimized PLP, PDP, Cart, Checkout, Wallets, Rewards, and Gift Cards",
-        "Collaborated with Product Managers, Developers, and QA across the product lifecycle",
-        "Converted approved UI into responsive ReactJS and Next.js components, maintaining design fidelity and performance"
-      ],
-      "stack": [
-        "UX Research",
-        "Wireframing",
-        "Design System",
-        "AI UX",
-        "React",
-        "Next.js",
-        "Frontend Implementation"
-      ],
-      "frameType": "ecommerce",
-      "build": [
-        "Next.js",
-        "Vibe Coding"
-      ]
-    },
-    {
       "id": "oms",
       "category": "enterprise",
       "name": "Order Management System (OMS)",
-      "org": "Danube Home",
+      "org": "Home & Furniture Retail, UAE",
       "period": "Sep 2020 — Present",
-      "summary": "Led the end-to-end UX and product design of an enterprise Order Management System that streamlined order processing, inventory management, and operational workflows across teams — simplifying complex flows, improving real-time visibility, and delivering a scalable, role-based platform.",
+      "summary": "Led the end-to-end UI/UX design for an Order Management System that centralizes order processing, inventory visibility, customer management and fulfillment — helping operations, warehouse, sales and customer-support teams manage the complete order lifecycle.",
       "details": [
-        "Led UX strategy and product design for a centralized enterprise order-management platform",
-        "Ran user research, stakeholder workshops, workflow analysis, and competitor benchmarking to optimize business processes",
-        "Designed IA, user flows, wireframes, prototypes, and high-fidelity interfaces for the full order lifecycle",
-        "Built reusable UI components within a scalable enterprise design system",
-        "Designed real-time dashboards with order tracking, delivery monitoring, sales insights, and KPI visualization",
-        "Simplified order management with advanced search, filtering, bulk actions, status tracking, and detailed workflows",
-        "Integrated inventory visibility, stock sync, replenishment alerts, and fulfillment workflows to reduce operational errors",
-        "Collaborated with ReactJS developers to ship responsive, production-ready interfaces with accessibility and consistency"
+        "Owned UX research, journey mapping, information architecture, wireframes, high-fidelity UI, prototyping and design systems",
+        "Real-time operational dashboard with order, sales and fulfillment insights",
+        "Centralized order management with advanced search, filtering and status tracking",
+        "Detailed order view: customer, products, payments, shipping and returns",
+        "Order processing workflows from confirmation to fulfillment and delivery",
+        "Customer profiles with order history, communication and support tools",
+        "Real-time inventory visibility with stock monitoring and replenishment alerts",
+        "Analytics dashboards, role-based access control, approval workflows and audit logs"
       ],
       "stack": [
         "Enterprise UX",
@@ -269,83 +258,20 @@
       ]
     },
     {
-      "id": "price-tag",
-      "category": "enterprise",
-      "name": "Dynamic Price Tag Editor",
-      "org": "Danube Home",
-      "summary": "Led the end-to-end UX and product design of a Dynamic Price Tag Editor — an enterprise platform that simplifies large-scale retail pricing, catalog management, and in-store printing workflows, reducing manual effort and improving pricing accuracy across high-volume operations.",
-      "details": [
-        "Led UX strategy and product design for a centralized retail price-tag management platform",
-        "Ran user research, stakeholder workshops, workflow analysis, and operational mapping to surface pricing/print inefficiencies",
-        "Designed IA, user flows, wireframes, prototypes, and high-fidelity interfaces for large-scale merchandising workflows",
-        "Built reusable enterprise UI components within a scalable design system",
-        "Designed intuitive batch editing — reusable templates, live previews, bulk actions, and print-ready workflows",
-        "Simplified catalog management — advanced search, filtering, category organization, CSV/Excel import-export, and bulk updates",
-        "Integrated real-time inventory visibility, stock sync, pricing validation, and low-stock alerts for accuracy",
-        "Collaborated with developers for pixel-perfect, responsive implementation across enterprise retail systems"
-      ],
-      "stack": [
-        "Enterprise UX",
-        "Workflow Analysis",
-        "UX Research",
-        "Wireframing",
-        "Design System",
-        "Retail Operations",
-        "Dashboard Design"
-      ],
-      "frameType": "dashboard",
-      "build": [
-        "ReactJS"
-      ]
-    },
-    {
-      "id": "omnichannel",
-      "category": "ai",
-      "name": "Omnichannel Retail Experience",
-      "org": "Danube Home",
-      "role": "Concept Case Study · Lead Product Designer · Product Strategy · AI UX · Omnichannel CX",
-      "summary": "A forward-looking omnichannel retail concept that seamlessly connects physical stores with digital commerce — reimagining the customer journey from discovery and personalization to visualization and checkout through AI-driven experiences and connected touchpoints.",
-      "details": [
-        "Defined the end-to-end product vision and UX strategy for a unified omnichannel experience",
-        "Ran customer journey mapping, service blueprinting, and retail workflow analysis across online and in-store",
-        "Designed user flows, wireframes, and prototypes connecting physical and digital touchpoints",
-        "Smart Check-in Kiosk — instant access to saved preferences, wishlists, loyalty benefits, and ongoing sessions on store entry",
-        "Frictionless Checkout — transparent pricing, flexible payments, delivery scheduling, digital receipts, and omnichannel fulfillment",
-        "AI-Powered Room Design — place furniture in realistic room layouts, explore personalized styles, and buy directly from the design",
-        "Connected journey integrating AI recommendations, discovery, and visualization across web, mobile, and store",
-        "Established reusable interaction patterns and scalable principles for future AI-driven retail experiences"
-      ],
-      "stack": [
-        "Product Strategy",
-        "Omnichannel CX",
-        "AI UX",
-        "Service Design",
-        "Customer Journey Mapping",
-        "Wireframing",
-        "Product Thinking",
-        "UX Strategy"
-      ],
-      "frameType": "app",
-      "build": [
-        "UI Design",
-        "Front-end Conversion"
-      ]
-    },
-    {
       "id": "pim",
       "category": "enterprise",
       "name": "Product Information Management (PIM)",
-      "org": "Danube Home",
-      "summary": "Led the end-to-end UX and product design of a Product Information Management platform that centralized product data, digital assets, and catalog management across channels — simplifying complex workflows, improving data accuracy, and supporting ERP and e-commerce integrations.",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Led the end-to-end UI/UX design for a Product Information Management platform that centralizes product data, digital assets and catalog management, keeping data consistent across websites, mobile apps, marketplaces, ERP and other integrated systems.",
       "details": [
-        "Led UX strategy and product design for a centralized PIM platform",
-        "Ran user research, stakeholder workshops, workflow analysis, and information architecture for complex product processes",
-        "Designed user flows, wireframes, prototypes, and high-fidelity interfaces for large-scale catalog management",
-        "Built reusable enterprise UI components within a scalable design system",
-        "Designed real-time dashboards for product health, inventory status, content completeness, and publishing workflows",
-        "Simplified catalog management — advanced search, filtering, bulk editing, category hierarchy, DAM, and version control",
-        "Designed workflows for ERP integration, e-commerce sync, API connectivity, and multi-channel publishing",
-        "Collaborated with developers for pixel-perfect implementation and scalable enterprise UX"
+        "Owned UX research, information architecture, journey mapping, wireframes, high-fidelity UI, prototyping and design systems",
+        "Centralized catalog with advanced search, filtering and bulk editing",
+        "Product management: descriptions, pricing, specifications, attributes and inventory",
+        "Digital asset management for images, videos and documents",
+        "Category and taxonomy management with hierarchical structures",
+        "Bulk CSV/Excel import-export, validation, approval workflows and version history",
+        "Real-time dashboard with product insights, inventory status and operational metrics",
+        "Role-based access, audit logs and API-ready integration with ERP, CMS, e-commerce and marketplaces"
       ],
       "stack": [
         "Enterprise UX",
@@ -363,11 +289,121 @@
       ]
     },
     {
+      "id": "hexa",
+      "category": "enterprise",
+      "name": "Hexa Store — Showroom Sales & Order Management App",
+      "org": "Home & Furniture Retail, UAE",
+      "period": "Jan 2024 — Present",
+      "summary": "Designed the end-to-end user experience for Hexa Store, a mobile app that lets showroom sales teams manage customer interactions, product discovery, stock availability and order placement from a single platform — for faster service, better accuracy and a seamless customer experience.",
+      "details": [
+        "Led UX strategy, user research, information architecture, wireframes, high-fidelity UI, prototypes and a scalable design system",
+        "Secure login with role-based access for sales staff and managers",
+        "Personalized dashboard with sales KPIs, pending orders and performance insights",
+        "Fast product search with filters, categories and detailed product information",
+        "Real-time inventory and stock availability with low-stock alerts",
+        "Multi-basket management for handling multiple customers simultaneously",
+        "Customer profiles and purchase history, with Active, Pending and Archived segments",
+        "Sales history with advanced search and filtering"
+      ],
+      "stack": [
+        "UX Research",
+        "Enterprise UX",
+        "User Journey",
+        "Wireframing",
+        "Design System",
+        "React Native",
+        "Frontend Implementation"
+      ],
+      "frameType": "app",
+      "build": [
+        "React Native"
+      ]
+    },
+    {
+      "id": "kiosk",
+      "category": "ai",
+      "name": "In-Store Digital Kiosk — AI-Assisted Omnichannel Retail",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Designed and developed an interactive in-store kiosk that lets customers explore products, compare options and place orders themselves, with category-specific landing experiences and one omnichannel journey across kiosk, web and mobile.",
+      "details": [
+        "Category-specific interactive landing pages, rendered via HTML WebView for campaign updates without app releases",
+        "Rich A+ Content, lifestyle imagery, buying guides and product videos",
+        "AI-assisted natural-language search, AI product comparison and personalized recommendations",
+        "Advanced search, filtering and rich product detail pages",
+        "Real-time stock visibility and order placement",
+        "Touch-optimized self-service interface aligned with web and mobile"
+      ],
+      "stack": [
+        "Omnichannel CX",
+        "AI UX",
+        "Touch UI",
+        "Design System"
+      ],
+      "frameType": "app",
+      "build": [
+        "React Native",
+        "HTML WebView"
+      ]
+    },
+    {
+      "id": "price-tag",
+      "category": "enterprise",
+      "name": "Dynamic Price Tag Editor",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Led the end-to-end UI/UX design for a Dynamic Price Tag Editor and Product Catalog Management System that lets retail teams create, edit and print price tags in bulk while managing a centralized product catalog.",
+      "details": [
+        "Owned UX research, journey mapping, information architecture, wireframes, high-fidelity UI, prototyping and design system",
+        "Batch price-tag editing and bulk printing with predefined, customizable templates",
+        "Real-time tag preview and print configuration for different paper sizes and layouts",
+        "Product catalog with advanced search, filtering and category management",
+        "Product management with pricing, inventory and barcode support",
+        "CSV/Excel import-export and bulk pricing updates",
+        "Real-time inventory sync and low-stock alerts",
+        "Role-based access, approval workflows and a dashboard for print activity and inventory alerts"
+      ],
+      "stack": [
+        "Enterprise UX",
+        "Workflow Analysis",
+        "UX Research",
+        "Wireframing",
+        "Design System",
+        "Retail Operations",
+        "Dashboard Design"
+      ],
+      "frameType": "dashboard",
+      "build": [
+        "ReactJS"
+      ]
+    },
+    {
+      "id": "miles-club",
+      "category": "enterprise",
+      "name": "Miles Club — Omnichannel Promotion Engine",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Designed the end-to-end experience for Miles Club, an enterprise promotion engine where marketing teams create, manage and optimize campaigns across retail stores, e-commerce, mobile apps, affiliate partners and loyalty programs from one platform.",
+      "details": [
+        "Led UX strategy, user flows, information architecture, wireframes, high-fidelity UI, prototypes and design system",
+        "Campaign creation and scheduling with a rule-based promotion engine",
+        "Buy X Get Y, bundles, tiered discounts and cart promotions",
+        "Coupon, voucher, affiliate and Loyalty & Miles rewards management",
+        "Customer segmentation and targeted campaigns",
+        "Promotion approval workflow with multi-brand and multi-store support",
+        "Analytics dashboard, campaign performance tracking, role-based access and audit logs"
+      ],
+      "stack": [
+        "Enterprise UX",
+        "Rule Configuration",
+        "Workflow Design",
+        "Design System"
+      ],
+      "frameType": "dashboard"
+    },
+    {
       "id": "trade-partner-program",
       "category": "enterprise",
       "name": "Trade Partner Program — B2B Rewards Platform",
-      "org": "Danube Home",
-      "summary": "Designed and developed the Trade Partner Program, an interactive B2B rewards platform for Danube Home's retail partner ecosystem — supporting four partner programs (Privilege Partner, Interior Designer, Consultant, and Holiday Home) with a unified experience for onboarding, rewards management, exclusive campaigns, and account management.",
+      "org": "Home & Furniture Retail, UAE",
+      "summary": "Designed and developed the Trade Partner Program, an interactive B2B rewards platform for a retailer's partner ecosystem — supporting four partner programs (Privilege Partner, Interior Designer, Consultant, and Holiday Home) with a unified experience for onboarding, rewards management, exclusive campaigns, and account management.",
       "details": [
         "Designed the end-to-end UX and developed the interactive front end using React.js and Next.js",
         "Built immersive 3D visuals, scroll-based animations, and micro-interactions with Three.js, GSAP, and Framer Motion",
@@ -397,32 +433,57 @@
       "id": "sleephubz",
       "category": "commerce",
       "name": "Sleephubz.com — E-commerce",
-      "org": "Danube Home",
+      "org": "Home & Furniture Retail, UAE",
       "link": "https://www.sleephubz.com/ae/en",
-      "summary": "Led end-to-end UX and product design for SleepHubz.com, an e-commerce platform for mattresses and sleep solutions — creating intuitive shopping experiences, optimizing customer journeys, and building a scalable design system that lifted usability, engagement, and conversion across web and mobile.",
+      "summary": "Led the UI/UX design for SleepHubz, an e-commerce platform for mattresses, sleep products and bedroom essentials — seamless customer journeys that improve product discovery and conversion across web and mobile.",
       "details": [
-        "Led UX strategy and product design for a conversion-focused sleep & mattress e-commerce platform",
-        "Ran UX research, competitor analysis, customer journey mapping, and usability testing to remove friction",
-        "Designed IA, user flows, wireframes, prototypes, and high-fidelity UI for the full purchase journey",
-        "Optimized discovery, category navigation, PLP, PDP, Cart, Checkout, and post-purchase experiences",
-        "Lifted conversion by simplifying journeys, reducing checkout friction, and validating via A/B testing",
-        "Built a scalable design system with reusable components, responsive layouts, and accessibility guidelines",
-        "Collaborated with developers for pixel-perfect, responsive implementation and clean design-to-dev handoff",
-        "Used analytics and customer feedback to continuously refine the experience and drive data-informed decisions"
+        "Owned UX research, journey mapping, information architecture, wireframes, high-fidelity UI, prototyping and design systems",
+        "Product discovery with intuitive navigation, search and filtering",
+        "Conversion-focused PLP and PDP with rich content, specifications, reviews and recommendations",
+        "Streamlined cart and secure checkout to reduce purchase friction",
+        "Responsive experiences across desktop, tablet and mobile",
+        "Built and maintained a scalable design system",
+        "Usability testing, user-behaviour analysis and data-driven iteration"
       ],
       "stack": [
         "UX Research",
         "Customer Journey",
-        "A/B Testing",
         "Usability Testing",
         "Wireframing",
         "Design System",
-        "Conversion Optimization",
-        "Frontend Collaboration"
+        "Conversion Optimization"
       ],
       "frameType": "ecommerce",
       "build": [
         "Next.js",
+        "UI Design",
+        "Front-end Conversion"
+      ]
+    },
+    {
+      "id": "omnichannel",
+      "category": "ai",
+      "name": "Omnichannel Retail Experience",
+      "org": "Home & Furniture Retail, UAE",
+      "role": "Concept Case Study · Lead Product Designer · Product Strategy · AI UX · Omnichannel CX",
+      "summary": "An end-to-end omnichannel store experience connecting in-store interactions with digital touchpoints, so customers move from discovery → visualization → purchase without friction.",
+      "details": [
+        "Smart Check-in Kiosk — instant login unlocking personalized preferences, saved carts and cross-device continuity",
+        "AI-Powered Room Visualization — visualize products in your own space and shop directly from the design",
+        "Frictionless Checkout — streamlined UI with transparent pricing, delivery options and flexible payment methods"
+      ],
+      "stack": [
+        "Product Strategy",
+        "Omnichannel CX",
+        "AI UX",
+        "Service Design",
+        "Customer Journey Mapping",
+        "Wireframing",
+        "Product Thinking",
+        "UX Strategy"
+      ],
+      "frameType": "app",
+      "build": [
         "UI Design",
         "Front-end Conversion"
       ]
@@ -481,6 +542,7 @@
       "id": "y-vision",
       "category": "web",
       "resumeTitleOnly": true,
+      "hidden": true,
       "name": "Y-Vision — Digital Agency Website",
       "org": "Middle East",
       "link": "https://www.y-vizion.com/",
@@ -506,19 +568,21 @@
   ],
   "experience": [
     {
-      "company": "Danube Home",
+      "company": "Home & Furniture Retail Group, UAE",
       "title": "UI/UX & CX Lead Designer · Product Designer · Front-End Developer (React, Next.js, React Native)",
       "period": "Sep 2020 — Present",
       "location": "United Arab Emirates · On-site",
       "blurb": "Largest furniture and home-improvement brand in the Middle East.",
       "highlights": [
-        "Led Product Design, UI/UX & CX across Danube Home’s e-commerce & marketplace ecosystem, mobile apps, enterprise platforms, PIM, OMS, and internal business applications.",
+        "Led Product Design, UI/UX & CX across a leading UAE home & furniture retailer’s e-commerce & marketplace ecosystem, mobile apps, enterprise platforms, PIM, OMS, and internal business applications.",
         "Led the design of SellerHub, the e-commerce and marketplace platform powering product discovery, search, navigation, checkout, orders, seller journeys, and customer experiences.",
         "Designed SleepHubz, a specialized mattress e-commerce platform focused on product discovery, comparison, personalization, and conversion.",
         "Designed enterprise platforms including PIM, OMS, Pricely, HEXA, and Vibe, simplifying complex product, catalog, pricing, order, store-operation, creative-content, and operational workflows.",
         "Established scalable Design Systems, UI libraries, reusable components, and UX standards across web and mobile, improving consistency, accessibility, usability, and delivery efficiency.",
         "Led AI Product Experiences including YARA AI – Intelligent Retail & Shopping Assistant, AI Product Search, AI Order Tracking, AI Product Information, DH Imagine for AI product-image and A+ content generation, and YARA AI Room & Interior Design.",
-        "Designed Miles Club – Omnichannel Promotion Engine, supporting promotional experiences across customer and business touchpoints.",
+        "Designed and developed an AI-assisted In-Store Digital Kiosk (React Native + HTML WebView) for self-service product discovery, comparison and ordering in showrooms.",
+        "Designed Miles Club – Omnichannel Promotion Engine, letting marketing teams create, manage and optimize campaigns across retail stores, e-commerce, mobile apps, affiliate partners and loyalty programs.",
+        "Designed and built the Trade Partner Program, a B2B rewards platform for four partner programs, in React.js and Next.js.",
         "Led end-to-end product design from Customer Journey → UX Strategy → Wireframes → Design System → UI → Prototype → Development → Optimization, collaborating with Product, Engineering, Business, Marketing, and senior stakeholders.",
         "Combined strategic design leadership with hands-on React, Next.js, React Native, HTML, CSS, Generative AI, and Vibe Coding to accelerate prototyping, design-to-code workflows, and scalable digital product delivery."
       ]
@@ -661,35 +725,35 @@
     {
       "title": "YARA — AI Assistant",
       "tag": "AI · Conversational UI",
-      "url": "yara.danubehome.com",
+      "url": "Live · AI shopping assistant",
       "src": "/images/projects/yara.png",
       "projectId": "yara"
     },
     {
       "title": "Omnichannel Retail Experience",
       "tag": "AI · Omnichannel CX",
-      "url": "Concept · Danube Home",
+      "url": "Concept",
       "src": "/images/projects/Ominichannel.png",
       "projectId": "omnichannel"
     },
     {
       "title": "Hexa — Showroom App",
       "tag": "Mobile · Sales",
-      "url": "hexa.danubehome.com",
+      "url": "Internal · Showroom sales app",
       "src": "/images/projects/HexaApp.jpeg",
       "projectId": "hexa"
     },
     {
-      "title": "Danube Home — App",
+      "title": "Home & Furniture — App",
       "tag": "React Native",
-      "url": "app.danubehome.com",
+      "url": "Live · iOS & Android",
       "src": "/images/projects/DHMobileApp.jpeg",
-      "projectId": "danube-app"
+      "projectId": "retail-app"
     },
     {
-      "title": "Danube Property — App",
+      "title": "Real Estate — App",
       "tag": "Mobile · Real Estate",
-      "url": "danubeproperties.com",
+      "url": "Live · iOS & Android",
       "src": "/images/projects/IMG_2971.jpeg",
       "build": [
         "React Native",
@@ -700,9 +764,8 @@
     {
       "title": "Seller Hub — Marketplace",
       "tag": "Mobile · Dashboard",
-      "url": "sellerhub.danubehome.com",
+      "url": "Live · Seller platform",
       "src": "/images/projects/IMG_2972.jpeg",
-      "link": "https://sellerhub.danubehome.com/",
       "build": [
         "ReactJS",
         "UI Design",
@@ -720,32 +783,18 @@
       "hidden": true
     },
     {
-      "title": "Danubehome.com",
+      "title": "Home & Furniture E-commerce",
       "tag": "E-commerce",
-      "url": "danubehome.com",
-      "src": "/images/projects/danubeHome.png",
-      "projectId": "danubehome-web"
+      "url": "Live · E-commerce",
+      "src": "/images/projects/retailEcommerce.png",
+      "projectId": "retail-web"
     },
     {
       "title": "Order Management (OMS)",
       "tag": "Dashboard",
-      "url": "oms.danubehome.com",
+      "url": "Internal · Order management",
       "src": "/images/projects/OMS.png",
       "projectId": "oms"
-    },
-    {
-      "title": "Product Information Management (PIM)",
-      "tag": "Enterprise · Dashboard",
-      "url": "pim.danubehome.com",
-      "src": "/images/projects/PMI.png",
-      "projectId": "pim"
-    },
-    {
-      "title": "Dynamic Price Tag Editor",
-      "tag": "Enterprise · Retail Pricing",
-      "url": "Danube Home · Enterprise",
-      "src": "/images/projects/PriceTage.png",
-      "projectId": "price-tag"
     },
     {
       "title": "Sleephubz.com",
@@ -757,23 +806,25 @@
     {
       "title": "AI Product Search — Personal AI Shopper",
       "tag": "AI · E-commerce Search",
-      "url": "danubehome.com",
+      "url": "Live · E-commerce",
       "src": "/images/projects/AISearch.png",
       "build": [
         "Next.js",
         "Vibe Coding"
-      ]
+      ],
+      "projectId": "ai-product-search"
     },
     {
       "title": "Imagine AI — Shopping Looks",
       "tag": "AI · Mood Boards",
-      "url": "danubehome.com",
+      "url": "Live · E-commerce",
       "src": "/images/projects/AIImagine.png",
       "build": [
         "AI-Assisted Design",
         "Next.js",
         "Vibe Coding"
-      ]
+      ],
+      "hidden": true
     },
     {
       "title": "Electronics Store — E-commerce",
@@ -817,7 +868,8 @@
       "tag": "Web · Agency",
       "url": "y-vizion.com",
       "src": "/images/projects/yVision.png",
-      "projectId": "y-vision"
+      "projectId": "y-vision",
+      "hidden": true
     }
   ],
   "toolkit": [
@@ -936,26 +988,26 @@
   ],
   "testimonials": [
     {
-      "quote": "I had the pleasure of working with Akhil at Danube Home, where he consistently demonstrated exceptional skills as a UI/UX Designer, Web Designer, and Front-End Developer. He has a keen eye for design and a deep understanding of user experience principles, which he seamlessly integrates into his work. His ability to create visually appealing and user-friendly interfaces is truly impressive — and he ensures his designs are not only beautiful but also functional and responsive. His attention to detail and commitment to high-quality work make him an invaluable asset to any team.",
+      "quote": "He has a keen eye for design and a deep understanding of user experience principles, which he seamlessly integrates into his work … and he ensures his designs are not only beautiful but also functional and responsive.",
       "name": "Naveen Varma",
       "role": "D2C & Ecommerce Platform Strategist",
-      "company": "Danube Home"
+      "company": "Home & Furniture Retail Group, UAE"
+    },
+    {
+      "quote": "His commitment to enhancing customer experience is evident in every project … His ability to translate complex ideas into user-friendly interfaces makes him a standout professional and a true asset.",
+      "name": "Muhammed Shafeel",
+      "role": "Solutions Architect — AI & ML"
+    },
+    {
+      "quote": "As a UI/UX designer he has a keen eye for detail and a deep understanding of what makes a user experience truly exceptional … If you want a designer who can also ship the code, look no further.",
+      "name": "Isham Azad",
+      "role": "Full Stack Developer & Technical Architect"
     },
     {
       "quote": "Akhil is an excellent UI/UX React front-end developer with a strong eye for design and functionality. I had the pleasure of working with him on several projects, and he consistently delivers visually appealing, user-friendly designs while ensuring smooth functionality and performance. He combines strong React expertise with a deep understanding of UI/UX principles, and he's a great team player — always open to feedback and highly collaborative. I highly recommend him for any UI/UX React front-end role.",
       "name": "Rishal KS",
       "role": "Assistant Manager, UI/UX",
-      "company": "Danube Home"
-    },
-    {
-      "quote": "I've worked with Akhil on multiple projects, and he's one of the most talented and versatile designers I've met. As a UI/UX designer he has a keen eye for detail and a deep understanding of what makes a user experience truly exceptional — his designs are always visually stunning, intuitive, and user-friendly. What sets him apart is his ability to bring those designs to life with front-end skills in HTML, CSS, JavaScript, and React, turning complex concepts into fully functional, responsive, pixel-perfect web apps. If you want a designer who can also ship the code, look no further.",
-      "name": "Isham Azad",
-      "role": "Full Stack Developer & Technical Architect"
-    },
-    {
-      "quote": "Akhil excels in UI/UX design, combining a keen eye for aesthetics with a deep understanding of user behavior to create seamless, engaging digital experiences. His commitment to enhancing customer experience is evident in every project, where he skillfully balances functionality with visually striking designs. His ability to translate complex ideas into user-friendly interfaces makes him a standout professional and a true asset.",
-      "name": "Muhammed Shafeel",
-      "role": "Solutions Architect — AI & ML"
+      "company": "Home & Furniture Retail Group, UAE"
     },
     {
       "quote": "Hardworking, and pretty fast at what he does!",
@@ -966,18 +1018,18 @@
   ],
   "sections": [
     {
-      "id": "about",
-      "label": "About",
-      "enabled": true
-    },
-    {
-      "id": "industries",
-      "label": "Industries",
-      "enabled": true
-    },
-    {
       "id": "work",
       "label": "Work",
+      "enabled": true
+    },
+    {
+      "id": "systems",
+      "label": "Complex systems",
+      "enabled": true
+    },
+    {
+      "id": "design-systems",
+      "label": "Design systems",
       "enabled": true
     },
     {
@@ -986,14 +1038,19 @@
       "enabled": true
     },
     {
+      "id": "leadership",
+      "label": "How I lead",
+      "enabled": true
+    },
+    {
       "id": "experience",
       "label": "Experience",
       "enabled": true
     },
     {
-      "id": "gallery",
-      "label": "Gallery",
-      "enabled": false
+      "id": "about",
+      "label": "About",
+      "enabled": true
     },
     {
       "id": "toolkit",
@@ -1002,13 +1059,23 @@
     },
     {
       "id": "testimonials",
-      "label": "Praise",
+      "label": "Recommendations",
       "enabled": true
     },
     {
       "id": "contact",
       "label": "Contact",
       "enabled": true
+    },
+    {
+      "id": "industries",
+      "label": "Industries",
+      "enabled": false
+    },
+    {
+      "id": "gallery",
+      "label": "Gallery",
+      "enabled": false
     }
   ]
 }

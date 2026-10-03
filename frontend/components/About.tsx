@@ -11,7 +11,6 @@ import {
   Route,
   Component,
   ShoppingBag,
-  Wand2,
   Code2,
   ArrowRight,
   Target,
@@ -45,34 +44,16 @@ const item: Variants = {
   },
 };
 
+// Paired with about.delivers by index — keep the two in the same order.
 const DELIVER_META: {
   title: string;
   Icon: LucideIcon;
 }[] = [
-  {
-    title: "AI Product & UX",
-    Icon: Sparkles,
-  },
-  {
-    title: "Product & CX Design",
-    Icon: Route,
-  },
-  {
-    title: "Design Systems",
-    Icon: Component,
-  },
-  {
-    title: "E-commerce & Digital Platforms",
-    Icon: ShoppingBag,
-  },
-  {
-    title: "AI-Assisted Design & Vibe Coding",
-    Icon: Wand2,
-  },
-  {
-    title: "Front-End Development",
-    Icon: Code2,
-  },
+  { title: "Product & CX Design", Icon: Route },
+  { title: "E-commerce & Digital Platforms", Icon: ShoppingBag },
+  { title: "Design Systems", Icon: Component },
+  { title: "AI Product & UX", Icon: Sparkles },
+  { title: "Front-End Development", Icon: Code2 },
 ];
 
 const HIGHLIGHT = "simple, scalable, and high-performing";
@@ -84,9 +65,9 @@ export default function About({
 }) {
   const reduce = useReducedMotion();
 
-  const fadeUp = reduce
-    ? {}
-    : {
+  // Always set: MotionConfig (reducedMotion="user") drops the movement for
+  // reduced-motion visitors, while the reveal still runs so nothing stays hidden.
+  const fadeUp = {
         initial: {
           opacity: 0,
           y: 20,
@@ -114,8 +95,9 @@ export default function About({
         relative
         overflow-hidden
         bg-paper
-        py-24
+        py-14
         text-ink
+        sm:py-20
         lg:py-32
       "
     >
@@ -269,15 +251,15 @@ export default function About({
               {...fadeUp}
               className="mt-8 space-y-5"
             >
-              {about.paragraphs.map((p) => (
+              {about.paragraphs.map((p, pi) => (
                 <p
                   key={p.slice(0, 24)}
-                  className="
+                  className={`${pi >= 2 ? "hidden sm:block" : ""}
                     text-base
                     leading-[1.75]
                     text-inkmuted
                     lg:max-w-xl
-                  "
+                  `}
                 >
                   {p}
                 </p>
@@ -285,7 +267,7 @@ export default function About({
             </motion.div>
 
             {about.flow?.length ? (
-              <motion.div {...fadeUp} className="mt-10">
+              <motion.div {...fadeUp} className="mt-10 hidden sm:block">
                 <p
                   className="
                     font-mono
@@ -393,9 +375,9 @@ export default function About({
 
             <motion.ul
               className="mt-6 space-y-6"
-              variants={reduce ? undefined : stagger}
-              initial={reduce ? undefined : "hidden"}
-              whileInView={reduce ? undefined : "show"}
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
               viewport={{
                 once: true,
                 margin: "-60px",
@@ -409,7 +391,7 @@ export default function About({
                 return (
                   <motion.li
                     key={d.slice(0, 24)}
-                    variants={reduce ? undefined : item}
+                    variants={item}
                     className="flex gap-4"
                   >
                     {/* Icon */}
@@ -505,7 +487,7 @@ export default function About({
             {about.expertise.map((group, gi) => (
               <div
                 key={group.group}
-                className={gi === 0 ? "sm:col-span-2" : undefined}
+                className={gi === 0 ? "sm:col-span-2" : "hidden sm:block"}
               >
                 <p
                   className="

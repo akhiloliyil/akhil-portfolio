@@ -25,7 +25,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
       aria-pressed={dark ?? false}
-      className="focus-ring relative grid h-10 w-10 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
+      className="focus-ring relative grid h-11 w-11 place-items-center rounded-full border border-line text-ink transition-colors hover:border-accent hover:text-accent"
     >
       {/* Sun (light) — shown when currently dark, i.e. click → go light */}
       <svg

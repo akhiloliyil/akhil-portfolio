@@ -1,26 +1,31 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 /**
- * Shows a "Download résumé" button when the URL carries a `resume` hint
- * (e.g. ?resume). Downloads from /api/resume, which is regenerated from the
- * live (admin-edited) content on every request — always up to date.
+ * "Download résumé" link. /api/resume regenerates the PDF from the live
+ * (admin-edited) content on every request, so it's always up to date.
  */
-export default function ResumeButton() {
-  const [show, setShow] = useState(false);
+const VARIANTS = {
+  // Secondary CTA next to the hero's primary button.
+  outline:
+    "rounded-full border border-line bg-panel px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:border-accent hover:text-accent",
+  // Compact pill for the header bar.
+  nav: "rounded-full border border-line px-4 py-2.5 text-[15px] font-medium text-ink hover:border-accent hover:text-accent",
+  solid:
+    "rounded-full bg-accent px-5 py-3 font-mono text-xs uppercase tracking-wider text-onaccent hover:brightness-110",
+};
 
-  useEffect(() => {
-    setShow(window.location.search.toLowerCase().includes("resume"));
-  }, []);
-
-  if (!show) return null;
-
+export default function ResumeButton({
+  variant = "outline",
+  label = "Download résumé",
+  className = "",
+}: {
+  variant?: keyof typeof VARIANTS;
+  label?: string;
+  className?: string;
+}) {
   return (
     <a
       href="/api/resume"
       download="Akhil-Kumar-Resume.pdf"
-      className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-mono text-xs uppercase tracking-wider text-onaccent transition-[filter] hover:brightness-110"
+      className={`focus-ring inline-flex items-center gap-2 transition-[color,border-color,filter] ${VARIANTS[variant]} ${className}`}
     >
       <svg
         viewBox="0 0 24 24"
@@ -34,7 +39,7 @@ export default function ResumeButton() {
       >
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
       </svg>
-      Download résumé
+      {label}
     </a>
   );
 }

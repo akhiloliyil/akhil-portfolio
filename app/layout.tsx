@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import MotionProvider from "@/components/MotionProvider";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -29,9 +30,34 @@ const serif = Instrument_Serif({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://akhil-oliyil.com";
-const title = "Akhil Kumar — Lead Product Designer (UI/UX & CX)";
+const title = "Akhil Kumar — Lead Product Designer, UI/UX & CX · Dubai, UAE";
 const description =
-  "Portfolio of Akhil Kumar, a Dubai-based Lead Product Designer specializing in AI-driven experiences, design systems, and front-end delivery with React, Next.js, and React Native across e-commerce and complex web platforms.";
+  "Lead Product Designer in Dubai with 16+ years in UI/UX, product design and CX — e-commerce, enterprise platforms, marketplaces, design systems and AI product experiences, from customer journey to React/Next.js production.";
+
+// Structured data so search engines can read the profile as a Person.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Akhil Kumar",
+  jobTitle: "Lead Product Designer — UI/UX & CX",
+  url: siteUrl,
+  image: `${siteUrl}/images/profile.jpg`,
+  email: "mailto:akhiloliyil@gmail.com",
+  address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" },
+  sameAs: ["https://www.linkedin.com/in/akhil-kumar-49789656/"],
+  knowsAbout: [
+    "Product Design",
+    "UX Design",
+    "Customer Experience",
+    "E-commerce UX",
+    "Enterprise UX",
+    "Design Systems",
+    "AI Product Design",
+    "React",
+    "Next.js",
+    "React Native",
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,14 +65,14 @@ export const metadata: Metadata = {
   description,
   keywords: [
     "Akhil Kumar",
-    "Lead Product Designer",
-    "UI/UX Designer",
-    "CX",
+    "Lead Product Designer UAE",
+    "UI/UX Designer UAE",
+    "Product Designer Dubai",
+    "UX/CX Designer",
+    "E-commerce Product Designer",
+    "Enterprise UX Designer",
+    "AI Product Designer",
     "Design Systems",
-    "React",
-    "Next.js",
-    "React Native",
-    "Dubai",
   ],
   authors: [{ name: "Akhil Kumar" }],
   alternates: { canonical: "/" },
@@ -63,6 +89,7 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Akhil Kumar — Portfolio",
+    locale: "en_AE",
     title,
     description,
   },
@@ -71,6 +98,18 @@ export const metadata: Metadata = {
     title,
     description,
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Lets the layout extend under the notch / home indicator; padding uses
+  // env(safe-area-inset-*) where it matters (nav, contact).
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f7f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0d0a" },
+  ],
 };
 
 // Runs before paint to set the theme class from storage / system preference,
@@ -95,11 +134,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body
         className={`${display.variable} ${body.variable} ${mono.variable} ${serif.variable} font-body antialiased`}
       >
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

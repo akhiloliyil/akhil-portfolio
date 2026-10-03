@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   projects as seedProjects,
@@ -26,6 +26,18 @@ export default function Lightbox({
   const project = shot?.projectId
     ? projects.find((p) => p.id === shot.projectId)
     : undefined;
+
+  // Main shot first, then any extra screens as tabs. The selected tab is
+  // tied to the shot it was picked on, so moving to another shot resets it.
+  const views = shot?.src
+    ? [
+        { label: "Overview", src: shot.src, alt: `${shot.title} preview`, notes: undefined as string[] | undefined },
+        ...(shot.screens ?? []),
+      ]
+    : [];
+  const [picked, setPicked] = useState({ index, view: 0 });
+  const viewIndex = picked.index === index ? picked.view : 0;
+  const view = views[viewIndex];
 
   const go = useCallback(
     (dir: number) => {
@@ -95,7 +107,15 @@ export default function Lightbox({
             role="dialog"
             aria-modal="true"
             aria-label={`${shot.title} preview`}
-            className="relative z-10 grid max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-md border border-line bg-panel shadow-2xl lg:grid-cols-[1.5fr_1fr]"
+            // Lenis would otherwise swallow wheel events inside the dialog.
+            data-lenis-prevent
+            // minmax(0,…) rows cap the details column at the dialog height,
+            // so it scrolls instead of being clipped.
+            className={`relative z-10 grid max-h-[88vh] w-full overflow-hidden rounded-md border border-line bg-panel shadow-2xl ${
+              shot.src
+                ? "max-w-5xl grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[1.5fr_1fr] lg:grid-rows-[minmax(0,1fr)]"
+                : "max-w-xl grid-rows-[minmax(0,1fr)]"
+            }`}
             initial={{ opacity: 0, scale: 0.96, y: 14 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 14 }}
@@ -112,84 +132,136 @@ export default function Lightbox({
               </svg>
             </button>
 
-            {/* Image */}
-            <div className="flex items-center justify-center bg-paper p-4 lg:p-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={shot.src}
-                alt={`${shot.title} preview`}
-                className="max-h-[38vh] w-full rounded-sm object-contain lg:max-h-[74vh]"
-              />
-            </div>
+            {/* Image — skipped for projects with no screen (details only). */}
+            {view && (
+              <div className="flex min-h-0 flex-col items-center justify-center gap-4 bg-paper p-4 lg:p-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={view.src}
+                  src={view.src}
+                  alt={view.alt}
+                  className={`w-full min-h-0 rounded-sm object-contain ${
+                    views.length > 1 ? "max-h-[30vh] lg:max-h-[58vh]" : "max-h-[38vh] lg:max-h-[74vh]"
+                  }`}
+                />
+                {views.length > 1 && (
+                  <>
+                    <div role="tablist" aria-label="Screens" className="flex flex-wrap justify-center gap-2">
+                      {views.map((v, i) => (
+                        <button
+                          key={v.label}
+                          type="button"
+                          role="tab"
+                          aria-selected={i === viewIndex}
+                          onClick={() => setPicked({ index, view: i })}
+                          className={`focus-ring rounded-full border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
+                            i === viewIndex
+                              ? "border-accent bg-accent text-onaccent"
+                              : "border-line text-inkmuted hover:border-accent hover:text-accent"
+                          }`}
+                        >
+                          {v.label}
+                        </button>
+                      ))}
+                    </div>
+                    {view.notes && (
+                      <ul className="hidden w-full max-w-xl space-y-1.5 lg:block">
+                        {view.notes.map((n) => (
+                          <li key={n} className="flex gap-2 text-xs leading-relaxed text-inkmuted">
+                            <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                            {n}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
 
-            {/* Details */}
-            <div className="flex flex-col overflow-y-auto border-t border-line p-6 sm:p-8 lg:border-l lg:border-t-0">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                {shot.tag}
-              </p>
-              <h3 className="mt-3 font-display text-2xl font-semibold leading-tight tracking-tight text-ink">
-                {shot.title}
-              </h3>
-              <p className="mt-1 font-mono text-[11px] tracking-wide text-inkmuted">
-                {shot.url}
-              </p>
+            {/* Details — header and footer stay put; only the body scrolls. */}
+            <div
+              className={`flex min-h-0 flex-col ${
+                shot.src ? "border-t border-line lg:border-l lg:border-t-0" : ""
+              }`}
+            >
+              <div className="shrink-0 border-b border-line px-6 pb-5 pr-14 pt-6 sm:px-8 sm:pr-16 sm:pt-8">
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                  {shot.tag}
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-semibold leading-tight tracking-tight text-ink">
+                  {shot.title}
+                </h3>
+                <p className="mt-1 font-mono text-[11px] tracking-wide text-inkmuted">
+                  {shot.url}
+                </p>
+              </div>
 
-              {project && (
-                <>
-                  <p className="mt-5 text-sm leading-relaxed text-inkmuted">
-                    {project.summary}
-                  </p>
-                  <ul className="mt-5 space-y-2">
-                    {project.details.map((d) => (
-                      <li
-                        key={d}
-                        className="flex gap-2.5 text-sm leading-relaxed text-ink"
-                      >
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.stack.map((s) => (
-                      <span
-                        key={s}
-                        className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="focus-ring mt-6 inline-flex w-fit items-center gap-1 rounded-sm bg-ink px-4 py-2.5 font-mono text-[11px] uppercase tracking-wider text-paper transition-colors hover:bg-accent"
-                    >
-                      View project ↗
-                    </a>
-                  )}
-                </>
-              )}
+              {/* Keyed by index so each project opens scrolled to the top. */}
+              <div
+                key={index}
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-5 sm:px-8"
+              >
+                {project ? (
+                  <>
+                    <p className="text-sm leading-relaxed text-inkmuted">
+                      {project.summary}
+                    </p>
+                    <ul className="mt-5 space-y-2">
+                      {project.details.map((d) => (
+                        <li
+                          key={d}
+                          className="flex gap-2.5 text-sm leading-relaxed text-ink"
+                        >
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.stack.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-sm bg-paper px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                ) : null}
+              </div>
 
-              {/* Footer nav */}
-              <div className="mt-auto flex items-center justify-between gap-4 border-t border-line pt-5">
-                <button
-                  onClick={() => go(-1)}
-                  className="focus-ring inline-flex items-center gap-1.5 rounded-sm font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:text-accent"
-                >
-                  <Chevron dir="left" small /> Prev
-                </button>
-                <span className="font-mono text-[11px] tracking-wider text-inkmuted">
-                  {index + 1} / {shots.length}
-                </span>
-                <button
-                  onClick={() => go(1)}
-                  className="focus-ring inline-flex items-center gap-1.5 rounded-sm font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:text-accent"
-                >
-                  Next <Chevron dir="right" small />
-                </button>
+              <div className="shrink-0 border-t border-line px-6 pb-5 pt-4 sm:px-8 sm:pb-6">
+                {(project?.link ?? shot.link) && (
+                  <a
+                    href={project?.link ?? shot.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-ring mb-4 inline-flex w-fit items-center gap-1 rounded-sm bg-ink px-4 py-2.5 font-mono text-[11px] uppercase tracking-wider text-paper transition-colors hover:bg-accent"
+                  >
+                    View project ↗
+                  </a>
+                )}
+
+                {/* Footer nav */}
+                <div className="flex items-center justify-between gap-4">
+                  <button
+                    onClick={() => go(-1)}
+                    className="focus-ring inline-flex items-center gap-1.5 rounded-sm font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:text-accent"
+                  >
+                    <Chevron dir="left" small /> Prev
+                  </button>
+                  <span className="font-mono text-[11px] tracking-wider text-inkmuted">
+                    {index + 1} / {shots.length}
+                  </span>
+                  <button
+                    onClick={() => go(1)}
+                    className="focus-ring inline-flex items-center gap-1.5 rounded-sm font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:text-accent"
+                  >
+                    Next <Chevron dir="right" small />
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
