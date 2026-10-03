@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Observer } from "gsap/Observer";
 import {
   AnimatePresence,
   motion,
@@ -143,211 +144,308 @@ export default function About({
   // Only the sectors are shown (matched by name, else the 2nd group).
   const industries =
     about.expertise.find((g) => /industr/i.test(g.group)) ?? about.expertise[1];
-  // Industry Experience — on desktop the card pins and the sector cards are
-  // dealt one by one like a riffle shuffle: right pile → centre → left pile.
-  // Phones, tablets and reduced motion keep the plain grid.
+  // Industry Experience — a riffle deck: right pile → centre → left pile.
+  // Scroll over it (desktop) or swipe it (touch) to deal one card at a
+  // time; the page itself scrolls normally. Reduced motion keeps the grid.
   const indPinRef = useRef<HTMLDivElement>(null);
   const indTrackRef = useRef<HTMLUListElement>(null);
   const indCountRef = useRef<HTMLSpanElement>(null);
   const indBarRef = useRef<HTMLSpanElement>(null);
+  // Swipe mode's step function, for the ‹ › buttons.
+  const indStepRef = useRef<((dir: 1 | -1) => void) | null>(null);
 
   useIsoLayoutEffect(() => {
     const pin = indPinRef.current;
     const track = indTrackRef.current;
     if (!pin || !track) return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Keep ScrollTrigger in step with Lenis smooth scrolling.
-    const lenis = (
-      window as unknown as {
-        lenis?: { on?: (e: string, cb: () => void) => void; off?: (e: string, cb: () => void) => void };
-      }
-    ).lenis;
-    const onLenisScroll = () => ScrollTrigger.update();
-    lenis?.on?.("scroll", onLenisScroll);
+    gsap.registerPlugin(ScrollTrigger, Observer);
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
-      // The pinned deck (~700px) must clear the floating nav: 800px+ tall on
-      // desktop, 700px+ on phones/tablets (shorter screens keep the grid).
-      mm.add(
-        "(min-width: 1024px) and (min-height: 800px) and (prefers-reduced-motion: no-preference), (max-width: 1023px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)",
-        () => {
-          pin.classList.add("ind-horizontal");
-          const tiles = gsap.utils.toArray<HTMLElement>(".ind-tile", track);
-          const slots = tiles.map((t) => t.parentElement as HTMLElement);
-          const n = tiles.length;
-          // Room above the cards for the lift as one arcs between piles.
-          const LIFT = 40;
+      // Shared riffle deck: every card sits in the same centred slot and is
+      // moved by transform — card 01 starts in the centre, upcoming cards
+      // fan to the right, dealt ones stack to the left.
+      const setupDeck = () => {
+        pin.classList.add("ind-horizontal");
+        const tiles = gsap.utils.toArray<HTMLElement>(".ind-tile", track);
+        const slots = tiles.map((t) => t.parentElement as HTMLElement);
+        const n = tiles.length;
+        // Room above the cards for the lift as one arcs between piles.
+        const LIFT = 40;
 
-          // Riffle deck: every card sits in the same centred slot and is
-          // moved by transform. Size the deck to the tallest card and
-          // work out how far the two piles sit from centre.
-          let tileW = 0;
-          let pileX = 0;
-          const layout = () => {
-            tileW = slots[0]?.offsetWidth ?? 0;
-            const h = Math.max(...tiles.map((t) => t.scrollHeight));
-            slots.forEach((s) => (s.style.height = h + "px"));
-            track.style.height = h + LIFT + 24 + "px";
-            pileX = Math.min(tileW * 0.82, (track.clientWidth - tileW) / 2 - 12);
-          };
+        let tileW = 0;
+        let pileX = 0;
+        // Every card gets the tallest card's full natural height (borders
+        // included) plus a little breathing room, so nothing is clipped.
+        const layout = () => {
+          tileW = slots[0]?.offsetWidth ?? 0;
+          slots.forEach((s) => (s.style.height = ""));
+          const h = Math.max(...tiles.map((t) => t.offsetHeight)) + 16;
+          slots.forEach((s) => (s.style.height = h + "px"));
+          track.style.height = h + LIFT + 24 + "px";
+          pileX = Math.max(14, Math.min(tileW * 0.82, (track.clientWidth - tileW) / 2 - 12));
+        };
+        layout();
+        ScrollTrigger.addEventListener("refreshInit", layout);
+        // Web fonts can land after this runs and make cards taller.
+        let alive = true;
+        document.fonts?.ready.then(() => {
+          if (!alive) return;
           layout();
-          ScrollTrigger.addEventListener("refreshInit", layout);
-
-          let current = -1;
-          const setActive = (i: number) => {
-            if (i === current) return;
-            current = i;
-            tiles.forEach((t, j) => t.classList.toggle("is-active", j === i));
-            if (indCountRef.current)
-              indCountRef.current.textContent = String(i + 1).padStart(2, "0");
-          };
-
-          // d = how far card i is from the current position (negative = already
-          // dealt to the left pile, positive = still waiting on the right).
-          // |d| ≤ 1: in flight — it lifts and tilts in 3D as it arcs across.
-          // |d| > 1: resting in a pile, fanned a little more per card deep.
-          // One scroll gesture = one card: while pinned, the deck can only
-          // move one card from the last settled one; when scrolling stops
-          // the page snaps to exactly that card (see onScrollEnd below).
-          let settled = 0;
-          let snapping = false;
-          let st: ScrollTrigger | undefined;
-          const deal = (progress: number) => {
-            let pos = progress * (n - 1);
-            pos = gsap.utils.clamp(settled - 1, settled + 1, pos);
-            tiles.forEach((tile, i) => {
-              const d = i - pos;
-              const ad = Math.abs(d);
-              const s = Math.sign(d);
-              let x: number, y: number, rot: number, rotY: number, scale: number, bright: number, opacity = 1;
-              if (ad <= 1) {
-                const arc = Math.sin(Math.PI * ad);
-                x = s * pileX * ad;
-                y = -arc * LIFT;
-                rot = s * 7 * ad;
-                rotY = -s * 22 * arc;
-                scale = 1 - 0.08 * ad;
-                bright = 1 - 0.45 * ad;
-              } else {
-                const k = ad - 1;
-                x = s * (pileX + k * 18);
-                y = k * 7;
-                rot = s * (7 + k * 2.5);
-                rotY = 0;
-                scale = 0.92 - 0.02 * k;
-                bright = Math.max(0.3, 0.55 - 0.08 * k);
-                opacity = k > 3 ? 0 : 1;
-              }
-              slots[i].style.zIndex = String(100 - Math.round(ad * 10));
-              gsap.set(tile, {
-                x,
-                y,
-                rotation: rot,
-                rotationY: rotY,
-                scale,
-                opacity,
-                filter: `brightness(${bright.toFixed(3)})`,
-              });
-            });
-            setActive(Math.min(n - 1, Math.max(0, Math.round(pos))));
-            if (indBarRef.current) indBarRef.current.style.transform = `scaleX(${progress})`;
-          };
-          deal(0);
-
-          // A proxy tween so `scrub` smooths the deal like the other pins.
-          const state = { p: 0 };
-          const tween = gsap.to(state, {
-            p: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: pin,
-              start: "center center",
-              end: () => "+=" + window.innerHeight * 0.4 * n,
-              scrub: 1,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
-              // Arriving from a jump (nav link, scrollbar) starts at the end
-              // you came in from — but not while we're pulling back an
-              // overshoot, which re-enters on purpose.
-              onEnter: () => {
-                if (!snapping) settled = 0;
-              },
-              onEnterBack: () => {
-                if (!snapping) settled = n - 1;
-              },
-            },
-            onUpdate: () => deal(state.p),
-          });
-          st = tween.scrollTrigger;
-
-          const lenis = (
-            window as unknown as {
-              lenis?: { scrollTo?: (y: number, o?: { duration?: number }) => void };
-            }
-          ).lenis;
-          const scrollToCard = (i: number) => {
-            if (!st) return;
-            // Inset 1px so the first/last card stays inside the pin range.
-            const y = gsap.utils.clamp(
-              st.start + 1,
-              st.end - 1,
-              st.start + (i / (n - 1)) * (st.end - st.start)
-            );
-            if (Math.abs(window.scrollY - y) < 2) return;
-            snapping = true;
-            if (lenis?.scrollTo) lenis.scrollTo(y, { duration: 0.6 });
-            else window.scrollTo({ top: y, behavior: "smooth" });
-          };
-          const onScrollEnd = () => {
-            if (!st) return;
-            const y = window.scrollY;
-            const near = window.innerHeight * 1.5;
-            if (st.isActive) {
-              const raw = st.progress * (n - 1);
-              // A small nudge (under 12% of a card) snaps back to the same card.
-              const step = raw - settled > 0.12 ? 1 : raw - settled < -0.12 ? -1 : 0;
-              settled = gsap.utils.clamp(0, n - 1, settled + step);
-              scrollToCard(settled);
-              if (step === 0) snapping = false;
-            } else if (y > st.end && y - st.end < near && settled < n - 1) {
-              // A flick overshot the end mid-deck: pull back to the next card.
-              settled += 1;
-              scrollToCard(settled);
-            } else if (y < st.start && st.start - y < near && settled > 0) {
-              settled -= 1;
-              scrollToCard(settled);
-            } else {
-              snapping = false;
-            }
-          };
-          ScrollTrigger.addEventListener("scrollEnd", onScrollEnd);
-
           ScrollTrigger.refresh();
+        });
 
-          return () => {
-            ScrollTrigger.removeEventListener("refreshInit", layout);
-            ScrollTrigger.removeEventListener("scrollEnd", onScrollEnd);
-            track.style.height = "";
-            slots.forEach((s) => {
-              s.style.height = "";
-              s.style.zIndex = "";
-            });
-            pin.classList.remove("ind-horizontal");
-            gsap.set(tiles, { clearProps: "opacity,transform,filter" });
-            tiles.forEach((t) => t.classList.remove("is-active"));
-            if (indBarRef.current) indBarRef.current.style.transform = "";
+        // Clicking a card in either pile deals the deck to it (each mode
+        // supplies how). Ignored right after a swipe, which can end in a click.
+        let pick: ((i: number) => void) | null = null;
+        let lastDrag = 0;
+        const clickHandlers = slots.map((slot, i) => {
+          const onClick = () => {
+            if (performance.now() - lastDrag < 350 || i === current) return;
+            pick?.(i);
           };
-        }
-      );
+          slot.addEventListener("click", onClick);
+          return onClick;
+        });
+
+        let current = -1;
+        const setActive = (i: number) => {
+          if (i === current) return;
+          current = i;
+          tiles.forEach((t, j) => t.classList.toggle("is-active", j === i));
+          if (indCountRef.current)
+            indCountRef.current.textContent = String(i + 1).padStart(2, "0");
+        };
+
+        // pos = deck position in cards (0 … n-1). d = how far card i is from
+        // it (negative = dealt to the left pile, positive = waiting right).
+        // |d| ≤ 1: in flight — it lifts and tilts in 3D as it arcs across.
+        // |d| > 1: resting in a pile, fanned a little more per card deep.
+        const dealAt = (pos: number) => {
+          tiles.forEach((tile, i) => {
+            const d = i - pos;
+            const ad = Math.abs(d);
+            const s = Math.sign(d);
+            let x: number, y: number, rot: number, rotY: number, scale: number, bright: number;
+            let opacity = 1;
+            if (ad <= 1) {
+              const arc = Math.sin(Math.PI * ad);
+              x = s * pileX * ad;
+              y = -arc * LIFT;
+              rot = s * 7 * ad;
+              rotY = -s * 22 * arc;
+              scale = 1 - 0.08 * ad;
+              bright = 1 - 0.45 * ad;
+            } else {
+              const k = ad - 1;
+              x = s * (pileX + k * 18);
+              y = k * 7;
+              rot = s * (7 + k * 2.5);
+              rotY = 0;
+              scale = 0.92 - 0.02 * k;
+              bright = Math.max(0.3, 0.55 - 0.08 * k);
+              opacity = k > 3 ? 0 : 1;
+            }
+            slots[i].style.zIndex = String(100 - Math.round(ad * 10));
+            gsap.set(tile, {
+              x,
+              y,
+              rotation: rot,
+              rotationY: rotY,
+              scale,
+              opacity,
+              filter: `brightness(${bright.toFixed(3)})`,
+            });
+          });
+          setActive(Math.min(n - 1, Math.max(0, Math.round(pos))));
+          if (indBarRef.current)
+            indBarRef.current.style.transform = `scaleX(${n > 1 ? pos / (n - 1) : 1})`;
+        };
+        dealAt(0);
+
+        const cleanup = () => {
+          alive = false;
+          slots.forEach((slot, i) => slot.removeEventListener("click", clickHandlers[i]));
+          ScrollTrigger.removeEventListener("refreshInit", layout);
+          track.style.height = "";
+          slots.forEach((s) => {
+            s.style.height = "";
+            s.style.zIndex = "";
+          });
+          pin.classList.remove("ind-horizontal");
+          gsap.set(tiles, { clearProps: "opacity,transform,filter" });
+          tiles.forEach((t) => t.classList.remove("is-active"));
+          if (indBarRef.current) indBarRef.current.style.transform = "";
+        };
+        return {
+          n,
+          dealAt,
+          cleanup,
+          tileW: () => tileW,
+          setPick: (fn: (i: number) => void) => (pick = fn),
+          noteDrag: () => (lastDrag = performance.now()),
+        };
+      };
+
+      // ── One deck for desktop and mobile — no pinning, the page scrolls
+      // normally around it. ──
+      // • Mouse/trackpad: scrolling while the pointer is over the deck deals
+      //   one card per gesture (momentum included) and the page stays put;
+      //   at the first/last card the scroll carries on to the page.
+      // • Touch: swipe left/right (cards follow the finger), one card per
+      //   swipe; vertical swipes scroll the page (touch-action: pan-y).
+      // • Both: click/tap a side card to bring it to the centre, ‹ › buttons,
+      //   arrow keys when focused, and auto-deal every 5.5s while on screen —
+      //   paused on hover, stopped for good once the visitor takes over.
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const { n, dealAt, cleanup, tileW, setPick, noteDrag } = setupDeck();
+        const card = pin.querySelector<HTMLElement>(".ind-card") ?? pin;
+        let index = 0;
+        const state = { pos: 0 };
+
+        const go = (i: number) => {
+          const next = gsap.utils.clamp(0, n - 1, i);
+          const dist = Math.abs(next - index);
+          index = next;
+          gsap.to(state, {
+            pos: index,
+            duration: Math.min(1.1, 0.6 + Math.max(0, dist - 1) * 0.1),
+            ease: "power3.out",
+            overwrite: true,
+            onUpdate: () => dealAt(state.pos),
+          });
+        };
+
+        // Auto-deal.
+        let auto = true;
+        let visible = false;
+        let hovering = false;
+        let timer = 0;
+        const schedule = () => {
+          window.clearTimeout(timer);
+          if (!auto || !visible || hovering) return;
+          timer = window.setTimeout(() => {
+            go(index === n - 1 ? 0 : index + 1);
+            schedule();
+          }, 5500);
+        };
+        const takeOver = () => {
+          auto = false;
+          window.clearTimeout(timer);
+        };
+        const io = new IntersectionObserver(
+          ([entry]) => {
+            visible = entry.intersectionRatio >= 0.5;
+            schedule();
+          },
+          { threshold: [0, 0.5, 1] }
+        );
+        io.observe(track);
+        const onEnter = () => {
+          hovering = true;
+          schedule();
+        };
+        const onLeave = () => {
+          hovering = false;
+          schedule();
+        };
+        card.addEventListener("pointerenter", onEnter);
+        card.addEventListener("pointerleave", onLeave);
+
+        indStepRef.current = (dir) => {
+          takeOver();
+          go(index + dir);
+        };
+        setPick((i) => {
+          takeOver();
+          go(i);
+        });
+
+        // Wheel over the deck. A gesture = a burst of wheel events; a new one
+        // starts after a 280ms gap. Events of a gesture that already dealt a
+        // card are swallowed too, so momentum never scrolls the page.
+        let lastEvt = 0;
+        let consumed = false;
+        const onWheel = (e: WheelEvent) => {
+          const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+          if (Math.abs(delta) < 1) return;
+          const now = performance.now();
+          const fresh = now - lastEvt > 280;
+          lastEvt = now;
+          if (fresh) {
+            const dir = delta > 0 ? 1 : -1;
+            const atEdge = (dir > 0 && index === n - 1) || (dir < 0 && index === 0);
+            consumed = !atEdge;
+            if (!atEdge) {
+              takeOver();
+              go(index + dir);
+            }
+          }
+          if (consumed) {
+            // Keep it from the page and from Lenis (which listens on window).
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        };
+        card.addEventListener("wheel", onWheel, { passive: false });
+
+        // Swipe / drag.
+        const obs = Observer.create({
+          target: track,
+          type: "touch,pointer",
+          dragMinimum: 6,
+          lockAxis: true,
+          onDragStart: (self) => {
+            if (self.axis === "x") takeOver();
+          },
+          onDrag: (self) => {
+            if (self.axis !== "x") return;
+            gsap.killTweensOf(state);
+            const dx = self.x! - self.startX!;
+            state.pos = gsap.utils.clamp(
+              Math.max(0, index - 1),
+              Math.min(n - 1, index + 1),
+              index - dx / Math.max(120, tileW() * 0.8)
+            );
+            dealAt(state.pos);
+          },
+          onDragEnd: (self) => {
+            noteDrag();
+            if (self.axis !== "x") return go(index);
+            const dx = self.x! - self.startX!;
+            go(Math.abs(dx) > 40 ? index + (dx < 0 ? 1 : -1) : index);
+          },
+        });
+
+        // Arrow keys while the deck has focus.
+        const onKey = (e: globalThis.KeyboardEvent) => {
+          const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+          if (!dir) return;
+          e.preventDefault();
+          takeOver();
+          go(index + dir);
+        };
+        track.tabIndex = 0;
+        track.setAttribute("aria-label", "Industry sectors — use the arrow keys to browse");
+        track.addEventListener("keydown", onKey);
+
+        return () => {
+          obs.kill();
+          io.disconnect();
+          window.clearTimeout(timer);
+          card.removeEventListener("pointerenter", onEnter);
+          card.removeEventListener("pointerleave", onLeave);
+          card.removeEventListener("wheel", onWheel);
+          track.removeEventListener("keydown", onKey);
+          track.removeAttribute("tabindex");
+          track.removeAttribute("aria-label");
+          indStepRef.current = null;
+          cleanup();
+        };
+      });
     }, pin);
 
-    return () => {
-      lenis?.off?.("scroll", onLenisScroll);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   const moved = new Set(DELIVER_META.map((m) => m.para).filter((n) => n != null));
@@ -811,7 +909,7 @@ export default function About({
           <div ref={indPinRef} className="mt-16 lg:mt-20">
           <motion.div
             {...fadeUp}
-            className="group/card relative isolate overflow-hidden rounded-[28px] border border-accent/25 bg-[linear-gradient(135deg,rgb(var(--accent)/0.10),rgb(var(--panel))_45%,rgb(var(--panel)))] p-6 shadow-[0_0_0_1px_rgb(var(--accent)/0.06),0_30px_80px_-30px_rgb(var(--accent)/0.35)] transition-colors duration-300 hover:border-accent/40 sm:p-10 lg:p-12"
+            className="ind-card group/card relative isolate overflow-hidden rounded-[28px] border border-accent/25 bg-[linear-gradient(135deg,rgb(var(--accent)/0.10),rgb(var(--panel))_45%,rgb(var(--panel)))] p-6 shadow-[0_0_0_1px_rgb(var(--accent)/0.06),0_30px_80px_-30px_rgb(var(--accent)/0.35)] transition-colors duration-300 hover:border-accent/40 sm:p-10 lg:p-12"
           >
             {/* Decoration: two accent glows, a large watermark icon, and an
                 accent hairline along the top edge. */}
@@ -834,7 +932,7 @@ export default function About({
             />
 
             <div className="flex flex-wrap items-end justify-between gap-6">
-              <div className="flex items-center gap-4 sm:gap-5">
+              <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
                 <span className="relative">
                   <span aria-hidden="true" className="work-glyph-glow absolute -inset-4 rounded-full" />
                   <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-onaccent shadow-[0_10px_30px_-8px_rgb(var(--accent)/0.6)] transition-transform duration-300 group-hover/card:-rotate-6 sm:h-16 sm:w-16">
@@ -845,14 +943,14 @@ export default function About({
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
                     Sectors I&apos;ve designed for
                   </p>
-                  <h3 className="mt-1.5 font-display text-[28px] font-semibold leading-none tracking-[-0.035em] text-ink sm:text-4xl lg:text-5xl">
+                  <h3 className="ind-title mt-1.5 whitespace-nowrap font-display text-[26px] font-semibold leading-none tracking-[-0.035em] text-ink sm:text-4xl lg:text-5xl">
                     {industries.group}
                   </h3>
                 </div>
               </div>
 
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-5xl font-bold leading-none tracking-[-0.05em] text-accent sm:text-6xl lg:text-7xl">
+                <span className="ind-count font-display text-5xl font-bold leading-none tracking-[-0.05em] text-accent sm:text-6xl lg:text-7xl">
                   {industries.items.length}
                 </span>
                 <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-inkmuted">
@@ -862,19 +960,41 @@ export default function About({
             </div>
 
             {/* Scroll progress — only in the pinned desktop mode. */}
-            <div className="ind-progress mt-8 hidden items-center gap-4" aria-hidden="true">
-              <span className="font-mono text-[11px] tabular-nums text-inkmuted">
+            <div className="ind-progress mt-8 hidden items-center gap-4">
+              <span aria-hidden="true" className="font-mono text-[11px] tabular-nums text-inkmuted">
                 <span ref={indCountRef} className="text-accent">01</span> /{" "}
                 {String(industries.items.length).padStart(2, "0")}
               </span>
-              <span className="relative h-px flex-1 overflow-hidden bg-line">
+              <span aria-hidden="true" className="relative h-px flex-1 overflow-hidden bg-line">
                 <span
                   ref={indBarRef}
                   className="absolute inset-0 origin-left scale-x-0 bg-accent shadow-[0_0_10px_rgb(var(--accent)/0.6)]"
                 />
               </span>
-              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-inkmuted">
-                Scroll to explore
+              {/* Hint per input type (globals.css), then ‹ › step buttons. */}
+              <span className="ind-hint-swipe hidden items-center gap-2">
+                <span aria-hidden="true" className="ind-hint-fine whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-inkmuted">
+                  Scroll over the cards
+                </span>
+                <span aria-hidden="true" className="ind-hint-coarse whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-inkmuted">
+                  Swipe
+                </span>
+                <button
+                  type="button"
+                  aria-label="Previous sector"
+                  onClick={() => indStepRef.current?.(-1)}
+                  className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-inkmuted transition-colors hover:border-accent/40 hover:text-accent"
+                >
+                  <ChevronLeft className="h-4 w-4" strokeWidth={2} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next sector"
+                  onClick={() => indStepRef.current?.(1)}
+                  className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-inkmuted transition-colors hover:border-accent/40 hover:text-accent"
+                >
+                  <ChevronRight className="h-4 w-4" strokeWidth={2} />
+                </button>
               </span>
             </div>
 
@@ -920,7 +1040,7 @@ export default function About({
                     )}
 
                     {detail?.summary && (
-                      <p className="mt-3 text-sm leading-[1.65] text-inkmuted">{detail.summary}</p>
+                      <p className="ind-summary mt-3 text-sm leading-[1.65] text-inkmuted">{detail.summary}</p>
                     )}
 
                     {detail?.focus?.length ? (

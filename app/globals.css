@@ -437,9 +437,9 @@ body {
   animation-fill-mode: forwards;
 }
 
-/* About → Industry Experience: riffle-deck on desktop. `ind-horizontal` is
-   added by JS (lg + motion); otherwise the sectors are a plain grid. Every
-   card sits in one centred slot and JS deals it left/right by transform. */
+/* About → Industry Experience: riffle deck. `ind-horizontal` is added by JS
+   (motion allowed); otherwise the sectors are a plain grid. Every card sits
+   in one centred slot and JS deals it left/right by transform. */
 .ind-horizontal .ind-progress {
   display: flex;
 }
@@ -467,6 +467,35 @@ body {
   backdrop-filter: none;
   will-change: transform, filter;
   transform-origin: 50% 100%;
+}
+/* Horizontal drags go to the deck, vertical ones still scroll the page.
+   The hint matches the input: scroll for mouse/trackpad, swipe for touch. */
+.ind-horizontal .ind-track {
+  touch-action: pan-y;
+  user-select: none;
+}
+.ind-horizontal .ind-track:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 6px;
+  border-radius: 1rem;
+}
+.ind-horizontal .ind-hint-swipe {
+  display: inline-flex;
+}
+@media (pointer: coarse) {
+  .ind-hint-fine {
+    display: none;
+  }
+}
+@media (pointer: fine) {
+  .ind-hint-coarse {
+    display: none;
+  }
+}
+
+/* Side cards are clickable — they deal the deck to themselves. */
+.ind-horizontal .ind-tile:not(.is-active) {
+  cursor: pointer;
 }
 .ind-tile.is-active {
   border-color: rgb(var(--accent) / 0.55);
