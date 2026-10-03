@@ -3,73 +3,24 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  projects as seedProjects,
-  projectCategories,
-  type Project,
-} from "@/data/content";
+import { industries as seedIndustries, type Industry } from "@/data/content";
 
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-function FrameGlyph({ type }: { type: "app" | "dashboard" | "ecommerce" }) {
-  const ink = "rgb(var(--ink))";
-  const line = "rgb(var(--line))";
-  const accent = "rgb(var(--accent))";
-  const coral = "rgb(var(--coral))";
-  if (type === "app") {
-    return (
-      <svg viewBox="0 0 48 64" className="h-12 w-9" aria-hidden="true">
-        <rect x="1" y="1" width="46" height="62" rx="6" fill="none" stroke={ink} strokeWidth="2" />
-        <rect x="9" y="9" width="30" height="6" fill={line} />
-        <rect x="9" y="20" width="30" height="4" fill={line} />
-        <rect x="9" y="28" width="20" height="4" fill={line} />
-        <circle cx="24" cy="56" r="3" fill={accent} />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 64 48" className="h-9 w-12" aria-hidden="true">
-      <rect x="1" y="1" width="62" height="46" rx="4" fill="none" stroke={ink} strokeWidth="2" />
-      <rect x="1" y="1" width="62" height="10" fill={line} />
-      <circle cx="8" cy="6" r="1.5" fill={coral} />
-      <rect x="8" y="18" width="20" height="22" fill={line} />
-      <rect x="32" y="18" width="24" height="10" fill={line} />
-      <rect x="32" y="31" width="24" height="9" fill={accent} opacity="0.25" />
-    </svg>
-  );
-}
-
+// Industry experience — the pinned horizontal-scroll section. Projects live
+// in the WorkV2 grid below, so this tells the "where" story: one numbered
+// frame per sector, threaded on the dashed arch.
 export default function Work({
-  projects = seedProjects,
+  industries = seedIndustries,
 }: {
-  projects?: typeof seedProjects;
+  industries?: Industry[];
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const linePathRef = useRef<SVGPathElement>(null);
   const linePathRef2 = useRef<SVGPathElement>(null);
   const lineSvgRef = useRef<SVGSVGElement>(null);
-
-  // Order projects by industry group (label shown small above each name).
-  const catMap = new Map(projectCategories.map((c) => [c.id, c]));
-  const ordered: {
-    project: Project;
-    frame: number;
-    cat?: (typeof projectCategories)[number];
-  }[] = [];
-  let frame = 0;
-  const known = new Set(projectCategories.map((c) => c.id));
-  for (const cat of projectCategories) {
-    for (const project of projects.filter((p) => p.category === cat.id)) {
-      frame += 1;
-      ordered.push({ project, frame, cat });
-    }
-  }
-  for (const project of projects.filter((p) => !known.has(p.category ?? ""))) {
-    frame += 1;
-    ordered.push({ project, frame, cat: catMap.get(project.category ?? "") });
-  }
 
   useIsoLayoutEffect(() => {
     const root = rootRef.current;
@@ -274,21 +225,26 @@ export default function Work({
   }, []);
 
   return (
-    <section id="work" ref={rootRef} className="relative border-b border-line bg-paper text-ink">
+    <section id="industries" ref={rootRef} className="relative border-b border-line bg-paper text-ink">
       <div className="work-inner py-20 sm:py-28">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-end justify-between gap-4 border-b border-line px-6 pb-6">
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            Selected work
-          </h2>
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+              ( Where I&apos;ve designed )
+            </p>
+            <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              Industry experience
+            </h2>
+          </div>
           <div className="flex items-center gap-4">
             <span className="hidden font-mono text-xs uppercase tracking-wider text-inkmuted sm:block">
-              {projects.length} frames · scroll to explore
+              {industries.length} industries · scroll to explore
             </span>
             <a
-              href="#process"
+              href="#work"
               className="focus-ring inline-flex items-center gap-1.5 rounded-sm border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-inkmuted transition-colors hover:border-accent hover:text-accent"
             >
-              Skip work
+              Skip to work
               <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M12 5v14M19 12l-7 7-7-7" />
               </svg>
@@ -327,76 +283,53 @@ export default function Work({
                 opacity="0.3"
               />
             </svg>
-            {ordered.map(({ project, frame: frameNo, cat }) => (
-              <div
-                key={project.id}
-                className={`work-card ${project.featured ? "work-card--featured" : ""}`}
-              >
+            {industries.map((ind, i) => (
+              <div key={ind.label} className="work-card">
                 <div className="group flex h-full flex-col items-center px-2 text-center transition-transform duration-300 hover:-translate-y-1.5 sm:px-4">
                   <span
                     aria-hidden="true"
                     className="work-number select-none font-display text-[4rem] font-extrabold leading-none text-transparent [-webkit-text-stroke:3px_rgb(var(--ink))] sm:text-[5.5rem]"
                   >
-                    {String(frameNo).padStart(2, "0")}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  <div className="relative my-4 flex h-16 w-16 items-center justify-center sm:h-20 sm:w-20">
+                  <div className="relative my-5 flex h-20 w-20 items-center justify-center">
                     <span
                       aria-hidden="true"
                       className="work-glyph-glow absolute -inset-3 rounded-full"
                     />
-                    <div className="relative scale-[1.35] transition-transform duration-300 group-hover:scale-[1.5]">
-                      <FrameGlyph type={project.frameType} />
-                    </div>
+                    <span
+                      aria-hidden="true"
+                      className="relative grid h-[72px] w-[72px] place-items-center rounded-2xl border-2 border-ink bg-panel text-[34px] leading-none transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+                    >
+                      {ind.icon}
+                    </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-center gap-2">
-                    {project.featured && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-coral px-3.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white">
-                        ★ Featured
-                      </span>
-                    )}
-                    {cat && (
-                      <span className="inline-flex items-center gap-2 rounded-full bg-ink px-3.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-paper">
-                        <span aria-hidden="true">·</span>
-                        {cat.icon} {cat.label}
-                        <span aria-hidden="true">·</span>
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="mt-3.5 max-w-sm font-display text-xl font-bold leading-snug tracking-tight text-ink sm:text-2xl">
-                    {project.name}
+                  <h3 className="max-w-sm font-display text-xl font-bold leading-snug tracking-tight text-ink sm:text-2xl">
+                    {ind.label}
                   </h3>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-inkmuted">
-                    {project.role ? `${project.role} · ` : ""}
-                    {project.org}
-                  </p>
+                  {ind.work && (
+                    <p className="mt-2 inline-flex max-w-sm items-center gap-2 rounded-full bg-ink px-3.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-paper">
+                      <span aria-hidden="true">·</span>
+                      {ind.work}
+                      <span aria-hidden="true">·</span>
+                    </p>
+                  )}
                   <p className="mt-3 line-clamp-3 max-w-sm text-[15px] leading-relaxed text-inkmuted">
-                    {project.summary}
+                    {ind.summary}
                   </p>
 
                   <div className="mt-4 flex max-w-sm flex-wrap items-center justify-center gap-2">
-                    {project.stack.slice(0, 3).map((s) => (
+                    {ind.focus.map((f) => (
                       <span
-                        key={s}
+                        key={f}
                         className="rounded-full border border-line px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-inkmuted"
                       >
-                        {s}
+                        {f}
                       </span>
                     ))}
                   </div>
-
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="focus-ring mt-4 inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider text-accent transition-colors hover:text-coral"
-                    >
-                      View project ↗
-                    </a>
-                  )}
                 </div>
               </div>
             ))}

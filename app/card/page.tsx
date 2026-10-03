@@ -119,13 +119,13 @@ export default async function CardPage() {
     // Fixed dark palette regardless of the visitor's site-wide theme choice
     // — a tap-to-connect card should look the same on every phone it's
     // opened on, not flip to a light page if that's their stored preference.
-    <main className="relative min-h-screen overflow-hidden bg-[#0a0a10] px-5 py-10 text-white sm:py-16">
+    <main className="relative min-h-screen overflow-hidden bg-[#0c0d0a] px-5 py-10 text-white sm:py-16">
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0"
         style={{
           background:
-            "radial-gradient(circle at 20% 15%, rgb(124 58 237 / 0.25), transparent 55%), radial-gradient(circle at 85% 80%, rgb(56 189 248 / 0.16), transparent 55%)",
+            "radial-gradient(circle at 50% 0%, rgb(212 240 79 / 0.14), transparent 50%), radial-gradient(circle at 10% 60%, rgb(212 240 79 / 0.06), transparent 45%), radial-gradient(circle at 90% 90%, rgb(255 120 96 / 0.10), transparent 50%)",
         }}
       />
 
@@ -158,7 +158,7 @@ export default async function CardPage() {
               className="absolute inset-0 scale-110 rounded-full bg-accent opacity-50 blur-2xl"
             />
             <div className="relative rounded-full bg-accent p-[3px]">
-              <div className="h-28 w-28 overflow-hidden rounded-full bg-[#0a0a10]">
+              <div className="h-28 w-28 overflow-hidden rounded-full bg-[#0c0d0a]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={PROFILE_IMAGE}

@@ -6,14 +6,47 @@ import NebulaBackground from "./NebulaBackground";
 import ToolkitOrbit from "./ToolkitOrbit";
 import { ToolIcon, allToolNames } from "./ToolIcon";
 
-const groupStagger: Variants = {
+// Each group plays as a short sequence: the label slides in, then the chips
+// rise out of a soft blur one at a time, and each icon pops in just after
+// its chip lands — so the stack reads as being assembled, not dumped.
+const group: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.18 } },
+};
+
+const label: Variants = {
+  hidden: { opacity: 0, x: -16, letterSpacing: "0.3em" },
+  show: {
+    opacity: 1,
+    x: 0,
+    letterSpacing: "0.05em",
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const chipRow: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09 } },
 };
 
 const chip: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 22, scale: 0.88, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { type: "spring", stiffness: 260, damping: 22, mass: 0.7 },
+  },
+};
+
+const icon: Variants = {
+  hidden: { scale: 0, rotate: -120 },
+  show: {
+    scale: 1,
+    rotate: 0,
+    transition: { type: "spring", stiffness: 320, damping: 16, delay: 0.12 },
+  },
 };
 
 // These groups' tools skip the icon — both in their own chips (text-only)
@@ -64,21 +97,27 @@ export default function Toolkit({
             </p>
 
             <div className="mt-9 flex flex-col gap-7">
-              {toolkit.map((group) => (
-                <motion.div
-                  key={group.group}
-                  initial={reduce ? undefined : "hidden"}
-                  whileInView={reduce ? undefined : "show"}
-                  viewport={{ once: true, margin: "-60px" }}
-                  variants={reduce ? undefined : groupStagger}
-                >
-                  <h3 className="font-mono text-[11px] uppercase tracking-wider text-inkmuted">
-                    {group.group}
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {group.tools.map((tool) => {
-                      const showIcon = !NO_ICON_GROUPS.has(group.group);
-                      return (
+              {toolkit.map(({ group: name, tools }) => {
+                const showIcon = !NO_ICON_GROUPS.has(name);
+                return (
+                  <motion.div
+                    key={name}
+                    initial={reduce ? undefined : "hidden"}
+                    whileInView={reduce ? undefined : "show"}
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={reduce ? undefined : group}
+                  >
+                    <motion.h3
+                      variants={reduce ? undefined : label}
+                      className="font-mono text-[11px] uppercase tracking-wider text-inkmuted"
+                    >
+                      {name}
+                    </motion.h3>
+                    <motion.div
+                      variants={reduce ? undefined : chipRow}
+                      className="mt-3 flex flex-wrap gap-2"
+                    >
+                      {tools.map((tool) => (
                         <motion.span
                           key={tool}
                           variants={reduce ? undefined : chip}
@@ -89,14 +128,21 @@ export default function Toolkit({
                               : "inline-flex cursor-default items-center rounded-full border border-line bg-panel px-4 py-1.5 text-sm text-ink transition-colors hover:border-accent"
                           }
                         >
-                          {showIcon && <ToolIcon name={tool} size={22} />}
+                          {showIcon && (
+                            <motion.span
+                              variants={reduce ? undefined : icon}
+                              className="inline-flex"
+                            >
+                              <ToolIcon name={tool} size={22} />
+                            </motion.span>
+                          )}
                           {tool}
                         </motion.span>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              ))}
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>

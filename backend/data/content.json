@@ -169,6 +169,7 @@
       "category": "commerce",
       "name": "Danube Home — Mobile App",
       "org": "Danube Home",
+      "link": "https://www.danubehome.com",
       "period": "Jan 2023 — Present",
       "summary": "Led the end-to-end UX and product design of the Danube Home mobile app — a seamless omnichannel shopping experience across iOS and Android, with scalable mobile design patterns and production-ready React Native implementation.",
       "details": [
@@ -388,6 +389,68 @@
         "Frontend Collaboration"
       ],
       "frameType": "ecommerce"
+    },
+    {
+      "id": "kingdom-bridge",
+      "category": "realestate",
+      "name": "Kingdom Bridge — Real Estate Advisory",
+      "org": "UK · Dubai",
+      "summary": "Designed the website for Kingdom Bridge, a premium cross-border real estate and investment advisory firm bridging the United Kingdom and Dubai — presenting luxury property, strategic capital and end-to-end relocation services through an editorial, trust-led experience.",
+      "details": [
+        "Defined an editorial, luxury visual direction — serif typography, gold accents and immersive city imagery",
+        "Structured the site around the firm's offer: expertise, UK–Dubai corridor, opportunities and process",
+        "Surfaced asset classes (residential, waterfront, off-plan, portfolio) and advisory services (Golden Visa, UAE setup, wealth strategy) at a glance",
+        "Designed responsive layouts that keep the premium feel across desktop and mobile"
+      ],
+      "stack": [
+        "Web Design",
+        "Real Estate",
+        "Brand Experience",
+        "Responsive UI"
+      ],
+      "frameType": "ecommerce",
+      "link": "https://www.kingdombridge-est.com/"
+    },
+    {
+      "id": "hamparaa-lux",
+      "category": "commerce",
+      "name": "Hamparaa.lux — Luxury Gift Hampers",
+      "org": "Dubai",
+      "summary": "Designed the e-commerce experience for Hamparaa.lux, a Dubai luxury gift-hamper brand — curated hampers, a build-your-own hamper flow, and occasion and corporate gifting, wrapped in a warm, premium editorial look.",
+      "details": [
+        "Set a premium visual direction — editorial serif headlines, a deep burgundy and cream palette, and rich lifestyle photography",
+        "Structured navigation around how people gift: shop hampers, customise your hamper, baby, signature, corporate and occasions",
+        "Designed a 'Create Your Hamper' path alongside ready-made collections",
+        "Designed responsive storefront layouts with search, account, wishlist and cart"
+      ],
+      "stack": [
+        "E-commerce UX",
+        "Web Design",
+        "Brand Experience",
+        "Responsive UI"
+      ],
+      "frameType": "ecommerce"
+    },
+    {
+      "id": "y-vision",
+      "category": "web",
+      "name": "Y-Vision — Digital Agency Website",
+      "org": "Middle East",
+      "link": "https://www.y-vizion.com/",
+      "summary": "Designed the website for Y-Vision, a Middle East digital agency helping businesses grow through websites, mobile apps, marketing, SEO, automation and AI — a bold, modern presence built to turn visitors into consultations.",
+      "details": [
+        "Set a bold, modern visual direction with confident typography and a clear value proposition up front",
+        "Built the page around conversion — 'Book consultation' and 'View services' as primary actions, with a persistent 'Book a call'",
+        "Showcased the agency's technology stack (Next.js, FlutterFlow, Google Ads, Meta Ads, SEO, HubSpot, Tailwind CSS, AI automation) as a scrolling capability strip",
+        "Designed responsive layouts for desktop and mobile"
+      ],
+      "stack": [
+        "Web Design",
+        "Conversion UX",
+        "Brand Experience",
+        "Responsive UI"
+      ],
+      "frameType": "ecommerce"
     }
   ],
   "experience": [
@@ -548,47 +611,48 @@
       "title": "YARA — AI Assistant",
       "tag": "AI · Conversational UI",
       "url": "yara.danubehome.com",
-      "src": "https://picsum.photos/seed/yara-ai/1280/854",
+      "src": "/images/projects/yara.png",
       "projectId": "yara"
     },
     {
       "title": "Hexa — Showroom App",
       "tag": "Mobile · Sales",
       "url": "hexa.danubehome.com",
-      "src": "https://picsum.photos/seed/hexa-store/1280/854",
+      "src": "/images/projects/HexaApp.jpeg",
       "projectId": "hexa"
     },
     {
       "title": "Danube Home — App",
       "tag": "React Native",
       "url": "app.danubehome.com",
-      "src": "https://picsum.photos/seed/danube-app/1280/854",
+      "src": "/images/projects/DHMobileApp.jpeg",
       "projectId": "danube-app"
     },
     {
       "title": "Danube Property — App",
       "tag": "Mobile · Real Estate",
       "url": "danubeproperties.com",
-      "src": "https://picsum.photos/seed/danube-property/1280/854"
+      "src": "/images/projects/IMG_2971.jpeg"
     },
     {
       "title": "Seller Hub — Marketplace",
       "tag": "Mobile · Dashboard",
       "url": "sellerhub.danubehome.com",
-      "src": "https://picsum.photos/seed/seller-hub/1280/854"
+      "src": "/images/projects/IMG_2972.jpeg",
+      "link": "https://sellerhub.danubehome.com/"
     },
     {
       "title": "Danubehome.com",
       "tag": "E-commerce",
       "url": "danubehome.com",
-      "src": "https://picsum.photos/seed/danube-web/1280/854",
+      "src": "/images/projects/danubeHome.png",
       "projectId": "danubehome-web"
     },
     {
       "title": "Order Management (OMS)",
       "tag": "Dashboard",
       "url": "oms.danubehome.com",
-      "src": "https://picsum.photos/seed/oms-dash/1280/854",
+      "src": "/images/projects/OMS.png",
       "projectId": "oms"
     },
     {
@@ -597,6 +661,51 @@
       "url": "sleephubz.com",
       "src": "https://picsum.photos/seed/sleephubz/1280/854",
       "projectId": "sleephubz"
+    },
+    {
+      "title": "AI Product Search — Personal AI Shopper",
+      "tag": "AI · E-commerce Search",
+      "url": "danubehome.com",
+      "src": "/images/projects/AISearch.png"
+    },
+    {
+      "title": "Imagine AI — Shopping Looks",
+      "tag": "AI · Mood Boards",
+      "url": "danubehome.com",
+      "src": "/images/projects/AIImagine.png"
+    },
+    {
+      "title": "Electronics Store — E-commerce",
+      "tag": "E-commerce · Electronics",
+      "url": "E-commerce · Web UI",
+      "src": "/images/projects/eletronicsEcommerce.png"
+    },
+    {
+      "title": "Car Rental App",
+      "tag": "Mobile · Car Rental",
+      "url": "Jetour · Mobile UI",
+      "src": "/images/projects/multi-screen-canvas.jpg"
+    },
+    {
+      "title": "Kingdom Bridge — Real Estate",
+      "tag": "Web · Real Estate",
+      "url": "kingdombridge-est.com",
+      "src": "/images/projects/KindomBridge.png",
+      "projectId": "kingdom-bridge"
+    },
+    {
+      "title": "Hamparaa.lux — Gift Hampers",
+      "tag": "E-commerce · Luxury Gifting",
+      "url": "Dubai · E-commerce",
+      "src": "/images/projects/giftHamperecommerce.png",
+      "projectId": "hamparaa-lux"
+    },
+    {
+      "title": "Y-Vision — Digital Agency",
+      "tag": "Web · Agency",
+      "url": "y-vizion.com",
+      "src": "/images/projects/yVision.png",
+      "projectId": "y-vision"
     }
   ],
   "toolkit": [
@@ -747,6 +856,11 @@
     {
       "id": "about",
       "label": "About",
+      "enabled": true
+    },
+    {
+      "id": "industries",
+      "label": "Industries",
       "enabled": true
     },
     {

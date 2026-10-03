@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Work from "@/components/Work";
+import WorkV2 from "@/components/WorkV2";
 import Experience from "@/components/Experience";
 import Gallery from "@/components/Gallery";
 import DesignProcess from "@/components/DesignProcess";
@@ -29,7 +30,8 @@ export default async function Home() {
       <Nav links={navLinks} />
       <Hero profile={c.profile} stats={c.stats} />
       {on("about") && <About about={c.about} />}
-      {on("work") && <Work projects={c.projects} />}
+      {on("industries") && <Work />}
+      {on("work") && <WorkV2 projects={c.projects} gallery={c.gallery} />}
       {on("process") && <DesignProcess process={c.process} />}
       {on("experience") && (
         <Experience experience={c.experience} education={c.education} />
