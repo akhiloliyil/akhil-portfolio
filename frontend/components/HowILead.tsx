@@ -63,7 +63,7 @@ export default function HowILead() {
   return (
     <section
       id="leadership"
-      className="relative overflow-hidden bg-paper py-14 text-ink sm:py-20 lg:py-32"
+      className="relative overflow-hidden bg-paper pb-8 pt-14 text-ink sm:pb-10 sm:pt-20 lg:pb-14 lg:pt-32"
     >
       {/* Background glow */}
       <div

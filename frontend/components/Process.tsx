@@ -12,7 +12,7 @@ const STEPS = [
 
 export default function Process({ process = seedProcess }: { process?: typeof seedProcess }) {
   return (
-    <section id="process" className="relative scroll-mt-24 border-b border-line bg-paper py-14 sm:py-20 lg:py-24">
+    <section id="process" className="relative scroll-mt-24 border-b border-line bg-paper pb-14 pt-8 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
       <div className="page-container">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>

@@ -220,12 +220,13 @@ body {
    class is added by JS only on large screens with motion allowed; otherwise
    the section stays a normal vertical stack (mobile / reduced-motion). */
 /* Uniform section heights on desktop — every section fills at least the
-   viewport, with its content vertically centred. Industry experience is excluded (it pins
-   to 100vh on its own). Gated to 1280px (not lg's 1024) so tablet landscape
+   viewport, with its content vertically centred. Industry experience and
+   Design → Code are excluded (they pin to 100vh on their own), and so is
+   Process — a short strip that would otherwise float in empty space. Gated to 1280px (not lg's 1024) so tablet landscape
    isn't stretched to fill a full screen's worth of empty space around
    content shorter than the viewport — that's what "desktop" here means. */
 @media (min-width: 1280px) {
-  main > section:not(#industries):not(#design-to-code) {
+  main > section:not(#industries):not(#design-to-code):not(#process) {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -422,6 +423,62 @@ body {
   transform-origin: left center;
   background: rgb(var(--accent));
   box-shadow: 0 0 12px rgb(var(--accent) / 0.65);
+}
+
+/* About → "What I Bring" auto-advance: the selected tab's time-left bar.
+   Its animationend moves to the next tab, so pausing it pauses the carousel. */
+@keyframes about-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.about-progress {
+  animation-name: about-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* About → Industry Experience: riffle-deck on desktop. `ind-horizontal` is
+   added by JS (lg + motion); otherwise the sectors are a plain grid. Every
+   card sits in one centred slot and JS deals it left/right by transform. */
+.ind-horizontal .ind-progress {
+  display: flex;
+}
+.ind-horizontal .ind-track {
+  display: block;
+  position: relative;
+  perspective: 1400px;
+}
+.ind-horizontal .ind-track > li {
+  --ind-card-w: min(70vw, 22rem);
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  width: var(--ind-card-w);
+  margin-left: calc(var(--ind-card-w) / -2);
+}
+@media (min-width: 1024px) {
+  .ind-horizontal .ind-track > li {
+    --ind-card-w: min(28vw, 22rem);
+  }
+}
+/* Opaque cards so the piles read as a deck, not see-through layers. */
+.ind-horizontal .ind-tile {
+  background: rgb(var(--paper));
+  backdrop-filter: none;
+  will-change: transform, filter;
+  transform-origin: 50% 100%;
+}
+.ind-tile.is-active {
+  border-color: rgb(var(--accent) / 0.55);
+  box-shadow: 0 18px 40px -18px rgb(var(--accent) / 0.55);
+}
+.ind-tile.is-active::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: rgb(var(--accent));
+  box-shadow: 0 0 12px rgb(var(--accent) / 0.7);
 }
 
 /* Soft glow behind each project's glyph icon. */
