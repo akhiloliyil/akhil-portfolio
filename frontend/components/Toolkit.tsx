@@ -52,7 +52,7 @@ export default function Toolkit({
             </span>
             <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold leading-[1.15] tracking-tight text-ink sm:text-5xl">
               Design tooling and the{" "}
-              <span className="bg-gradient-to-r from-accent to-[#8b5cf6] bg-clip-text text-transparent">
+              <span className="text-accent">
                 ship-it stack
               </span>
               , side by side

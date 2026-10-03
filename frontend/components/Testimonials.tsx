@@ -204,7 +204,7 @@ export default function Testimonials({
               type="button"
               aria-label="Next"
               onClick={() => embla?.scrollNext()}
-              className="focus-ring grid h-11 w-11 place-items-center rounded-full bg-accent text-white transition-opacity hover:opacity-90"
+              className="focus-ring grid h-11 w-11 place-items-center rounded-full bg-accent text-onaccent transition-opacity hover:opacity-90"
             >
               <Chevron dir="right" />
             </button>

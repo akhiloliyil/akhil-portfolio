@@ -6,10 +6,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = `${profile.name} — ${profile.title}`;
 
-const ACCENT = "#7A91FF";
-const INK = "#E9EDF5";
-const MUTED = "#969FB4";
-const BG = "#0B0E16";
+const ACCENT = "#D4F04F";
+const INK = "#F6F7F0";
+const MUTED = "#A0A496";
+const BG = "#0C0D0A";
 const handle = (pos: React.CSSProperties): React.CSSProperties => ({
   position: "absolute",
   width: 18,
@@ -43,7 +43,7 @@ export default function OpengraphImage() {
             inset: 0,
             display: "flex",
             backgroundImage:
-              "linear-gradient(rgba(233,237,245,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(233,237,245,0.05) 1px, transparent 1px)",
+              "linear-gradient(rgba(246,247,240,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(246,247,240,0.05) 1px, transparent 1px)",
             backgroundSize: "48px 48px",
           }}
         />
@@ -101,7 +101,7 @@ export default function OpengraphImage() {
                   key={t}
                   style={{
                     display: "flex",
-                    border: "1px solid rgba(233,237,245,0.16)",
+                    border: "1px solid rgba(246,247,240,0.16)",
                     color: MUTED,
                     padding: "10px 18px",
                     borderRadius: 6,

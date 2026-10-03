@@ -7,10 +7,13 @@ import {
 } from "motion/react";
 
 import {
-  TrendingUp,
-  Workflow,
+  Sparkles,
+  Route,
   Component,
-  Zap,
+  ShoppingBag,
+  Wand2,
+  Code2,
+  ArrowRight,
   Target,
   type LucideIcon,
 } from "lucide-react";
@@ -47,28 +50,32 @@ const DELIVER_META: {
   Icon: LucideIcon;
 }[] = [
   {
-    title: "Conversion-Focused Products",
-    Icon: TrendingUp,
+    title: "AI Product & UX",
+    Icon: Sparkles,
   },
   {
-    title: "Simplified Workflows",
-    Icon: Workflow,
+    title: "Product & CX Design",
+    Icon: Route,
   },
   {
-    title: "Scalable Design Systems",
+    title: "Design Systems",
     Icon: Component,
   },
   {
-    title: "AI-Assisted Prototyping",
-    Icon: Zap,
+    title: "E-commerce & Digital Platforms",
+    Icon: ShoppingBag,
   },
   {
-    title: "Strategic Product Alignment",
-    Icon: Target,
+    title: "AI-Assisted Design & Vibe Coding",
+    Icon: Wand2,
+  },
+  {
+    title: "Front-End Development",
+    Icon: Code2,
   },
 ];
 
-const HIGHLIGHT = "don't just look good";
+const HIGHLIGHT = "simple, scalable, and high-performing";
 
 export default function About({
   about = seedAbout,
@@ -238,14 +245,14 @@ export default function About({
               {...fadeUp}
               className="
                 font-display
-                text-4xl
+                text-lg
                 font-semibold
-                leading-[1.05]
-                tracking-[-0.04em]
+                leading-[1.3]
+                tracking-[-0.02em]
                 text-ink
-                sm:text-5xl
+                sm:text-2xl
                 lg:max-w-2xl
-                lg:text-[52px]
+                lg:text-[26px]
               "
             >
               {leadParts.length === 2 ? (
@@ -253,13 +260,7 @@ export default function About({
                   {leadParts[0]}
 
                   <span
-                    className="
-                      bg-gradient-to-r
-                      from-sky-400
-                      to-accent
-                      bg-clip-text
-                      text-transparent
-                    "
+                    className="text-accent"
                   >
                     {HIGHLIGHT}
                   </span>
@@ -289,6 +290,63 @@ export default function About({
                 </p>
               ))}
             </motion.div>
+
+            {about.flow?.length ? (
+              <motion.div {...fadeUp} className="mt-10">
+                <p
+                  className="
+                    font-mono
+                    text-[11px]
+                    uppercase
+                    tracking-[0.08em]
+                    text-accent
+                  "
+                >
+                  How I work
+                </p>
+
+                <ol
+                  className="
+                    mt-4
+                    flex
+                    flex-wrap
+                    items-center
+                    gap-x-1.5
+                    gap-y-2
+                    lg:max-w-xl
+                  "
+                >
+                  {about.flow.map((step, i) => (
+                    <li
+                      key={step}
+                      className="flex items-center gap-1.5"
+                    >
+                      <span
+                        className="
+                          rounded-md
+                          border
+                          border-line
+                          bg-panel
+                          px-2.5
+                          py-1
+                          text-[13px]
+                          text-ink
+                        "
+                      >
+                        {step}
+                      </span>
+                      {i < about.flow.length - 1 && (
+                        <ArrowRight
+                          aria-hidden="true"
+                          className="h-3.5 w-3.5 text-inkmuted"
+                          strokeWidth={1.8}
+                        />
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </motion.div>
+            ) : null}
           </div>
 
           {/* =================================================
@@ -316,7 +374,7 @@ export default function About({
                 text-accent
               "
             >
-              Commitment to quality
+              Capabilities
             </span>
 
             <h3
@@ -329,7 +387,7 @@ export default function About({
                 text-ink
               "
             >
-              What I Deliver
+              What I Bring
             </h3>
 
             <div
@@ -439,7 +497,7 @@ export default function About({
               text-inkmuted
             "
           >
-            Core Expertise
+            Expertise & Industries
           </h3>
 
           <div
@@ -448,11 +506,14 @@ export default function About({
               grid
               gap-x-10
               gap-y-8
-              sm:grid-cols-[1.6fr_0.4fr]
+              sm:grid-cols-[1.4fr_0.6fr]
             "
           >
-            {about.expertise.map((group) => (
-              <div key={group.group}>
+            {about.expertise.map((group, gi) => (
+              <div
+                key={group.group}
+                className={gi === 0 ? "sm:col-span-2" : undefined}
+              >
                 <p
                   className="
                     font-mono

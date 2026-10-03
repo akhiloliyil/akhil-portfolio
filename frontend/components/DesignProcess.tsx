@@ -81,6 +81,7 @@ export default function DesignProcess({
 
   return (
     <section
+      id="process"
       className="
         relative
         overflow-visible
@@ -390,7 +391,7 @@ export default function DesignProcess({
                     w-px
                     origin-top
                     bg-accent
-                    shadow-[0_0_12px_rgba(139,92,246,0.65)]
+                    shadow-[0_0_12px_rgb(var(--accent)/0.65)]
                   "
                   style={{
                     scaleY: scrollYProgress,
@@ -466,7 +467,7 @@ export default function DesignProcess({
                           font-semibold
                           tracking-[-0.02em]
                           text-accent
-                          shadow-[0_0_20px_rgba(139,92,246,0.15)]
+                          shadow-[0_0_20px_rgb(var(--accent)/0.15)]
                         "
                       >
                         {String(index + 1).padStart(2, "0")}

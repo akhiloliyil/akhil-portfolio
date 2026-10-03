@@ -43,7 +43,7 @@ export default function Contact({
 
             <h2 className="mx-auto mt-6 max-w-2xl font-serif text-4xl leading-[1.1] text-ink sm:text-6xl">
               Let&apos;s design something people{" "}
-              <em className="bg-gradient-to-r from-sky-400 to-accent bg-clip-text text-transparent not-italic">
+              <em className="text-accent not-italic">
                 actually
               </em>{" "}
               enjoy using.

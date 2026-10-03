@@ -5,23 +5,26 @@
 /* Palette as RGB channel triplets so Tailwind opacity modifiers (bg-paper/70)
    keep working. Swap the values under .dark to retheme the whole site. */
 :root {
-  --paper: 243 245 248;
+  --paper: 246 247 241;
   --panel: 255 255 255;
-  --ink: 17 25 43;
-  --inkmuted: 91 100 120;
-  --line: 215 220 229;
-  --accent: 139 92 246;
+  --ink: 17 19 12;
+  --inkmuted: 92 97 82;
+  --line: 221 224 210;
+  /* Darker lime in light mode so accent text keeps WCAG AA contrast. */
+  --accent: 77 124 15;
+  --onaccent: 255 255 255;
   --coral: 255 91 60;
   color-scheme: light;
 }
 
 .dark {
-  --paper: 11 14 22;
-  --panel: 21 26 38;
-  --ink: 233 237 245;
-  --inkmuted: 150 160 180;
-  --line: 40 48 64;
-  --accent: 139 92 246;
+  --paper: 12 13 10;
+  --panel: 22 24 18;
+  --ink: 246 247 240;
+  --inkmuted: 160 164 150;
+  --line: 42 46 34;
+  --accent: 212 240 79;
+  --onaccent: 12 13 10;
   --coral: 255 120 96;
   color-scheme: dark;
 }
@@ -51,7 +54,7 @@ body {
 
 ::selection {
   background: rgb(var(--accent));
-  color: #ffffff;
+  color: rgb(var(--onaccent));
 }
 
 /* Nebula backdrop, used behind the hero and section headers — see
@@ -270,8 +273,9 @@ body {
   /* The arch's excursion is centred symmetrically (see drawArch's centerY
      in Work.tsx), so this only needs to clear the header plus ~20px for
      the curve's highest point — not the larger one-sided buffer an
-     off-centre baseline would require. */
-  padding-top: 5rem;
+     off-centre baseline would require. Also clears the sticky floating
+     nav (~82px tall), which overlaps the pinned section. */
+  padding-top: 7.5rem;
   padding-bottom: 1.5rem;
 }
 .work-horizontal .work-viewport {

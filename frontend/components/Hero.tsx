@@ -194,7 +194,7 @@ export default function Hero({
   // layout. Gradient ring echoes the site's accent without needing the
   // full card treatment.
   const portraitCircle = (
-    <div className="relative h-28 w-28 shrink-0 rounded-full bg-gradient-to-br from-sky-400 to-accent p-[3px] shadow-[0_8px_40px_-12px_rgb(var(--accent)/0.6)] sm:h-[280px] sm:w-[280px]">
+    <div className="relative h-28 w-28 shrink-0 rounded-full bg-accent p-[3px] shadow-[0_8px_40px_-12px_rgb(var(--accent)/0.6)] sm:h-[280px] sm:w-[280px]">
       <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 border-paper bg-paper font-display text-2xl font-semibold text-accent">
         {portraitOk ? (
           <img
@@ -330,7 +330,7 @@ export default function Hero({
             <Magnetic>
               <a
                 href="#work"
-                className="focus-ring inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,rgb(var(--accent)),#4f7cff)] px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] transition-[filter] hover:brightness-110"
+                className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-onaccent shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] transition-[filter] hover:brightness-110"
               >
                 View selected work
                 <svg

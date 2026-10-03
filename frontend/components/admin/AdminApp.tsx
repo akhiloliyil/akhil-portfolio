@@ -76,7 +76,8 @@ const FIELD_LABELS: Record<string, string> = {
   focus: "Focus pills",
   lead: "Lead statement",
   paragraphs: "Paragraphs",
-  delivers: "What I deliver",
+  flow: "How I work",
+  delivers: "What I bring",
   expertise: "Core expertise",
 };
 const pretty = (k: string) =>
@@ -403,7 +404,8 @@ export default function AdminApp() {
           <div className="space-y-4">
             <Area label="Lead statement" rows={3} value={content.about.lead} onChange={(v) => patch({ about: { ...content.about, lead: v } })} />
             <StringList area label="Paragraphs" values={content.about.paragraphs} onChange={(v) => patch({ about: { ...content.about, paragraphs: v } })} />
-            <StringList area label="What I deliver" values={content.about.delivers} onChange={(v) => patch({ about: { ...content.about, delivers: v } })} />
+            <StringList label="How I work (flow steps)" values={content.about.flow ?? []} onChange={(v) => patch({ about: { ...content.about, flow: v } })} />
+            <StringList area label="What I bring" values={content.about.delivers} onChange={(v) => patch({ about: { ...content.about, delivers: v } })} />
             <div>
               <span className="font-mono text-[10px] uppercase tracking-wider text-inkmuted">Core expertise groups</span>
               <div className="mt-2">

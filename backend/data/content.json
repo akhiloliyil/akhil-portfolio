@@ -1,18 +1,18 @@
 {
   "profile": {
     "name": "Akhil Kumar",
-    "title": "Lead Product Designer · UI/UX & CX · Design Systems",
+    "title": "Lead Product Designer · AI Product & UX · UX/CX · Design Systems",
     "location": "Dubai, United Arab Emirates",
     "email": "akhiloliyil@gmail.com",
     "phone": "+971 565862460",
     "linkedin": "https://www.linkedin.com/in/akhil-kumar-49789656/",
-    "blurb": "Lead Product Designer shaping AI-driven, user-centered experiences end to end — from research and design systems to production React, Next.js, and React Native. Six years at Danube Home driving e-commerce, OMS, and mobile platforms, turning UX and CX decisions into measurable business growth, with prior work across marketplaces, healthcare apps, and CMS builds.",
+    "blurb": "I design AI-driven digital products and customer experiences — 16+ years across UI/UX, Product Design, CX, and Front-End Development. I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps, and enterprise platforms, connecting UX, CX, AI, and technology from customer journey to production.",
     "focus": [
-      "AI-Driven Experiences",
-      "Design Systems",
+      "AI Product Design",
+      "Generative AI",
       "React · Next.js · React Native",
-      "E-commerce · Banking · FinTech · Healthcare · Marketplace · Dashboard · Design Systems",
-      "Business Growth"
+      "E-commerce & Retail · Marketplace · HealthTech · FinTech · Enterprise & B2B",
+      "Vibe Coding"
     ],
     "heroStyle": "cinematic",
     "portrait": "/images/uploads/akhil-kumar-3e6ab44b.jpg",
@@ -34,39 +34,74 @@
     }
   ],
   "about": {
-    "lead": "I design AI-driven digital products and customer experiences that don't just look good — they perform.",
+    "lead": "I design AI-driven digital products and customer experiences that turn complex business challenges into simple, scalable, and high-performing experiences.",
     "paragraphs": [
-      "With 16+ years as a UI/UX & CX lead designer and front-end developer, I build scalable, conversion-focused products across e-commerce, mobile apps, and complex web platforms — turning business goals, customer expectations, and user needs into intuitive, AI-enabled experiences that drive measurable results.",
-      "What sets me apart is bridging UX, CX, AI, and engineering. I don't just design interfaces — I create seamless end-to-end customer journeys and make sure they're practical, scalable, and built efficiently. Combining AI-powered design workflows with hands-on front-end work closes the design-to-development gap, accelerates delivery, and keeps experiences consistent across every touchpoint."
+      "With 16+ years of experience across UI/UX, Product Design, CX, and Front-End Development, I lead end-to-end product experiences across e-commerce, retail, marketplaces, mobile apps, and enterprise platforms.",
+      "My strength is connecting UX + CX + AI + technology — from customer journeys, product strategy, information architecture and user flows to design systems, prototyping and production.",
+      "I start with the customer and business problem, not just the interface. I simplify complex workflows and translate user needs and business goals into intuitive, scalable experiences.",
+      "I use Generative AI, AI UX, AI-assisted design and vibe coding throughout the product lifecycle, from research and ideation to prototyping and front-end implementation."
+    ],
+    "flow": [
+      "Customer Journey",
+      "UX Strategy",
+      "Information Architecture",
+      "User Flows",
+      "Wireframes",
+      "Design System",
+      "UI",
+      "Prototype",
+      "Development",
+      "Optimization"
     ],
     "delivers": [
-      "Higher conversion, engagement, and customer satisfaction through UX, CX, and AI-driven design",
-      "Simplified workflows for complex, data-rich systems",
-      "Scalable design systems that improve consistency, usability, and delivery speed",
-      "AI-assisted design and rapid prototyping that accelerate product development",
-      "Strong alignment between product strategy, customer experience, and business goals"
+      "AI-enabled experiences, conversational interfaces, intelligent search, recommendations, personalization, content generation and AI-assisted workflows",
+      "UX strategy, user research, customer journey mapping, information architecture, user flows, interaction design, usability testing and conversion optimization",
+      "Scalable components, design tokens, responsive patterns, accessibility (WCAG) and multi-platform consistency",
+      "E-commerce, marketplaces, PIM, OMS, catalog, seller platforms, customer portals, checkout, promotions, loyalty and growth experiences",
+      "Rapid ideation, prototyping, UI generation, design exploration and faster design-to-development workflows",
+      "React, Next.js and React Native, enabling strong collaboration with engineering teams"
     ],
     "expertise": [
       {
-        "group": "Design & Strategy",
+        "group": "Core Expertise",
         "items": [
-          "AI-Driven Product Design",
-          "UX Strategy",
-          "CX Strategy",
+          "AI Product Design",
+          "AI UX",
+          "Generative AI",
+          "UI/UX",
           "Product Design",
-          "Customer Journey Mapping",
-          "Interaction Design",
+          "UX/CX Strategy",
+          "UX Research",
           "Design Systems",
-          "Accessibility (WCAG)",
-          "Conversion Optimization"
+          "E-commerce UX",
+          "Marketplace UX",
+          "Mobile App Design",
+          "Conversion Optimization",
+          "Vibe Coding"
         ]
       },
       {
-        "group": "Build",
+        "group": "Industry Experience",
         "items": [
+          "E-commerce & Retail",
+          "Healthcare & HealthTech",
+          "FinTech",
+          "Enterprise & B2B",
+          "Education",
+          "Travel & Tourism",
+          "Real Estate",
+          "Hospitality"
+        ]
+      },
+      {
+        "group": "Tech",
+        "items": [
+          "Figma",
           "React",
           "Next.js",
-          "React Native"
+          "React Native",
+          "HTML",
+          "CSS"
         ]
       }
     ]
@@ -358,104 +393,136 @@
   "experience": [
     {
       "company": "Danube Home",
-      "title": "UI/UX & CX Lead Designer · Product Designer · Front-End Developer",
+      "title": "UI/UX & CX Lead Designer · Product Designer · Front-End Developer (React, Next.js, React Native)",
       "period": "Sep 2020 — Present",
       "location": "United Arab Emirates · On-site",
       "blurb": "Largest furniture and home-improvement brand in the Middle East.",
       "highlights": [
-        "Led end-to-end UI/UX & CX for e-commerce and mobile apps — AI-driven, user-centered experiences that lifted engagement, conversion, and satisfaction",
-        "Designed scalable, AI-enabled design systems for consistent, accessible experiences across web and mobile",
-        "Ran UX research, journey mapping, usability testing, and data analysis — with AI tools — to surface pain points and optimize journeys",
-        "Redesigned critical journeys like onboarding and checkout, reducing drop-offs and increasing conversion through data-driven UX",
-        "Partnered with product, engineering, and cross-functional teams to ship responsive, customer-centric products aligned to business goals",
-        "Bridged design and development hands-on in React, Next.js, and React Native, using AI-assisted workflows to speed prototyping and handoff"
+        "Led Product Design, UI/UX & CX across Danube Home’s e-commerce & marketplace ecosystem, mobile apps, enterprise platforms, PIM, OMS, and internal business applications.",
+        "Led the design of SellerHub, the e-commerce and marketplace platform powering product discovery, search, navigation, checkout, orders, seller journeys, and customer experiences.",
+        "Designed SleepHubz, a specialized mattress e-commerce platform focused on product discovery, comparison, personalization, and conversion.",
+        "Designed enterprise platforms including PIM, OMS, Pricely, HEXA, and Vibe, simplifying complex product, catalog, pricing, order, store-operation, creative-content, and operational workflows.",
+        "Established scalable Design Systems, UI libraries, reusable components, and UX standards across web and mobile, improving consistency, accessibility, usability, and delivery efficiency.",
+        "Led AI Product Experiences including YARA AI – Intelligent Retail & Shopping Assistant, AI Product Search, AI Order Tracking, AI Product Information, DH Imagine for AI product-image and A+ content generation, and YARA AI Room & Interior Design.",
+        "Designed Miles Club – Omnichannel Promotion Engine, supporting promotional experiences across customer and business touchpoints.",
+        "Led end-to-end product design from Customer Journey → UX Strategy → Wireframes → Design System → UI → Prototype → Development → Optimization, collaborating with Product, Engineering, Business, Marketing, and senior stakeholders.",
+        "Combined strategic design leadership with hands-on React, Next.js, React Native, HTML, CSS, Generative AI, and Vibe Coding to accelerate prototyping, design-to-code workflows, and scalable digital product delivery."
       ]
     },
     {
       "company": "Organic & Real.com",
-      "title": "Sr. UI/UX Designer / Magento Front-End Developer",
+      "title": "Senior UI/UX Designer / Magento Front-End Developer",
       "period": "Aug 2019 — Sep 2020",
-      "location": "Dubai, UAE",
+      "location": "Dubai, UAE · On-site",
       "blurb": "UAE organic grocery store — certified organic, vegan, gluten-free, keto, and paleo products.",
       "highlights": [
-        "Built the Magento e-commerce site from scratch — themes, layouts, and checkout",
-        "Responsive front-end in HTML5, CSS, jQuery, and Bootstrap, optimized across devices",
-        "Custom modules to extend catalog functionality, performance, and usability",
-        "Brand-aligned visuals designed in Adobe XD, Photoshop, and Illustrator"
+        "Handled end-to-end Magento 2 e-commerce website development, from UI design and front-end implementation to integration, customization, testing, and deployment.",
+        "Designed responsive UI/UX layouts using Adobe XD, Photoshop, Illustrator, and Google Web Designer.",
+        "Developed responsive front-end interfaces using HTML5, CSS3, jQuery, and Bootstrap.",
+        "Delivered high-end Magento 2 customization based on business and functional requirements.",
+        "Integrated, configured, and customized Magento 2 modules and extensions.",
+        "Managed Magento 2 email templates, transactional emails, and email customization.",
+        "Customized Magento storefront experiences, layouts, components, and functionality while maintaining responsive design.",
+        "Collaborated with backend developers and stakeholders to deliver complete e-commerce solutions."
       ]
     },
     {
       "company": "Shopinc.com",
       "title": "Sr. UI/UX Designer / Magento Front-End Developer",
       "period": "May 2018 — Jul 2019",
-      "location": "Dubai Marina, UAE",
+      "location": "Dubai Marina, UAE · On-site",
       "blurb": "UAE e-commerce marketplace connecting buyers and sellers across categories.",
       "highlights": [
-        "Designed and built a Magento multi-vendor marketplace from the ground up",
-        "Responsive, engaging UI in HTML5, CSS, jQuery, and Bootstrap",
-        "Optimized navigation, search, and multi-vendor management",
-        "Brand-cohesive visuals in Adobe XD, Photoshop, and Illustrator"
+        "Handled end-to-end Magento 2 e-commerce website development, from UI design and front-end implementation to integration, customization, testing, and deployment.",
+        "Designed responsive UI/UX layouts using Adobe XD, Photoshop, Illustrator, and Google Web Designer.",
+        "Developed responsive front-end interfaces using HTML5, CSS3, jQuery, and Bootstrap.",
+        "Delivered high-end Magento 2 customization based on business and functional requirements.",
+        "Integrated, configured, and customized Magento 2 modules and extensions.",
+        "Managed Magento 2 email templates, transactional emails, and email customization.",
+        "Customized Magento storefront experiences, layouts, components, and functionality while maintaining responsive design.",
+        "Collaborated with backend developers and stakeholders to deliver complete e-commerce solutions."
       ]
     },
     {
       "company": "Citrus Informatics (India) Pvt Ltd",
-      "title": "Sr. UI/UX Designer / Web Designer / Front-End Developer",
+      "title": "Sr. UI/UX Designer / Front-End Developer",
       "period": "Dec 2016 — Feb 2018",
-      "location": "Cochin, India",
+      "location": "Cochin, India · On-site",
       "blurb": "Global IT solutions provider — healthcare apps, desktop apps, and CMS sites for primarily US clients.",
       "highlights": [
-        "UI/UX research for healthcare mobile apps, desktop apps, and CMS websites",
-        "Designed user-centric product UIs aligned to client objectives and trends",
-        "Built and maintained responsive CMS sites on Joomla and WordPress",
-        "Created design systems and style guides for consistency and scalability",
-        "Ensured accessible, inclusive designs to usability standards"
+        "Worked on US-based healthcare projects, delivering UI/UX and front-end solutions for enterprise applications and digital platforms.",
+        "Designed desktop dashboards and Microsoft-based business applications, focusing on usability and intuitive user experiences.",
+        "Designed and implemented Angular-based mobile applications with reusable UI components and responsive layouts.",
+        "Worked on React Native mobile applications, translating UX designs into production-ready mobile interfaces.",
+        "Designed and customized WordPress and WooCommerce websites, including themes, layouts, components, and functionality.",
+        "Managed email marketing campaigns, including responsive email templates, visual design, content layout, and campaign implementation.",
+        "Created digital marketing and print-ready designs for promotional and business communication materials.",
+        "Handled digital printing artwork and production files, ensuring proper layouts, dimensions, resolution, and print specifications.",
+        "Collaborated with US-based clients, product teams, developers, and stakeholders throughout the design and development lifecycle."
       ]
     },
     {
       "company": "eWoke Innovative Solutions Pvt. Ltd",
-      "title": "UI/UX Designer / Web Designer / Front-End Developer",
+      "title": "Sr. Web Designer / Front-End Developer",
       "period": "Oct 2013 — Nov 2016",
       "location": "Kochi, India",
       "blurb": "Digital creative agency serving clients across the US, Middle East, Europe, and UK.",
       "highlights": [
-        "Built responsive e-commerce sites on Magento, ZenCart, CodeIgniter, and Yii",
-        "Delivered shopping cart, payment gateway, and customer-management features",
-        "Customized and optimized storefronts to client requirements",
-        "Conducted UI research and product design for intuitive navigation",
-        "Enhanced scalability and cross-device responsiveness"
+        "Led UI/UX and web development projects for clients across the UK, Germany, and Middle East, working on government, enterprise, and advertising agency projects.",
+        "Worked extensively with PHP, CodeIgniter, and Yii for web application development and customization.",
+        "Specialized in Magento, Zen Cart, and WordPress projects, handling UI design, customization, front-end development, and implementation.",
+        "Delivered Middle East-based government and advertising agency projects, translating business and client requirements into functional digital experiences.",
+        "Contributed to a Germany-based social networking platform, focusing on UI/UX, responsive interfaces, and front-end implementation.",
+        "Handled Magento theme customization, module integration, layout development, and front-end enhancements for e-commerce projects.",
+        "Designed responsive web experiences across desktop, tablet, and mobile platforms.",
+        "Worked closely with clients, project managers, designers, and developers throughout the project lifecycle.",
+        "Took a lead designer role, providing design direction, coordinating implementation, and maintaining design consistency across projects."
       ]
     },
     {
       "company": "Eden Software",
-      "title": "UI/UX Designer / Web Designer / Front-End Developer",
+      "title": "Sr. Web Designer / Front-End Developer",
       "period": "Feb 2013 — Sep 2013",
       "location": "Kochi, India",
       "highlights": [
-        "Designed and built web interfaces with Google Web Designer and Adobe tools",
-        "Delivered responsive, user-friendly e-commerce designs",
-        "HTML5, CSS, jQuery, Bootstrap, WordPress, and Magento"
+        "Worked on an Australia-based government voting and polling web platform, supporting UI design and web application development.",
+        "Started implementing responsive web design using Bootstrap, adapting interfaces for desktop, tablet, and mobile devices.",
+        "Developed and customized web applications using PHP, CodeIgniter, and Yii.",
+        "Designed user interfaces and web layouts with a focus on usability, clarity, and consistent user experiences.",
+        "Developed HTML, CSS, JavaScript, and jQuery front-end interfaces and integrated them with backend applications.",
+        "Worked closely with the development team to translate project requirements into functional and responsive web experiences.",
+        "Supported testing, UI refinement, and feature implementation throughout the development lifecycle."
       ]
     },
     {
       "company": "Viaweb Solutions",
-      "title": "UI/UX Designer / Web Designer / Front-End Developer",
+      "title": "Web Designer / Front-End Developer",
       "period": "Feb 2012 — Feb 2013",
       "location": "Kochi, India",
       "highlights": [
-        "Designed and built web interfaces with Google Web Designer and Adobe tools",
-        "Delivered responsive, user-friendly e-commerce designs",
-        "HTML5, CSS, jQuery, Bootstrap, WordPress, and Magento"
+        "Worked on MailSkool, an email marketing and campaign management platform for creating, managing, and executing email campaigns.",
+        "Contributed to the UI/UX and front-end development of campaign planning, management, and reporting interfaces.",
+        "Worked on a .NET-based application, collaborating with developers to translate functional requirements into user-friendly interfaces.",
+        "Implemented Bootstrap-based responsive web design for desktop, tablet, and mobile experiences.",
+        "Developed responsive interfaces using HTML, CSS, JavaScript, and jQuery.",
+        "Designed email campaign templates and user interfaces with a focus on usability and visual consistency.",
+        "Collaborated with the development team through design, implementation, testing, and delivery."
       ]
     },
     {
       "company": "Media Crow",
-      "title": "Web Designer / HTML Developer",
+      "title": "Jr. Web Designer / HTML Developer",
       "period": "Apr 2010 — Feb 2012",
       "location": "Thrissur, India",
       "highlights": [
-        "Designed and built web interfaces with Google Web Designer and Adobe tools",
-        "Delivered responsive, user-friendly e-commerce designs",
-        "HTML5, CSS, jQuery, Bootstrap, and WordPress"
+        "Worked as a Junior Web Designer on outsourced digital agency projects, developing websites for diverse clients and business requirements.",
+        "Contributed to the ICICI Venture website project, supporting UI design and front-end implementation.",
+        "Designed and developed multiple custom PHP websites and static websites.",
+        "Created website layouts, page designs, and visual assets using Adobe Photoshop and Illustrator.",
+        "Developed front-end interfaces using HTML, CSS, JavaScript, and jQuery.",
+        "Worked closely with senior designers and developers to convert design concepts into functional websites.",
+        "Gained hands-on experience in responsive web design, website customization, cross-browser compatibility, and UI implementation.",
+        "Supported projects throughout the design, development, testing, and delivery lifecycle."
       ]
     }
   ],

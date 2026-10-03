@@ -155,9 +155,9 @@ export default async function CardPage() {
           <div className="relative">
             <div
               aria-hidden
-              className="absolute inset-0 scale-110 rounded-full bg-gradient-to-br from-sky-400 to-accent opacity-50 blur-2xl"
+              className="absolute inset-0 scale-110 rounded-full bg-accent opacity-50 blur-2xl"
             />
-            <div className="relative rounded-full bg-gradient-to-br from-sky-400 to-accent p-[3px]">
+            <div className="relative rounded-full bg-accent p-[3px]">
               <div className="h-28 w-28 overflow-hidden rounded-full bg-[#0a0a10]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

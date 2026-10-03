@@ -22,9 +22,9 @@ export default function SaveContact({
     "focus-ring inline-flex items-center gap-2 transition-colors";
   const styles =
     variant === "gradient"
-      ? "rounded-full px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] bg-[linear-gradient(135deg,rgb(var(--accent)),#4f7cff)] hover:brightness-110"
+      ? "rounded-full px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-onaccent shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)] bg-accent hover:brightness-110"
       : variant === "solid"
-        ? "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider bg-accent text-white hover:bg-panel"
+        ? "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider bg-accent text-onaccent hover:brightness-110"
         : variant === "pill"
           ? "rounded-full px-5 py-3 font-mono text-xs uppercase tracking-wider border border-line bg-panel text-ink hover:border-accent hover:text-accent"
           : "rounded-sm px-5 py-3 font-mono text-xs uppercase tracking-wider border border-ink text-ink hover:border-accent hover:text-accent";

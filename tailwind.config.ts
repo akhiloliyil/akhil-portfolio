@@ -18,6 +18,7 @@ const config: Config = {
         inkmuted: rgb("--inkmuted"),
         line: rgb("--line"),
         accent: rgb("--accent"),
+        onaccent: rgb("--onaccent"),
         coral: rgb("--coral"),
       },
       fontFamily: {

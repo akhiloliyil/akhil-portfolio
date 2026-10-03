@@ -445,7 +445,7 @@ export default function Experience({
   const reduce = useReducedMotion();
 
   return (
-    <section className="bg-paper py-24 lg:py-32">
+    <section id="experience" className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14">
 
         {/* ===================================================
